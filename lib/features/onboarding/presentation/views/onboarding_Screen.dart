@@ -26,44 +26,51 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           itemBuilder: (context, index) {
             return  Padding(
               padding: const EdgeInsets.all(30.0),
-              child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(onboardingmodel[index].image),
-                        Text(onboardingmodel[index].title,textAlign: TextAlign.center,style: TextStyle(color: AppColors.blue,fontSize: 36),),
-                        SizedBox(height: MediaQuery.of(context).size.height*0.025,),
-                        Text(onboardingmodel[index].desc,textAlign: TextAlign.center,style: TextStyle(fontSize: 15),),
-                        SizedBox(height: MediaQuery.of(context).size.height*0.025,),
-                        SmoothPageIndicator(
-                          controller: pageController,
-                          count: onboardingmodel.length,
-                          effect: ExpandingDotsEffect(
-                            activeDotColor: Color(0xff00A3E0),
-                            dotColor: Colors.grey,
-                            dotHeight: 6,
-                            dotWidth: 6,
+              child: ListView(
+                children: [
+                  Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(onboardingmodel[index].image),
+                                SizedBox(height: MediaQuery.of(context).size.height*0.025,),
+                                Text(onboardingmodel[index].title,textAlign: TextAlign.center,style: TextStyle(color: AppColors.blue,fontSize: 36),),
+                                SizedBox(height: MediaQuery.of(context).size.height*0.025,),
+                                Text(onboardingmodel[index].desc,textAlign: TextAlign.center,style: TextStyle(fontSize: 15),),
+                                SizedBox(height: MediaQuery.of(context).size.height*0.025,),
+                                SmoothPageIndicator(
+                                  controller: pageController,
+                                  count: onboardingmodel.length,
+                                  effect: ExpandingDotsEffect(
+                                    activeDotColor: Color(0xff00A3E0),
+                                    dotColor: Colors.grey,
+                                    dotHeight: 6,
+                                    dotWidth: 6,
 
+                                  ),
+                                ),
+
+                                SizedBox(height: MediaQuery.of(context).size.height*0.1,),
+                                CustomButton(title: "Continue", color: AppColors.blue, textcolor: AppColors.white
+                                ,onPressed: (){
+                                    if(index==onboardingmodel.length-1){
+                                      Navigator.push(context, MaterialPageRoute(builder: (c){
+                                        return GetStartedScreen();
+                                      }));
+                                    }else{
+                                      pageController.animateToPage(
+                                          index+1,
+                                          duration: Duration(seconds: 1), curve: Curves.linear);
+                                    }
+                                  },
+                                )
+
+                              ],
                           ),
-                        ),
-
-                        SizedBox(height: MediaQuery.of(context).size.height*0.1,),
-                        CustomButton(title: "Continue", color: AppColors.blue, textcolor: AppColors.white
-                        ,onPressed: (){
-                            if(index==onboardingmodel.length-1){
-                              Navigator.push(context, MaterialPageRoute(builder: (c){
-                                return GetStartedScreen();
-                              }));
-                            }else{
-                              pageController.animateToPage(
-                                  index+1,
-                                  duration: Duration(seconds: 1), curve: Curves.linear);
-                            }
-                          },
-                        )
-
-                      ],
-                  ),
+                ],
+              ),
+                
+             
             );
 
 
