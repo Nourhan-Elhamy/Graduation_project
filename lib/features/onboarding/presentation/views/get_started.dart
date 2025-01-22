@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
@@ -21,20 +20,42 @@ class GetStartedScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(AppImages.iustration),
-                SizedBox(height: MediaQuery.of(context).size.height*0.02,),
-                Text("Get Started",textAlign: TextAlign.center,style: TextStyle(color: Color(0xff00A3E0),fontWeight: FontWeight.w400,fontSize: 36),),
-                Text("Join carecapsule today and enjoy convenient access to pharmacies across different locations. \nStart now!",textAlign: TextAlign.center),
-                SizedBox(height: MediaQuery.of(context).size.height*0.1,),
-               CustomButton(title: "Login to existing account", color: AppColors.blue, textcolor: AppColors.white,onPressed: (){},),
-                SizedBox(height: 24,),
-
-                CustomButton(title: "Sign Up", color: AppColors.white,textcolor: AppColors.blue,
-                  onPressed: (){
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (c){
-                      return RoleSelectionScreen();
-                    }));
-                  }
-                )
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
+                const Text(
+                  "Get Started",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Color(0xff00A3E0),
+                      fontWeight: FontWeight.w400,
+                      fontSize: 36),
+                ),
+                const Text(
+                    "Join carecapsule today and enjoy convenient access to pharmacies across different locations. \nStart now!",
+                    textAlign: TextAlign.center),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                ),
+                CustomButton(
+                  title: "Login to existing account",
+                  color: AppColors.blue,
+                  textcolor: AppColors.white,
+                  onPressed: () {},
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                CustomButton(
+                    title: "Sign Up",
+                    color: AppColors.white,
+                    textcolor: AppColors.blue,
+                    onPressed: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (c) {
+                        return const RoleSelectionScreen();
+                      }));
+                    })
               ],
             ),
           ],
