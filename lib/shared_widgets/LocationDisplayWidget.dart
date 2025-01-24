@@ -27,9 +27,11 @@ class _LocationDisplayWidgetState extends State<LocationDisplayWidget> {
     // تحقق من تفعيل خدمات الموقع
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      setState(() {
-        _location = "Location services are disabled. Please enable them.";
-      });
+      if (mounted) {
+        setState(() {
+          _location = "Location services are disabled. Please enable them.";
+        });
+      }
       return;
     }
 
@@ -38,21 +40,24 @@ class _LocationDisplayWidgetState extends State<LocationDisplayWidget> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        setState(() {
-          _location = "Location permissions are denied. Please enable them.";
-        });
+        if (mounted) {
+          setState(() {
+            _location = "Location permissions are denied. Please enable them.";
+          });
+        }
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      setState(() {
-        _location =
-            "Location permissions are permanently denied. Please enable them in settings.";
-      });
+      if (mounted) {
+        setState(() {
+          _location =
+              "Location permissions are permanently denied. Please enable them in settings.";
+        });
+      }
       return;
     }
-
     try {
       // الحصول على الموقع الحالي
       Position position = await Geolocator.getCurrentPosition(
@@ -67,15 +72,17 @@ class _LocationDisplayWidgetState extends State<LocationDisplayWidget> {
       // إذا كانت القائمة تحتوي على بيانات، اختر المدينة الأولى
       Placemark place = placemarks.first;
 
-      setState(() {
-        _location = place.locality ??
-            "City not found"; // إذا لم يكن هناك مدينة، عرض "City not found"
-      });
+      if (mounted) {
+        setState(() {
+          _location = place.locality ?? "City not found";
+        });
+      }
     } catch (e) {
-      setState(() {
-        _location = "$e";
-        print("$e");
-      });
+      if (mounted) {
+        setState(() {
+          _location = "$e";
+        });
+      }
     }
   }
 
