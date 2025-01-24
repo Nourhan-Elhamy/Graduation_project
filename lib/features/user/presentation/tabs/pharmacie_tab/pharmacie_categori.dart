@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/features/user/presentation/pharmacy_list/pharmaci_list_view.dart';
+import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab/pharmacy_list/pharmaci_list_view.dart';
 import 'package:graduation_project/shared_widgets/LocationDisplayWidget.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_filter.dart';

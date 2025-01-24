@@ -1,13 +1,13 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/Category_view.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/article_category_View.dart';
 import 'package:graduation_project/shared_widgets/Image%20Carousel.dart';
 import 'package:graduation_project/shared_widgets/LocationDisplayWidget.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../shared_widgets/container_search.dart';
-import '../../pharmacy_list/pharmacy_list.dart';
+import '../pharmacie_tab/pharmacy_list/pharmacy_list.dart';
 import '../../../../../shared_widgets/navegaitor_row.dart';
 
 class HomeCategori extends StatefulWidget {
@@ -61,13 +61,26 @@ class _HomeCategoriState extends State<HomeCategori> {
             ),
             const CategoryView(),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             const NavegaitorRow(),
             const SizedBox(
-              height: 10,
+              height: 8,
             ),
             const PharmacyList(),
+            const SizedBox(
+              height: 8,
+            ),
+            Row(
+              children: [
+                const Icon(Icons.article),
+                Text(
+                  "Health Articles",
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
+            ),
+            ArticleCategoryView(),
           ],
         ),
       ),

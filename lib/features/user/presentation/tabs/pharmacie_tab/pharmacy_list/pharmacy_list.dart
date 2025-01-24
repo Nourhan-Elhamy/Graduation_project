@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import '../../../../shared_widgets/LoadingIndecator.dart';
+import '../../../../../../shared_widgets/LoadingIndecator.dart';
 
 class PharmacyList extends StatelessWidget {
   const PharmacyList({super.key});
