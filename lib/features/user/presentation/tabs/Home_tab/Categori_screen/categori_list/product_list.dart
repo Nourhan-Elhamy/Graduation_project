@@ -1,12 +1,36 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
-import 'package:graduation_project/shared_widgets/LoadingIndecator.dart';
 
-class ProductList extends StatelessWidget {
+
+class ProductList extends StatefulWidget {
   final IconData icon;
+  final Function(String)? onFavoriteToggle; // دالة للتعامل مع المفضلة
 
-  const ProductList({super.key, required this.icon});
+  const ProductList({super.key, required this.icon, this.onFavoriteToggle});
+
+  @override
+  _ProductListState createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
+  late bool isFavorite;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorite = false; // بداية المفضلة تكون غير مفعلة
+  }
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite; // تغيير حالة المفضلة عند الضغط
+    });
+
+    if (widget.onFavoriteToggle != null) {
+      widget.onFavoriteToggle!(isFavorite ? "added" : "removed");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,23 +44,25 @@ class ProductList extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(15)),
               child: CachedNetworkImage(
-                imageUrl:
-                    'https://www.iisertvm.ac.in/assets/images/placeholder.jpg',
+                imageUrl: 'https://www.iisertvm.ac.in/assets/images/placeholder.jpg',
                 width: 130,
                 height: 130,
                 fit: BoxFit.cover,
-                placeholder: (_, __) => const LoedingIndecator(),
+                placeholder: (_, __) => const CircularProgressIndicator(),
                 errorWidget: (_, __, ___) =>
-                    const Icon(Icons.image_not_supported_outlined),
+                const Icon(Icons.image_not_supported_outlined),
               ),
             ),
             Positioned(
               top: 8,
               right: 8,
-              child: Icon(
-                icon,
-                size: 24,
-                color: AppColors.blue,
+              child: GestureDetector(
+                onTap: toggleFavorite,
+                child: Icon(
+                  isFavorite ? Icons.favorite : widget.icon,
+                  size: 24,
+                  color: isFavorite ? AppColors.blue : AppColors.blue,
+                ),
               ),
             ),
           ],
@@ -46,9 +72,6 @@ class ProductList extends StatelessWidget {
           height: 20,
           width: 100,
           child: Text(
-            textAlign: TextAlign.start,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
             'Antinal 200 mg - 24 Capsules',
             style: Theme.of(context)
                 .textTheme

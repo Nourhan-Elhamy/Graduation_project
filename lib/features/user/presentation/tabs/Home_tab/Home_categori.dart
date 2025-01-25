@@ -7,6 +7,7 @@ import 'package:graduation_project/shared_widgets/LocationDisplayWidget.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
 import 'package:flutter/material.dart';
 import '../../../../../shared_widgets/container_search.dart';
+import '../pharmacie_tab/data/models/pharmacies_model.dart';
 import '../pharmacie_tab/pharmacy_list/pharmacy_list.dart';
 import '../../../../../shared_widgets/navegaitor_row.dart';
 
@@ -18,6 +19,7 @@ class HomeCategori extends StatefulWidget {
 }
 
 class _HomeCategoriState extends State<HomeCategori> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -67,7 +69,7 @@ class _HomeCategoriState extends State<HomeCategori> {
             const SizedBox(
               height: 8,
             ),
-            const PharmacyList(),
+            //const PharmacyList(pharmacy:[] ,),
             const SizedBox(
               height: 8,
             ),

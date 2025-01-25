@@ -7,7 +7,6 @@ class AppColors {
   static Color blue = const Color(0xff00A3E0);
   static Color iconColor = Color(0xffA0C1D6);
   static Color dividerColor = Color(0xff9747FF);
-
   static Color white = Colors.white;
   static Color continerColor = const Color(0xffa0c1d6);
   static Color idcatorCircle = const Color(0xffa0c1d699);
