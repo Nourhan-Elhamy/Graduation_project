@@ -23,10 +23,10 @@ class _CustomIconCameraState extends State<CustomIconCamera> {
           border: Border.all(
             color: Colors.transparent,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         ),
         child: IconButton(
-          icon: Icon(Icons.camera_alt),
+          icon: const Icon(Icons.camera_alt),
           color: AppColors.white,
           onPressed: () async {
             await checkPermissions();

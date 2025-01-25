@@ -5,8 +5,6 @@ class ProfileCategori extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const Text("p"),
-    );
+    return const Text("p");
   }
 }

@@ -8,7 +8,7 @@ class PharmaciListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: 10,
       itemBuilder: (_, int index) {
         return const PharmacyList();

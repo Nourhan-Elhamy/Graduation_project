@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../onboarding/presentation/views/onboarding_Screen.dart';

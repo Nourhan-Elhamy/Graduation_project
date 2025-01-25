@@ -57,9 +57,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                   "Register as a user so you can find pharmacies and purchase drugs.",
                   style: TextStyle(fontSize: 16, color: Colors.black87),
                 ),
-                onTap: () {
-                  print("User role selected");
-                },
+                onTap: () {},
               ),
             ),
             SizedBox(

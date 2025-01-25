@@ -44,7 +44,7 @@ class PharmacieCategori extends StatelessWidget {
             const SizedBox(
               height: 8,
             ),
-            NavegaitorRow(),
+            const NavegaitorRow(),
             const PharmaciListView(),
           ],
         ),

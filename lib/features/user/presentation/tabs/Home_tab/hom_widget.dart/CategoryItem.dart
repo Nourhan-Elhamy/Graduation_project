@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
@@ -19,7 +21,7 @@ class Categoryitem extends StatelessWidget {
             border: Border.all(
               color: Colors.transparent,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           ),
           child: (Image.asset(
             image,
@@ -27,7 +29,7 @@ class Categoryitem extends StatelessWidget {
             height: 60,
           )),
         ),
-        SizedBox(
+        const SizedBox(
           height: 2,
         ),
         Text(
