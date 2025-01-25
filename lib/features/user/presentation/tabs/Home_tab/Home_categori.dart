@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, file_names
 
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/Category_view.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/article_category_View.dart';
@@ -46,7 +46,7 @@ class _HomeCategoriState extends State<HomeCategori> {
                 CustomIconCamera(),
               ],
             ),
-            ImageCarouselWithCustomIndicator(),
+            const ImageCarouselWithCustomIndicator(),
             const SizedBox(
               height: 15,
             ),
@@ -80,7 +80,7 @@ class _HomeCategoriState extends State<HomeCategori> {
                 ),
               ],
             ),
-            ArticleCategoryView(),
+            const ArticleCategoryView(),
           ],
         ),
       ),

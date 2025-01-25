@@ -1,12 +1,11 @@
-import 'dart:ui';
+// ignore_for_file: use_full_hex_values_for_flutter_colors
 
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 class AppColors {
   static Color blue = const Color(0xff00A3E0);
-  static Color iconColor = Color(0xffA0C1D6);
-  static Color dividerColor = Color(0xff9747FF);
+  static Color iconColor = const Color(0xffA0C1D6);
+  static Color dividerColor = const Color(0xff9747FF);
 
   static Color white = Colors.white;
   static Color continerColor = const Color(0xffa0c1d6);

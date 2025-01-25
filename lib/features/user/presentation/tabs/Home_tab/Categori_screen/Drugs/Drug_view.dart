@@ -1,12 +1,13 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Drugs/drug_view_grid.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Drugs/drug_view_horizontal.dart';
 
 import 'package:graduation_project/shared_widgets/Image%20Carousel.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
-
-import '../categori_list/product_view_grid.dart';
-import '../categori_list/product_view_horizontal.dart';
 
 class DrugView extends StatelessWidget {
   const DrugView({super.key});
@@ -36,7 +37,7 @@ class DrugView extends StatelessWidget {
                 CustomIconCamera(),
               ],
             ),
-            ImageCarouselWithCustomIndicator(),
+            const ImageCarouselWithCustomIndicator(),
             const SizedBox(
               height: 15,
             ),
@@ -56,7 +57,7 @@ class DrugView extends StatelessWidget {
                 ),
               ],
             ),
-            ProductViewHorizontal(),
+            const DrugViewGrid(),
             Row(
               children: [
                 IconButton(
@@ -73,7 +74,7 @@ class DrugView extends StatelessWidget {
                 ),
               ],
             ),
-            ProductViewGrid(),
+            const DrugViewHorizontal(),
           ],
         ),
       ),

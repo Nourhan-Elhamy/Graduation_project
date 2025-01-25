@@ -16,15 +16,14 @@ class CustomIconFilter extends StatelessWidget {
           border: Border.all(
             color: Colors.transparent,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         ),
         child: IconButton(
-          icon: Icon(Icons.filter_alt),
+          icon: const Icon(Icons.filter_alt),
           color: AppColors.white,
           onPressed: () {},
         ),
       ),
     );
-    ;
   }
 }

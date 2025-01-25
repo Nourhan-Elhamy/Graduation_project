@@ -9,7 +9,7 @@ class CustomTextFilde extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -17,7 +17,7 @@ class CustomTextFilde extends StatelessWidget {
       ),
       body: TextFormField(
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.search),
+          prefixIcon: const Icon(Icons.search),
           border: InputBorder.none,
           filled: true,
           fillColor: AppColors.continerColor.withOpacity(0.2),

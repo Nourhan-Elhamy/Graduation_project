@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/categori_list/product_view_grid.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/care/care_view_grid.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/care/care_view_horizontal.dart';
 import 'package:graduation_project/shared_widgets/Image%20Carousel.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
-import '../categori_list/product_view_horizontal.dart';
 
 class CareView extends StatelessWidget {
   const CareView({super.key});
@@ -35,7 +33,7 @@ class CareView extends StatelessWidget {
                 CustomIconCamera(),
               ],
             ),
-            ImageCarouselWithCustomIndicator(),
+            const ImageCarouselWithCustomIndicator(),
             const SizedBox(
               height: 15,
             ),
@@ -43,7 +41,7 @@ class CareView extends StatelessWidget {
               children: [
                 IconButton(
                   color: const Color(0xFF455A64),
-                  icon: Icon(Icons.volunteer_activism),
+                  icon: const Icon(Icons.volunteer_activism),
                   onPressed: () {},
                 ),
                 Text(
@@ -55,12 +53,12 @@ class CareView extends StatelessWidget {
                 ),
               ],
             ),
-            ProductViewHorizontal(),
+            const CareViewHorizontal(),
             Row(
               children: [
                 IconButton(
                   color: const Color(0xFF455A64),
-                  icon: Icon(Icons.favorite_border),
+                  icon: const Icon(Icons.favorite_border),
                   onPressed: () {},
                 ),
                 Text(
@@ -72,7 +70,7 @@ class CareView extends StatelessWidget {
                 ),
               ],
             ),
-            ProductViewGrid(),
+            const CareViewGrid(),
           ],
         ),
       ),
