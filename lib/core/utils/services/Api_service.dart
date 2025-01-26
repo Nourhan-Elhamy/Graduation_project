@@ -33,7 +33,7 @@ class ApiService {
         List<dynamic> data = response.data;
         return data.map((json) => Care.fromJson(json)).toList();
       } else {
-        throw Exception('Failed to load data');
+        throw Exception('Failed to loadaing data');
       }
     } catch (e) {
       throw Exception('An error occurred while loading data: $e');
