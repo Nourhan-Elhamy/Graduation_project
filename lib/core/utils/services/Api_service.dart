@@ -7,12 +7,13 @@ import '../../../features/user/data/models/care/care.dart';
 
 class ApiService {
   final Dio dio;
-  String baseUrl = 'http://carecapsole.runasp.net/api/';
+
   ApiService(this.dio);
 
   Future<List<Medicine>> getMedicines() async {
     try {
-      final response = await dio.get('$baseUrl Medicine');
+      final response =
+          await dio.get('http://carecapsole.runasp.net/api/pharmacy/Medicine');
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         return data.map((json) => Medicine.fromJson(json)).toList();
@@ -26,12 +27,13 @@ class ApiService {
 
   Future<List<Care>> getCare() async {
     try {
-      final response = await dio.get('$baseUrl pharmacy/Care');
+      final response =
+          await dio.get('http://carecapsole.runasp.net/api/pharmacy/Care');
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         return data.map((json) => Care.fromJson(json)).toList();
       } else {
-        throw Exception('Failed to load data');
+        throw Exception('Failed to loadaing data');
       }
     } catch (e) {
       throw Exception('An error occurred while loading data: $e');
@@ -40,7 +42,8 @@ class ApiService {
 
   Future<List<Article>> getArticles() async {
     try {
-      final response = await dio.get('$baseUrl/Diseases');
+      final response =
+          await dio.get('http://carecapsole.runasp.net/api/Diseases');
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         return data.map((json) => Article.fromJson(json)).toList();
