@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, file_names
+// ignore_for_file: deprecated_member_use
 
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/Category_view.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/article_category_View.dart';
@@ -7,7 +7,6 @@ import 'package:graduation_project/shared_widgets/LocationDisplayWidget.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
 import 'package:flutter/material.dart';
 import '../../../../../shared_widgets/container_search.dart';
-import '../pharmacie_tab/pharmacy_list/pharmacy_list.dart';
 import '../../../../../shared_widgets/navegaitor_row.dart';
 
 class HomeCategori extends StatefulWidget {
@@ -18,6 +17,7 @@ class HomeCategori extends StatefulWidget {
 }
 
 class _HomeCategoriState extends State<HomeCategori> {
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,7 +46,7 @@ class _HomeCategoriState extends State<HomeCategori> {
                 CustomIconCamera(),
               ],
             ),
-            const ImageCarouselWithCustomIndicator(),
+            ImageCarouselWithCustomIndicator(),
             const SizedBox(
               height: 15,
             ),
@@ -67,7 +67,7 @@ class _HomeCategoriState extends State<HomeCategori> {
             const SizedBox(
               height: 8,
             ),
-            const PharmacyList(),
+            //const PharmacyList(pharmacy:[] ,),
             const SizedBox(
               height: 8,
             ),
@@ -80,7 +80,7 @@ class _HomeCategoriState extends State<HomeCategori> {
                 ),
               ],
             ),
-            const ArticleCategoryView(),
+            ArticleCategoryView(),
           ],
         ),
       ),

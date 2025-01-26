@@ -57,12 +57,17 @@ class _CustomIconCameraState extends State<CustomIconCamera> {
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.camera);
+
+    await picker.pickImage(source: ImageSource.camera);
+ 
 
     if (pickedFile != null) {
       setState(() {
         _pickedImagePath = pickedFile.path;
       });
+
+
+
 
       if (widget.onImageSelected != null) {
         widget.onImageSelected!(_pickedImagePath);
