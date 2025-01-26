@@ -7,6 +7,16 @@ class HomeSearch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomTextFilde();
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: CustomTextFilde(hintText: "Search", icon: Icons.search,),
+    );
   }
 }

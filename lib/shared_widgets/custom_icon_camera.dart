@@ -4,13 +4,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class CustomIconCamera extends StatefulWidget {
-  const CustomIconCamera({super.key});
+  final Function(String? imagePath)? onImageSelected;
+
+  const CustomIconCamera({Key? key, this.onImageSelected}) : super(key: key);
 
   @override
   State<CustomIconCamera> createState() => _CustomIconCameraState();
 }
 
 class _CustomIconCameraState extends State<CustomIconCamera> {
+  String? _pickedImagePath;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,29 +33,41 @@ class _CustomIconCameraState extends State<CustomIconCamera> {
           icon: const Icon(Icons.camera_alt),
           color: AppColors.white,
           onPressed: () async {
-            await checkPermissions();
-            pickImage();
+            await _checkPermissions();
+            await _pickImage();
           },
         ),
       ),
     );
   }
 
-  Future<void> checkPermissions() async {
+  Future<void> _checkPermissions() async {
     final cameraStatus = await Permission.camera.request();
-
     final storageStatus = await Permission.storage.request();
 
-    if (cameraStatus.isGranted && storageStatus.isGranted) {
-    } else {}
+    if (!cameraStatus.isGranted || !storageStatus.isGranted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Camera and Storage permissions are required."),
+        ),
+      );
+    }
   }
 
-  void pickImage() async {
+  Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.camera);
+    await picker.pickImage(source: ImageSource.camera);
+
     if (pickedFile != null) {
-      setState(() {});
+      setState(() {
+        _pickedImagePath = pickedFile.path;
+      });
+
+
+      if (widget.onImageSelected != null) {
+        widget.onImageSelected!(_pickedImagePath);
+      }
     }
   }
 }
