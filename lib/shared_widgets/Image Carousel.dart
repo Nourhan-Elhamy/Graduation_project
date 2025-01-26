@@ -1,9 +1,14 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 class ImageCarouselWithCustomIndicator extends StatefulWidget {
+  const ImageCarouselWithCustomIndicator({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _ImageCarouselWithCustomIndicatorState createState() =>
       _ImageCarouselWithCustomIndicatorState();
 }

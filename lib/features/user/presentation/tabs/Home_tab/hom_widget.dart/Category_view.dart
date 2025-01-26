@@ -1,10 +1,12 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Article_category/articlecategory.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/care/care_view.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/CategoryItem.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/offares/offares_view.dart';
 
 import '../Categori_screen/Drugs/Drug_view.dart';
-import '../Categori_screen/articl/article_category.dart';
 
 class CategoryView extends StatelessWidget {
   const CategoryView({super.key});

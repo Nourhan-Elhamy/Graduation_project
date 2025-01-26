@@ -1,12 +1,14 @@
+// ignore_for_file: file_names
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/LoadingIndecator.dart';
 
-class ProductList extends StatelessWidget {
+class DrugList extends StatelessWidget {
   final IconData icon;
 
-  const ProductList({super.key, required this.icon});
+  const DrugList({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
