@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
+import 'package:graduation_project/features/auth/login/user_login_screen.dart';
 import 'package:graduation_project/features/user/presentation/home.dart';
 
 import 'features/splash/presentation/views/splash_screen.dart';
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const HomeGround(),
-      // SplashScreen(),
+      home: const
+       SplashScreen(),
       theme: AppColors.lightTheme,
     );
   }
