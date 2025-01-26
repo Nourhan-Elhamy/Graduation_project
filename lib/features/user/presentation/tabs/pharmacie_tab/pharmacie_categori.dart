@@ -13,13 +13,13 @@ class PharmacieCategori extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
-      create: (context) => PharmacyCubit(pharmacyRepo: PharmacyRepoImplementationFromApi())..fetchPharmacies(),
-      child:  Padding(
-        padding: const EdgeInsets.only(left:6, right: 8, top: 25),
+      create: (context) =>
+      PharmacyCubit(pharmacyRepo: PharmacyRepoImplementationFromApi())
+        ..fetchPharmacies(),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 6, right: 8, top: 25),
         child: ListView(
-
           children: [
             const Row(
               children: [
@@ -50,26 +50,39 @@ class PharmacieCategori extends StatelessWidget {
               height: 8,
             ),
             NavegaitorRow(),
-            BlocBuilder<PharmacyCubit, PharmacyState>(
-
-              builder: (context, state) {
-                if (state is PharmacyLoading) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (state is PharmacyError) {
-                  return Center(child: Text(state.message));
-                } else if (state is PharmacyLoaded) {
-                  return PharmaciListView(pharmacyy: state.pharmacies);
-                } else {
-                  return Center(child: Text("No data"));
-                }
-              },
-            ),
-
-
+            // استخدام الويدجت المعدلة
+            const PharmaciesSection(numToShow: 100)
           ],
         ),
-
       ),
+    );
+  }
+}
+
+
+
+class PharmaciesSection extends StatelessWidget {
+  final int startIndex;
+  final int numToShow;
+
+  const PharmaciesSection({super.key, this.startIndex = 0, this.numToShow = 2});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PharmacyCubit, PharmacyState>(
+      builder: (context, state) {
+        if (state is PharmacyLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is PharmacyError) {
+          return Center(child: Text(state.message));
+        } else if (state is PharmacyLoaded) {
+          // تخطي أول 'startIndex' صيدلية و عرض 'numToShow' صيدليات بعدهم
+          final pharmaciesToShow = state.pharmacies.skip(startIndex).take(numToShow).toList();
+          return PharmaciListView(pharmacyy: pharmaciesToShow);
+        } else {
+          return const Center(child: Text("لا توجد بيانات"));
+        }
+      },
     );
   }
 }
