@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
-import 'package:graduation_project/features/auth/login/user_login_screen.dart';
-import 'package:graduation_project/features/auth/sign_up/pharmacy_SignUP.dart';
-import 'package:graduation_project/features/auth/sign_up/user_signup_screen.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
+
 import '../../../../core/utils/app_images.dart';
 
 class RoleSelectionScreen extends StatefulWidget {
@@ -14,8 +12,6 @@ class RoleSelectionScreen extends StatefulWidget {
 }
 
 class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
-  String selectedRole = '';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +37,7 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: selectedRole == 'user' ? Color(0xff00A3E0) : Colors.grey,
-                  width: selectedRole == 'user' ? 2 : 1,
+                  color: Colors.grey,
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -62,26 +57,17 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                   "Register as a user so you can find pharmacies and purchase drugs.",
                   style: TextStyle(fontSize: 16, color: Colors.black87),
                 ),
-
-                onTap: () {
-                  setState(() {
-                    selectedRole = 'user';
-                  });
-                },
-
+                onTap: () {},
               ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.025,
             ),
-            // Pharmacy Option
+
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: selectedRole == 'pharmacy' ? Color(0xff00A3E0) : Colors.grey,
-                  width: selectedRole == 'pharmacy' ? 2 : 1,
-                ),
+                border: Border.all(color: const Color(0xff00A3E0), width: 2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: ListTile(
@@ -100,66 +86,32 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                   "Register as a pharmacy so you can sell and manage your drugs on the app.",
                   style: TextStyle(fontSize: 16, color: Colors.black87),
                 ),
-                onTap: () {
-                  setState(() {
-                    selectedRole = 'pharmacy';
-                  });
-                },
+                onTap: () {},
               ),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.1,
             ),
-            // Continue Button
+
             Padding(
               padding: const EdgeInsets.all(20),
               child: CustomButton(
                 title: 'Continue',
                 color: AppColors.blue,
                 textcolor: AppColors.white,
-                onPressed: () {
-                  if (selectedRole == 'user') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RegistrationForm(), // صفحة تسجيل المستخدم
-                      ),
-                    );
-                  } else if (selectedRole == 'pharmacy') {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PharmacySignUpScreen(), // صفحة تسجيل الصيدلية
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Please select a role first."),
-                      ),
-                    );
-                  }
-                },
+                onPressed: () {},
               ),
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account? "),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  child: const Text(
-                    "Sign in",
-                    style: TextStyle(color: Color(0xff00A3E0), fontSize: 16),
-                  ),
+                Text("Already have an account? "),
+                Text(
+                  "Sign in",
+                  style: TextStyle(color: Color(0xff00A3E0), fontSize: 16),
                 )
               ],
-            ),
+            )
           ],
         ),
       ),
