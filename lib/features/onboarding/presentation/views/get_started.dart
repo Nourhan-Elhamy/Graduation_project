@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
+import 'package:graduation_project/features/auth/login/user_login_screen.dart';
 import 'package:graduation_project/features/onboarding/presentation/views/role_selection_page.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 
@@ -41,7 +42,13 @@ class GetStartedScreen extends StatelessWidget {
                   title: "Login to existing account",
                   color: AppColors.blue,
                   textcolor: AppColors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (c){
+                        return LoginPage();
+                      })
+                    );
+                  },
                 ),
                 const SizedBox(
                   height: 24,

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http; // استيراد حزمة http
-import 'dart:convert'; // لتحويل JSON
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import '../../../core/utils/app_colors.dart';
-import '../../../core/utils/appfonts.dart';
 import '../../../core/utils/app_images.dart';
+import '../../../core/utils/appfonts.dart';
 import '../../user/presentation/home.dart';
-import '../sign_up/user_signup_screen.dart'; // استيراد صفحة التسجيل
+import '../sign_up/user_signup_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,76 +16,36 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _isPasswordVisible = false;
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  String? _usernameError;
-  String? _passwordError;
+  bool _isPasswordVisible = false;
 
-  // دالة لتسجيل الدخول
-  Future<Map<String, dynamic>> login(String email, String password) async {
-    try {
-      final response = await http.post(
-        Uri.parse('http://carecapsole.runasp.net/login'), // رابط API لتسجيل الدخول
-        headers: {
-          'Content-Type': 'application/json', // تحديد نوع المحتوى كـ JSON
-        },
-        body: jsonEncode({
-          'email': email,
-          'password': password,
-        }),
-      );
+  Future<void> _login() async {
+    final String username = _usernameController.text.trim();
+    final String password = _passwordController.text.trim();
 
-      if (response.statusCode == 200) {
-        return jsonDecode(response.body); // تحويل JSON إلى Map
-      } else {
-        return {'error': 'Failed to login: ${response.statusCode}'};
-      }
-    } catch (e) {
-      return {'error': 'Failed to login: $e'};
+    // Check if username or password is empty
+    if (username.isEmpty || password.isEmpty) {
+      // Show a message if fields are empty
+      _showMessage("Please fill in both username and password.");
+      return;
     }
+
+    // Navigate to HomeGround if both fields are filled
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const HomeGround()),
+    );
   }
 
-  // دالة للتحقق من البيانات والدخول
-  void _validateAndLogin() async {
-    setState(() {
-      _usernameError = _usernameController.text.isEmpty ? 'Username cannot be empty' : null;
-      _passwordError = _passwordController.text.isEmpty ? 'Password cannot be empty' : null;
-    });
-
-    // التحقق من البيانات
-    if (_usernameError == null && _passwordError == null) {
-      final email = _usernameController.text;
-      final password = _passwordController.text;
-
-      // استدعاء دالة login
-      final result = await login(email, password);
-
-      if (result.containsKey('error')) {
-        // في حالة حدوث خطأ أثناء تسجيل الدخول
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(result['error']),
-            backgroundColor: Colors.red,
-          ),
-        );
-      } else {
-        // إذا تم تسجيل الدخول بنجاح
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeGround()), // توجيه لصفحة الرئيسية
-        );
-      }
-    } else {
-      // لو في أخطاء في التحقق من البيانات
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Please fill in all fields correctly!'),
-          backgroundColor: Colors.red,
-        ),
-      );
-    }
+  void _showMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        duration: const Duration(seconds: 2),
+      ),
+    );
   }
 
   @override
@@ -110,22 +70,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 5),
-            Container(
-              width: double.infinity,
-              height: 59,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: TextFormField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'UserName',
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                  errorText: _usernameError,
-                ),
-              ),
+            _buildInputField(
+              controller: _usernameController,
+              hintText: 'UserName',
             ),
             const SizedBox(height: 20),
             Align(
@@ -136,32 +83,19 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 5),
-            Container(
-              width: double.infinity,
-              height: 59,
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.2),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: TextFormField(
-                controller: _passwordController,
-                obscureText: !_isPasswordVisible,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Password',
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                  errorText: _passwordError,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  ),
+            _buildInputField(
+              controller: _passwordController,
+              hintText: 'Password',
+              obscureText: !_isPasswordVisible,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                 ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
               ),
             ),
             const SizedBox(height: 20),
@@ -170,17 +104,19 @@ class _LoginPageState extends State<LoginPage> {
               child: Text(
                 "Forgot password?",
                 style: TextStyle(
-                    color: AppColors.blue, fontFamily: AppFonts.creteround),
+                  color: AppColors.blue,
+                  fontFamily: AppFonts.creteround,
+                ),
               ),
             ),
             const SizedBox(height: 20),
             GestureDetector(
-              onTap: _validateAndLogin, // استدعاء الدالة عند الضغط
+              onTap: _login,
               child: Container(
                 width: double.infinity,
                 height: 59,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: AppColors.blue,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Center(
@@ -197,30 +133,46 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 10),
             Image.asset(AppImages.divider),
             const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            Column(
               children: [
-                Text(
-                  "Don't have an account yet? ",
-                  style: TextStyle(
-                    fontFamily: AppFonts.creteround,
-                    color: const Color(0xff455A64),
-                  ),
+                Container(
+                  width: double.infinity,
+                  height: 59,
+                  child: Image.asset(AppImages.google),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (c) => RegistrationForm()),
-                    );
-                  },
-                  child: Text(
-                    "Register here",
-                    style: TextStyle(
-                      color: AppColors.blue,
-                      fontFamily: AppFonts.creteround,
+                const SizedBox(height: 10),
+                Container(
+                  width: double.infinity,
+                  height: 59,
+                  child: Image.asset(AppImages.facebook),
+                ),
+                const SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account yet? ",
+                      style: TextStyle(
+                        fontFamily: AppFonts.creteround,
+                        color: const Color(0xff455A64),
+                      ),
                     ),
-                  ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (c) => RegistrationForm()),
+                        );
+                      },
+                      child: Text(
+                        "Register here",
+                        style: TextStyle(
+                          color: AppColors.blue,
+                          fontFamily: AppFonts.creteround,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -229,4 +181,32 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
+  Widget _buildInputField({
+    required TextEditingController controller,
+    required String hintText,
+    bool obscureText = false,
+    Widget? suffixIcon,
+  }) {
+    return Container(
+      width: double.infinity,
+      height: 59,
+      decoration: BoxDecoration(
+        color: Colors.grey.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        textAlignVertical: TextAlignVertical.center,
+        decoration: InputDecoration(
+          border: InputBorder.none,
+          hintText: hintText,
+          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+          suffixIcon: suffixIcon,
+        ),
+      ),
+    );
+  }
 }
+

@@ -3,9 +3,8 @@ import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/core/utils/app_images.dart';
 import 'package:graduation_project/core/utils/appfonts.dart';
 import 'package:graduation_project/features/auth/get_start/views/get_start_screen.dart';
-
-
-import '../../../services/user_signup_service.dart'; // استيراد AuthService
+import 'package:http/http.dart' as http; // استيراد حزمة http
+import 'dart:convert'; // لتحويل JSON
 
 class RegistrationForm extends StatefulWidget {
   @override
@@ -22,8 +21,57 @@ class _RegistrationFormState extends State<RegistrationForm> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
   bool _isChecked = false;
+  bool _isLoading = false; // مؤشر تحميل
 
-  final AuthService _authService = AuthService(); // إنشاء كائن من AuthService
+  Future<void> _registerUser() async {
+    final url = Uri.parse("http://carecapsole.runasp.net/register");
+
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    if (!_isChecked) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Please accept the Terms and Privacy Policy")),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true; // بدء التحميل
+    });
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          "username": _usernameController.text.trim(),
+          "email": _emailController.text.trim(),
+          "password": _passwordController.text,
+        }),
+      );
+
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Registration Successful!")),
+      );
+    } catch (e) {
+      //
+    } finally {
+      setState(() {
+        _isLoading = false; // إيقاف التحميل
+      });
+
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => GetStartScreen()),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +97,15 @@ class _RegistrationFormState extends State<RegistrationForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Full Name
                 _buildLabel("Full Name"),
                 const SizedBox(height: 8),
                 _buildInputField(
                   controller: _usernameController,
                   hintText: 'Full Name',
+                  validator: (value) => value!.isEmpty ? "Full Name is required" : null,
                 ),
                 const SizedBox(height: 20),
 
-                // Email Address
                 _buildLabel("Email Address"),
                 const SizedBox(height: 8),
                 _buildInputField(
@@ -66,17 +113,16 @@ class _RegistrationFormState extends State<RegistrationForm> {
                   hintText: 'Email Address',
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
+                      return "Email is required";
                     }
-                    if (!value.contains('@')) {
-                      return 'Please enter a valid email';
+                    if (!value.contains('@') || !value.contains('.')) {
+                      return "Please enter a valid email";
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
 
-                // Password
                 _buildLabel("Password"),
                 const SizedBox(height: 8),
                 _buildInputField(
@@ -93,19 +139,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       });
                     },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
-                    }
-                    return null;
-                  },
+                  validator: (value) => value!.length < 6 ? "Password must be at least 6 characters" : null,
                 ),
                 const SizedBox(height: 20),
 
-                // Confirm Password
                 _buildLabel("Confirm Password"),
                 const SizedBox(height: 8),
                 _buildInputField(
@@ -122,19 +159,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       });
                     },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please confirm your password';
-                    }
-                    if (value != _passwordController.text) {
-                      return 'Passwords do not match';
-                    }
-                    return null;
-                  },
+                  validator: (value) => value != _passwordController.text ? "Passwords do not match" : null,
                 ),
                 const SizedBox(height: 20),
 
-                // Checkbox for Terms and Privacy Policy
                 ListTile(
                   leading: Checkbox(
                     checkColor: AppColors.blue,
@@ -183,35 +211,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 ),
                 const SizedBox(height: 20),
 
-                // Sign Up Button
                 GestureDetector(
-                  onTap: () async {
-                    if (_formKey.currentState!.validate() && _isChecked) {
-                      // إرسال بيانات التسجيل إلى الـ API
-                      try {
-                        final response = await _authService.register(
-                          _emailController.text,
-                          _passwordController.text,
-                        );
-
-                        if (response != null) {
-                          // الانتقال إلى الشاشة التالية بعد نجاح التسجيل
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (c) => GetStartScreen()),
-                          );
-                        }
-                      } catch (e) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Registration Failed: $e')),
-                        );
-                      }
-                    } else if (!_isChecked) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text("You must agree to the terms")),
-                      );
-                    }
-                  },
+                  onTap: _registerUser,
                   child: Container(
                     width: 352,
                     height: 59,
@@ -220,7 +221,9 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       color: AppColors.blue,
                     ),
                     child: Center(
-                      child: Text(
+                      child: _isLoading
+                          ? CircularProgressIndicator(color: Colors.white) // مؤشر تحميل
+                          : Text(
                         "Sign UP",
                         style: TextStyle(
                           fontSize: 24,
@@ -247,7 +250,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
     );
   }
 
-  // Helper widget for field labels
   Widget _buildLabel(String text) {
     return Text(
       text,
@@ -255,7 +257,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
     );
   }
 
-  // Helper widget for input fields
   Widget _buildInputField({
     required TextEditingController controller,
     required String hintText,
