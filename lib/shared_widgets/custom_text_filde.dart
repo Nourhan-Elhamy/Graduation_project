@@ -14,16 +14,16 @@ class CustomTextFilde extends StatelessWidget {
         prefixIcon: Icon(icon),
         border: InputBorder.none,
         filled: true,
-        fillColor: AppColors.continerColor.withOpacity(0.2),
+        fillColor: Colors.white54,
         focusColor: Colors.white,
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-              color: AppColors.continerColor.withOpacity(0.2), width: 2.0),
+              color: AppColors.iconColor, width: 2.0),
           borderRadius: BorderRadius.circular(30),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-              color: AppColors.continerColor.withOpacity(0.2), width: 2.0),
+              color:AppColors.iconColor, width: 2.0),
           borderRadius: BorderRadius.circular(30),
         ),
         hintText: hintText,

@@ -95,7 +95,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: AppColors.blue.withOpacity(0.1), // لتقليل الشفافية إلى 50%
+                                color: AppColors.iconColor, // لتقليل الشفافية إلى 50%
 
                                 borderRadius: BorderRadius.circular(20),
                               ),

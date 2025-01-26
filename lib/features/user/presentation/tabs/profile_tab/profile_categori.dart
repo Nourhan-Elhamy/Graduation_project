@@ -106,7 +106,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: screenWidth*0.04,vertical: screenWidth*0.01),
                     decoration: BoxDecoration(
-                      color: AppColors.blue.withOpacity(0.1),
+                      color: Colors.white60,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
