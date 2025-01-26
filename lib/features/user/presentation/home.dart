@@ -10,12 +10,11 @@ class HomeGround extends StatefulWidget {
   @override
   State<HomeGround> createState() => _HomeGroundState();
 }
-
 List<Widget> tabs = [
   const HomeCategori(),
   const PharmacieCategori(),
-  const ProfileCategori(),
   const WishCategori(),
+  const ProfileCategori(),
 ];
 
 int selectedTap = 0;
