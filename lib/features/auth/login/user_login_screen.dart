@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
@@ -62,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
               fit: BoxFit.cover,
             ),
             const SizedBox(height: 20),
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "UserName",
@@ -75,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
               hintText: 'UserName',
             ),
             const SizedBox(height: 20),
-            Align(
+            const Align(
               alignment: Alignment.centerLeft,
               child: Text(
                 "Password",
@@ -135,13 +134,13 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 10),
             Column(
               children: [
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 59,
                   child: Image.asset(AppImages.google),
                 ),
                 const SizedBox(height: 10),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 59,
                   child: Image.asset(AppImages.facebook),
@@ -150,18 +149,18 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       "Don't have an account yet? ",
                       style: TextStyle(
 
-                        color: const Color(0xff455A64),
+                        color: Color(0xff455A64),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (c) => RegistrationForm()),
+                          MaterialPageRoute(builder: (c) => const RegistrationForm()),
                         );
                       },
                       child: Text(
@@ -192,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       height: 59,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.2),
+        color: Colors.grey,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(

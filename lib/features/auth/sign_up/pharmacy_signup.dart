@@ -4,11 +4,13 @@ import 'dart:convert';
 
 
 class PharmacySignUpScreen extends StatefulWidget {
+  const PharmacySignUpScreen({super.key});
+
   @override
-  _PharmacySignUpScreenState createState() => _PharmacySignUpScreenState();
+  PharmacySignUpScreenState createState() => PharmacySignUpScreenState();
 }
 
-class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
+class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
   final _pharmacyNameController = TextEditingController();
   final _ownerNameController = TextEditingController();
   final _businessEmailController = TextEditingController();
@@ -29,7 +31,7 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
   }
 
   bool _isValidEmail(String email) {
-    // التحقق من صحة البريد الإلكتروني
+
     final emailRegex = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
     return emailRegex.hasMatch(email);
   }
@@ -50,14 +52,14 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
         }),
       );
 
-      print("API Response: ${response.body}");
+
     } catch (e) {
       print("API Error: $e");
     }
   }
 
   void _handleSignUp() async {
-    // التحقق من أن جميع الحقول مملوءة
+
     if (_pharmacyNameController.text.isEmpty ||
         _ownerNameController.text.isEmpty ||
         _businessEmailController.text.isEmpty ||
@@ -67,13 +69,13 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
       return;
     }
 
-    // التحقق من صحة البريد الإلكتروني
+
     if (!_isValidEmail(_businessEmailController.text)) {
       _showMessage("Enter a valid email.");
       return;
     }
 
-    // التحقق من تطابق كلمات المرور
+
     if (_passwordController.text != _confirmPasswordController.text) {
       _showMessage("Passwords do not match.");
       return;
@@ -85,7 +87,7 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
 
     await _signUp();
 
-    // الانتقال إلى الصفحة التالية
+
     //Navigator.pushReplacement(
      // context,
      // MaterialPageRoute(builder: (context) => UploadDocumentsScreen()),
@@ -100,7 +102,7 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Create Account'),
+        title: const Text('Create Account'),
         centerTitle: true,
       ),
       body: Padding(
@@ -170,7 +172,7 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
                   child: Center(
                     child: _isLoading
                         ? CircularProgressIndicator(color: Colors.white)
-                        : Text(
+                        : const Text(
                       "Sign UP",
                       style: TextStyle(
                         fontSize: 24,
@@ -203,7 +205,7 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
       width: double.infinity,
       height: 59,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.2),
+        color: Colors.grey,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
@@ -228,7 +230,7 @@ class _PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
       width: double.infinity,
       height: 59,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.2),
+        color: Colors.grey,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(

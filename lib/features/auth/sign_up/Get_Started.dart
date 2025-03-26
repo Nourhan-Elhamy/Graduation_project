@@ -17,9 +17,9 @@ class GetStartScreen extends StatelessWidget {
             Image.asset(AppImages.get_start,
               fit: BoxFit.cover,
             ),
-            SizedBox(height: 20,),
+            const SizedBox(height: 20,),
 
-            SizedBox(height: 35,),
+            const SizedBox(height: 35,),
             ElevatedButton(onPressed: (){
              // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => LoadingPage()),);
             },
@@ -35,7 +35,7 @@ class GetStartScreen extends StatelessWidget {
 
                     )),
                 child:
-                Text("Start",style: TextStyle(
+                const Text("Start",style: TextStyle(
                   fontSize: 24,
 
                 ),)
