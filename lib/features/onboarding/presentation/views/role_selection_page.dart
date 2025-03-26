@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/auth/login/user_login_screen.dart';
-import 'package:graduation_project/features/auth/sign_up/pharmacy_SignUP.dart';
+
 import 'package:graduation_project/features/auth/sign_up/user_signup_screen.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 import '../../../../core/utils/app_images.dart';
+import '../../../auth/sign_up/pharmacy_signup.dart';
 
 class RoleSelectionScreen extends StatefulWidget {
   const RoleSelectionScreen({super.key});
