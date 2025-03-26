@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/core/utils/app_images.dart';
-import 'package:graduation_project/core/utils/appfonts.dart';
-import 'package:graduation_project/features/auth/get_start/views/get_start_screen.dart';
 import 'package:http/http.dart' as http; // استيراد حزمة http
-import 'dart:convert'; // لتحويل JSON
+import 'dart:convert';
+
+import 'Get_Started.dart'; // لتحويل JSON
 
 class RegistrationForm extends StatefulWidget {
   @override
@@ -84,7 +84,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
           style: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 24,
-            fontFamily: AppFonts.creteround,
+
             color: AppColors.blue,
           ),
         ),
@@ -181,28 +181,28 @@ class _RegistrationFormState extends State<RegistrationForm> {
                           text: "I agree to the ",
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: AppFonts.creteround,
+
                               color: Colors.black),
                         ),
                         TextSpan(
                           text: "Terms ",
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: AppFonts.creteround,
+
                               color: Colors.blue),
                         ),
                         TextSpan(
                           text: "and ",
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: AppFonts.creteround,
+
                               color: Colors.black),
                         ),
                         TextSpan(
                           text: "Privacy Policy",
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: AppFonts.creteround,
+
                               color: Colors.blue),
                         ),
                       ],
@@ -228,7 +228,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                         style: TextStyle(
                           fontSize: 24,
                           color: Colors.white,
-                          fontFamily: AppFonts.creteround,
+
                         ),
                       ),
                     ),
@@ -253,7 +253,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
   Widget _buildLabel(String text) {
     return Text(
       text,
-      style: TextStyle(fontSize: 16, fontFamily: AppFonts.creteround),
+      style: TextStyle(fontSize: 16, ),
     );
   }
 

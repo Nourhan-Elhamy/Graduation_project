@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
-import '../../../core/utils/appfonts.dart';
+
 import '../../user/presentation/home.dart';
 import '../sign_up/user_signup_screen.dart';
 
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "UserName",
-                style: TextStyle(fontFamily: AppFonts.creteround),
+
               ),
             ),
             const SizedBox(height: 5),
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "Password",
-                style: TextStyle(fontFamily: AppFonts.creteround),
+
               ),
             ),
             const SizedBox(height: 5),
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                 "Forgot password?",
                 style: TextStyle(
                   color: AppColors.blue,
-                  fontFamily: AppFonts.creteround,
+
                 ),
               ),
             ),
@@ -153,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       "Don't have an account yet? ",
                       style: TextStyle(
-                        fontFamily: AppFonts.creteround,
+
                         color: const Color(0xff455A64),
                       ),
                     ),
@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                         "Register here",
                         style: TextStyle(
                           color: AppColors.blue,
-                          fontFamily: AppFonts.creteround,
+
                         ),
                       ),
                     ),
