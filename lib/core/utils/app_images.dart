@@ -7,19 +7,14 @@ class AppImages {
   static String carecapsulelogo = "assets/images/careCapsule.png";
   static String iustration = "assets/images/Illustration.png";
 
-  static String logo = "assets/images/Content Container.png";
-  static String facebook="assets/images/Facebook Button.png";
-  static String google="assets/images/Google Button.png";
+  static String logo = "assets/images/Content Container (1).png";
+  static String facebook="assets/images/Facebook Content (1).png";
+  static String google="assets/images/Google Content.png";
   static String divider="assets/images/Divider Container.png";
   static String location="assets/images/Forgot password-rafiki 1 (1).png";
-  static String get_start="assets/images/Medicine-amico 1 (2).png";
+  static String get_start="assets/images/registerd successfully.png";
   static String panadol="assets/images/panadolimage.png";
   static String rawafrican="assets/images/Rawafricanimage.png";
-
-
-
-
-
 
   static String patientIcon = "assets/images/Patient Icon.png";
   static String pharmacyIcon = "assets/images/Pharmacy Icon.png";
