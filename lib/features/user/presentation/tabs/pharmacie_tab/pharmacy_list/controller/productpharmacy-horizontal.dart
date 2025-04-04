@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +10,7 @@ class ProductPharmacyViewHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 210,
       child: ListView.builder(
         shrinkWrap: true,
@@ -32,9 +34,10 @@ class ProductPharmacyViewHorizontal extends StatelessWidget {
                         width: 130,
                         height: 130,
                         fit: BoxFit.contain,
-                        placeholder: (_, __) => const CircularProgressIndicator(),
+                        placeholder: (_, __) =>
+                            const CircularProgressIndicator(),
                         errorWidget: (_, __, ___) =>
-                        const Icon(Icons.image_not_supported_outlined),
+                            const Icon(Icons.image_not_supported_outlined),
                       ),
                     ),
                     Positioned(
@@ -88,4 +91,3 @@ class ProductPharmacyViewHorizontal extends StatelessWidget {
     );
   }
 }
-

@@ -42,7 +42,9 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: selectedRole == 'user' ? Color(0xff00A3E0) : Colors.grey,
+                  color: selectedRole == 'user'
+                      ? const Color(0xff00A3E0)
+                      : Colors.grey,
                   width: selectedRole == 'user' ? 2 : 1,
                 ),
                 borderRadius: BorderRadius.circular(12),
@@ -63,13 +65,11 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                   "Register as a user so you can find pharmacies and purchase drugs.",
                   style: TextStyle(fontSize: 16, color: Colors.black87),
                 ),
-
                 onTap: () {
                   setState(() {
                     selectedRole = 'user';
                   });
                 },
-
               ),
             ),
             SizedBox(
@@ -80,7 +80,9 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: selectedRole == 'pharmacy' ? Color(0xff00A3E0) : Colors.grey,
+                  color: selectedRole == 'pharmacy'
+                      ? const Color(0xff00A3E0)
+                      : Colors.grey,
                   width: selectedRole == 'pharmacy' ? 2 : 1,
                 ),
                 borderRadius: BorderRadius.circular(12),
@@ -123,14 +125,16 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => RegistrationForm(), // صفحة تسجيل المستخدم
+                        builder: (context) =>
+                            const RegistrationForm(), // صفحة تسجيل المستخدم
                       ),
                     );
                   } else if (selectedRole == 'pharmacy') {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PharmacySignUpScreen(), // صفحة تسجيل الصيدلية
+                        builder: (context) =>
+                            const PharmacySignUpScreen(), // صفحة تسجيل الصيدلية
                       ),
                     );
                   } else {
@@ -151,7 +155,8 @@ class _RoleSelectionScreenState extends State<RoleSelectionScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
+                      MaterialPageRoute(
+                          builder: (context) => const LoginPage()),
                     );
                   },
                   child: const Text(

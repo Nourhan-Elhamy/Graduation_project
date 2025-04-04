@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-
 class PharmacySignUpScreen extends StatefulWidget {
   const PharmacySignUpScreen({super.key});
 
@@ -25,19 +24,19 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
 
   bool _isValidEmail(String email) {
-
     final emailRegex = RegExp(r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
     return emailRegex.hasMatch(email);
   }
 
   Future<void> _signUp() async {
     try {
+      // ignore: unused_local_variable
       final response = await http.post(
         Uri.parse('http://carecapsole.runasp.net/register'),
         headers: {
@@ -52,14 +51,11 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
         }),
       );
 
-
-    } catch (e) {
-      print("API Error: $e");
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   void _handleSignUp() async {
-
     if (_pharmacyNameController.text.isEmpty ||
         _ownerNameController.text.isEmpty ||
         _businessEmailController.text.isEmpty ||
@@ -69,12 +65,10 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
       return;
     }
 
-
     if (!_isValidEmail(_businessEmailController.text)) {
       _showMessage("Enter a valid email.");
       return;
     }
-
 
     if (_passwordController.text != _confirmPasswordController.text) {
       _showMessage("Passwords do not match.");
@@ -87,11 +81,10 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
 
     await _signUp();
 
-
     //Navigator.pushReplacement(
-     // context,
-     // MaterialPageRoute(builder: (context) => UploadDocumentsScreen()),
-   // );
+    // context,
+    // MaterialPageRoute(builder: (context) => UploadDocumentsScreen()),
+    // );
 
     setState(() {
       _isLoading = false;
@@ -112,20 +105,18 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _buildLabel("Pharmacy Name"),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               _buildInputField(
                 controller: _pharmacyNameController,
                 hintText: 'Enter Pharmacy Name',
               ),
               const SizedBox(height: 20),
-
               _buildLabel("Owner's Name"),
               _buildInputField(
                 controller: _ownerNameController,
                 hintText: 'Enter Owner\'s Name',
               ),
               const SizedBox(height: 20),
-
               _buildLabel("Business Email"),
               _buildInputField(
                 controller: _businessEmailController,
@@ -133,7 +124,6 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
                 keyboardType: TextInputType.emailAddress,
               ),
               const SizedBox(height: 20),
-
               _buildLabel("Password"),
               _buildPasswordField(
                 controller: _passwordController,
@@ -146,7 +136,6 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
                 },
               ),
               const SizedBox(height: 20),
-
               _buildLabel("Confirm Password"),
               _buildPasswordField(
                 controller: _confirmPasswordController,
@@ -159,7 +148,6 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
                 },
               ),
               const SizedBox(height: 20),
-
               GestureDetector(
                 onTap: _handleSignUp,
                 child: Container(
@@ -171,14 +159,14 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
                   ),
                   child: Center(
                     child: _isLoading
-                        ? CircularProgressIndicator(color: Colors.white)
+                        ? const CircularProgressIndicator(color: Colors.white)
                         : const Text(
-                      "Sign UP",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: Colors.white,
-                      ),
-                    ),
+                            "Sign UP",
+                            style: TextStyle(
+                              fontSize: 24,
+                              color: Colors.white,
+                            ),
+                          ),
                   ),
                 ),
               ),
@@ -192,7 +180,7 @@ class PharmacySignUpScreenState extends State<PharmacySignUpScreen> {
   Widget _buildLabel(String text) {
     return Text(
       text,
-      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     );
   }
 

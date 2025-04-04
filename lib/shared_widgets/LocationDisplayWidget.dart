@@ -6,7 +6,7 @@ import 'package:geocoding/geocoding.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 class LocationDisplayWidget extends StatefulWidget {
-  const LocationDisplayWidget({Key? key}) : super(key: key);
+  const LocationDisplayWidget({super.key});
 
   @override
   _LocationDisplayWidgetState createState() => _LocationDisplayWidgetState();

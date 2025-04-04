@@ -1,4 +1,4 @@
-
+// ignore_for_file: file_names
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/Category_view.dart';
@@ -21,15 +21,14 @@ class HomeCategori extends StatefulWidget {
 }
 
 class _HomeCategoriState extends State<HomeCategori> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 8, right: 8, top: 25),
       child: BlocProvider(
         create: (context) =>
-        PharmacyCubit(pharmacyRepo: PharmacyRepoImplementationFromApi())
-          ..fetchPharmacies(),
+            PharmacyCubit(pharmacyRepo: PharmacyRepoImplementationFromApi())
+              ..fetchPharmacies(),
         child: SingleChildScrollView(
           child: Column(
             children: [

@@ -10,13 +10,16 @@ class HomeSearch extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-      body: CustomTextFilde(hintText: "Search", icon: Icons.search,),
+      body: const CustomTextFilde(
+        hintText: "Search",
+        icon: Icons.search,
+      ),
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:graduation_project/features/user/presentation/tabs/profile_tab/r
 import 'edit_profile.dart';
 
 class ProfileCategori extends StatefulWidget {
-  const ProfileCategori({Key? key}) : super(key: key);
+  const ProfileCategori({super.key});
 
   @override
   State<ProfileCategori> createState() => _ProfileCategoriState();
@@ -27,7 +27,6 @@ class _ProfileCategoriState extends State<ProfileCategori> {
     ).then((updatedData) {
       // Update the data after returning from EditProfilePage
       if (updatedData != null) {
-
         setState(() {
           profileImagePath = updatedData['profileImage'];
           userName = updatedData['userName'];
@@ -36,8 +35,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
           phoneNumber = updatedData['phoneNumber'];
         });
       }
-    }
-    );
+    });
   }
 
   @override
@@ -76,22 +74,24 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(width: screenWidth*0.05),
+                  SizedBox(width: screenWidth * 0.05),
                   GestureDetector(
                     onTap: () {
-                      navigateToPage(context, EditProfilePage(
-                        userName: userName,
-                        email: email,
-                        location: location,
-                        profileImagePath: profileImagePath,
-                        phoneNumber: phoneNumber,
-                      ));
+                      navigateToPage(
+                          context,
+                          EditProfilePage(
+                            userName: userName,
+                            email: email,
+                            location: location,
+                            profileImagePath: profileImagePath,
+                            phoneNumber: phoneNumber,
+                          ));
                     },
                     child: Icon(Icons.edit_outlined),
                   ),
                 ],
               ),
-              SizedBox(height: screenHeight*0.01),
+              SizedBox(height: screenHeight * 0.01),
               Text(
                 email,
                 style: TextStyle(fontSize: screenWidth * 0.05),
@@ -104,7 +104,9 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: screenWidth*0.04,vertical: screenWidth*0.01),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: screenWidth * 0.04,
+                        vertical: screenWidth * 0.01),
                     decoration: BoxDecoration(
                       color: Colors.white60,
                       borderRadius: BorderRadius.circular(20),
@@ -112,7 +114,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                     child: Row(
                       children: [
                         Icon(Icons.location_on, color: AppColors.blue),
-                        SizedBox(width: screenWidth*0.01),
+                        SizedBox(width: screenWidth * 0.01),
                         Text(
                           location,
                           style: TextStyle(color: AppColors.blue),
@@ -128,27 +130,26 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                 label: "Personal Information",
                 image: Image.asset("assets/images/2x/personIcon.png"),
                 onTap: () {
-                  navigateToPage(context, EditProfilePage(
-                    userName: userName,
-                    email: email,
-                    location: location,
-                    profileImagePath: profileImagePath, phoneNumber: phoneNumber,
-                  ));
+                  navigateToPage(
+                      context,
+                      EditProfilePage(
+                        userName: userName,
+                        email: email,
+                        location: location,
+                        profileImagePath: profileImagePath,
+                        phoneNumber: phoneNumber,
+                      ));
                 },
               ),
               BuildListTile(
                 label: "Change Password",
                 image: Image.asset("assets/images/2x/union-1.png"),
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               BuildListTile(
                 label: "My Orders",
                 image: Image.asset("assets/images/2x/orders.png"),
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               BuildListTile(
                 label: "Refill Reminder",
@@ -160,23 +161,17 @@ class _ProfileCategoriState extends State<ProfileCategori> {
               BuildListTile(
                 label: "Language Preferences",
                 image: Image.asset("assets/images/2x/globe.png"),
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               BuildListTile(
                 label: "Report an Issue",
                 image: Image.asset("assets/images/2x/report.png"),
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               BuildListTile(
                 label: "About us",
                 image: Image.asset("assets/images/2x/About Icon.png"),
-                onTap: () {
-
-                },
+                onTap: () {},
               ),
               // Add other items here...
             ],
@@ -188,7 +183,11 @@ class _ProfileCategoriState extends State<ProfileCategori> {
 }
 
 class BuildListTile extends StatelessWidget {
-  const BuildListTile({super.key, required this.label, required this.image, required this.onTap});
+  const BuildListTile(
+      {super.key,
+      required this.label,
+      required this.image,
+      required this.onTap});
   final String label;
   final Image image;
   final VoidCallback onTap;

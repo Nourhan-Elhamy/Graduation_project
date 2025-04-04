@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
@@ -6,8 +8,6 @@ import '../../../../../../core/utils/app_colors.dart';
 import 'controller/pharmacy_details_cubit.dart';
 import 'controller/productpharmacy-horizontal.dart';
 import 'data/repos/pharmacy_implementation_repo.dart';
-
-
 
 class PharmaciesDetails extends StatefulWidget {
   final int pharmacyId;
@@ -27,7 +27,9 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return BlocProvider(
-      create: (context) => PharmacyDetailsCubit(pharmacyRepo: PharmacyRepoImplementationFromApi())..getPharmacyDetails(widget.pharmacyId),
+      create: (context) => PharmacyDetailsCubit(
+          pharmacyRepo: PharmacyRepoImplementationFromApi())
+        ..getPharmacyDetails(widget.pharmacyId),
       child: Scaffold(
         body: SingleChildScrollView(
           child: BlocBuilder<PharmacyDetailsCubit, PharmacyDetailsState>(
@@ -53,12 +55,14 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                   children: [
                     Stack(
                       children: [
-                        Image.network(pharmacy.imageURL , width: double.infinity, fit: BoxFit.cover),
+                        Image.network(pharmacy.imageURL,
+                            width: double.infinity, fit: BoxFit.cover),
                         IconButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          icon: Icon(Icons.arrow_back_ios, color: AppColors.blue),
+                          icon:
+                              Icon(Icons.arrow_back_ios, color: AppColors.blue),
                         ),
                       ],
                     ),
@@ -75,19 +79,31 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                           textAlign: TextAlign.center,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16, fontWeight: FontWeight.w300),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w300),
                         ),
                         SizedBox(height: screenHeight * 0.01),
                         Text(
                           "Open Hours: ${pharmacy.workTime}",
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: screenHeight * 0.01),
                         Text(
                           "Phone: ${pharmacy.phoneNumbers}",
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: screenHeight * 0.02),
                         Row(
@@ -95,14 +111,17 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                           children: [
                             Container(
                               decoration: BoxDecoration(
-                                color: AppColors.iconColor, // لتقليل الشفافية إلى 50%
+                                color: AppColors
+                                    .iconColor, // لتقليل الشفافية إلى 50%
 
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(
                                 children: [
-                                  Icon(Icons.location_on, color: AppColors.blue),
-                                  Text("1.3 KM", style: TextStyle(color: AppColors.blue)),
+                                  Icon(Icons.location_on,
+                                      color: AppColors.blue),
+                                  Text("1.3 KM",
+                                      style: TextStyle(color: AppColors.blue)),
                                 ],
                               ),
                             ),
@@ -114,8 +133,10 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               ),
                               child: Row(
                                 children: [
-                                  const Icon(Icons.star, color: Colors.amberAccent),
-                                  Text("3.5 (200 Review)", style: TextStyle(color: AppColors.blue)),
+                                  const Icon(Icons.star,
+                                      color: Colors.amberAccent),
+                                  Text("3.5 (200 Review)",
+                                      style: TextStyle(color: AppColors.blue)),
                                 ],
                               ),
                             ),
@@ -140,7 +161,8 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               isSelected: selectedCategory == 'All',
                               onTap: () {
                                 setState(() {
-                                  selectedCategory = 'All'; // تغيير الفئة المختارة
+                                  selectedCategory =
+                                      'All'; // تغيير الفئة المختارة
                                 });
                               },
                             ),
@@ -150,7 +172,8 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               isSelected: selectedCategory == 'Personal Care',
                               onTap: () {
                                 setState(() {
-                                  selectedCategory = 'Personal Care'; // تغيير الفئة المختارة
+                                  selectedCategory =
+                                      'Personal Care'; // تغيير الفئة المختارة
                                 });
                               },
                             ),
@@ -160,10 +183,10 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               isSelected: selectedCategory == 'Drugs',
                               onTap: () {
                                 setState(() {
-                                  selectedCategory = 'Drugs'; // تغيير الفئة المختارة
+                                  selectedCategory =
+                                      'Drugs'; // تغيير الفئة المختارة
                                 });
                               },
-
                             ),
                           ],
                         ),
@@ -177,12 +200,17 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                             ),
                             Text(
                               "Best Seller",
-                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 20),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(fontSize: 20),
                             ),
                           ],
                         ),
                         SizedBox(height: screenHeight * 0.01),
-                        ProductPharmacyViewHorizontal(products: filteredProducts), // عرض المنتجات المفلترة
+                        ProductPharmacyViewHorizontal(
+                            products:
+                                filteredProducts), // عرض المنتجات المفلترة
                       ],
                     ),
                   ],
@@ -199,7 +227,11 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
 }
 
 class FilterButton extends StatelessWidget {
-  const FilterButton({super.key, required this.label, required this.isSelected, required this.onTap});
+  const FilterButton(
+      {super.key,
+      required this.label,
+      required this.isSelected,
+      required this.onTap});
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
@@ -210,7 +242,8 @@ class FilterButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap, // عند الضغط يتم استدعاء الدالة onTap
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: 8),
+        padding:
+            EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.blue : AppColors.white,
           borderRadius: BorderRadius.circular(8.0),

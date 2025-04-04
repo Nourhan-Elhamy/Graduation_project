@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:image_picker/image_picker.dart';
@@ -6,7 +8,7 @@ import 'package:permission_handler/permission_handler.dart';
 class CustomIconCamera extends StatefulWidget {
   final Function(String? imagePath)? onImageSelected;
 
-  const CustomIconCamera({Key? key, this.onImageSelected}) : super(key: key);
+  const CustomIconCamera({super.key, this.onImageSelected});
 
   @override
   State<CustomIconCamera> createState() => _CustomIconCameraState();
@@ -57,17 +59,12 @@ class _CustomIconCameraState extends State<CustomIconCamera> {
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
-
-    await picker.pickImage(source: ImageSource.camera);
- 
+        await picker.pickImage(source: ImageSource.camera);
 
     if (pickedFile != null) {
       setState(() {
         _pickedImagePath = pickedFile.path;
       });
-
-
-
 
       if (widget.onImageSelected != null) {
         widget.onImageSelected!(_pickedImagePath);
