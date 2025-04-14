@@ -4,11 +4,8 @@ import '../models/pharmacies_model.dart';
 
 abstract class PharmacyRepo {
   Future<Either<Failure, List<Pharmacy>>> fetchPharmacies();
-  Future<Either<Failure, Pharmacy>> fetchPharmacyById(int id);}
-
-
-
-
+  Future<Either<Failure, Pharmacy>> fetchPharmacyById(int id);
+}
 
 class Failure {
   final String message;
@@ -17,5 +14,5 @@ class Failure {
 }
 
 class ApiFailure extends Failure {
-  ApiFailure({required String message}) : super(message: message);
+  ApiFailure({required super.message});
 }

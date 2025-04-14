@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/auth/login/user_login_screen.dart';
@@ -43,10 +45,9 @@ class GetStartedScreen extends StatelessWidget {
                   textcolor: AppColors.white,
                   onPressed: () {
                     Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (c){
-                        return LoginPage();
-                      })
-                    );
+                        MaterialPageRoute(builder: (c) {
+                      return LoginPage();
+                    }));
                   },
                 ),
                 const SizedBox(

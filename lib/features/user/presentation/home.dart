@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduation_project/features/user/presentation/chat_bot/chat_bot.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Home_categori.dart';
 import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab/pharmacie_categori.dart';
 import 'package:graduation_project/features/user/presentation/tabs/profile_tab/profile_categori.dart';
@@ -10,6 +11,7 @@ class HomeGround extends StatefulWidget {
   @override
   State<HomeGround> createState() => _HomeGroundState();
 }
+
 List<Widget> tabs = [
   const HomeCategori(),
   const PharmacieCategori(),
@@ -23,6 +25,15 @@ class _HomeGroundState extends State<HomeGround> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const ChatBot()),
+          );
+        },
+        child: Image.asset('assets/images/Chat.png'),
+      ),
       body: tabs[selectedTap],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedTap,

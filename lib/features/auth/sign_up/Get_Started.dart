@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/core/utils/app_images.dart';
@@ -14,38 +16,36 @@ class GetStartScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Image.asset(AppImages.get_start,
+            Image.asset(
+              AppImages.get_start,
               fit: BoxFit.cover,
             ),
-            const SizedBox(height: 20,),
-
-            const SizedBox(height: 35,),
-            ElevatedButton(onPressed: (){
-             // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => LoadingPage()),);
-            },
+            const SizedBox(
+              height: 20,
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  // Navigator.pushReplacement(context,MaterialPageRoute(builder: (context) => LoadingPage()),);
+                },
                 style: ElevatedButton.styleFrom(
-                    minimumSize: Size(buttonWidth,59),
-
-
-
+                    minimumSize: Size(buttonWidth, 59),
                     backgroundColor: AppColors.blue,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
-
                     )),
-                child:
-                const Text("Start",style: TextStyle(
-                  fontSize: 24,
-
-                ),)
-            )
-
+                child: const Text(
+                  "Start",
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ))
           ],
         ),
       ),
-
-
     );
   }
 }

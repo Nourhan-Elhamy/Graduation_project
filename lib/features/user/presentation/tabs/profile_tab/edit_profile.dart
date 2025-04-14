@@ -1,14 +1,10 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 import 'package:graduation_project/shared_widgets/custom_text_filde.dart';
 
 import '../../../../../shared_widgets/custom_icon_camera.dart';
-
-
 
 class EditProfilePage extends StatefulWidget {
   final String userName;
@@ -17,7 +13,14 @@ class EditProfilePage extends StatefulWidget {
   final String phoneNumber;
   final String? profileImagePath;
 
-  const EditProfilePage({Key? key, required this.userName, required this.email, required this.location, this.profileImagePath, required this.phoneNumber,}) : super(key: key);
+  const EditProfilePage({
+    super.key,
+    required this.userName,
+    required this.email,
+    required this.location,
+    this.profileImagePath,
+    required this.phoneNumber,
+  });
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
@@ -64,14 +67,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-
         child: SingleChildScrollView(
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
-
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
@@ -97,25 +97,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 "Full Name",
                 style: TextStyle(color: Colors.blueGrey),
               ),
-              CustomTextFilde(hintText: "Full Name", controller: nameController),
+              CustomTextFilde(
+                  hintText: "Full Name", controller: nameController),
               SizedBox(height: screenHeight * 0.02),
               const Text(
                 "Email Address",
                 style: TextStyle(color: Colors.blueGrey),
               ),
-              CustomTextFilde(hintText: "Email Address", controller: emailController),
+              CustomTextFilde(
+                  hintText: "Email Address", controller: emailController),
               SizedBox(height: screenHeight * 0.02),
               const Text(
                 "Phone Number",
                 style: TextStyle(color: Colors.blueGrey),
               ),
-              CustomTextFilde(hintText: "Phone Number", controller: phoneNumberController),
+              CustomTextFilde(
+                  hintText: "Phone Number", controller: phoneNumberController),
               SizedBox(height: screenHeight * 0.02),
               const Text(
                 "Location",
                 style: TextStyle(color: Colors.blueGrey),
               ),
-              CustomTextFilde(hintText: "Location", controller: locationController),
+              CustomTextFilde(
+                  hintText: "Location", controller: locationController),
               SizedBox(height: screenHeight * 0.1),
               CustomButton(
                 title: "Save",
