@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../data/models/pharmacies_model.dart';
@@ -14,16 +13,15 @@ class PharmacyCubit extends Cubit<PharmacyState> {
     final result = await pharmacyRepo.fetchPharmacies();
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(PharmacyError(failure.message));
       },
-          (pharmacies) {
+      (pharmacies) {
         emit(PharmacyLoaded(pharmacies));
       },
     );
   }
 }
-
 
 abstract class PharmacyState {}
 

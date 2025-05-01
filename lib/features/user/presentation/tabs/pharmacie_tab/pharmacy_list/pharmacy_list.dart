@@ -6,7 +6,6 @@ import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab
 import '../../../../../../shared_widgets/LoadingIndecator.dart';
 import 'data/models/pharmacies_model.dart';
 
-
 class PharmacyList extends StatelessWidget {
   const PharmacyList({super.key, required this.pharmacy});
   final Pharmacy pharmacy;
@@ -14,8 +13,12 @@ class PharmacyList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (c){return PharmaciesDetails(pharmacyId: pharmacy.id,);}));
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (c) {
+          return PharmaciesDetails(
+            pharmacyId: pharmacy.id,
+          );
+        }));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -31,12 +34,12 @@ class PharmacyList extends StatelessWidget {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15), topRight: Radius.circular(15)),
               child: CachedNetworkImage(
-                imageUrl:pharmacy.imageURL,
+                imageUrl: pharmacy.imageURL,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 placeholder: (_, __) => const LoedingIndecator(),
                 errorWidget: (_, __, ___) =>
-                const Icon(Icons.image_not_supported_outlined),
+                    const Icon(Icons.image_not_supported_outlined),
               ),
             ),
             Divider(

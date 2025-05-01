@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
 
@@ -65,7 +64,6 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "UserName",
-
               ),
             ),
             const SizedBox(height: 5),
@@ -78,7 +76,6 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "Password",
-
               ),
             ),
             const SizedBox(height: 5),
@@ -104,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
                 "Forgot password?",
                 style: TextStyle(
                   color: AppColors.blue,
-
                 ),
               ),
             ),
@@ -152,7 +148,6 @@ class _LoginPageState extends State<LoginPage> {
                     const Text(
                       "Don't have an account yet? ",
                       style: TextStyle(
-
                         color: Color(0xff455A64),
                       ),
                     ),
@@ -160,14 +155,14 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (c) => const RegistrationForm()),
+                          MaterialPageRoute(
+                              builder: (c) => const RegistrationForm()),
                         );
                       },
                       child: Text(
                         "Register here",
                         style: TextStyle(
                           color: AppColors.blue,
-
                         ),
                       ),
                     ),
@@ -208,4 +203,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-

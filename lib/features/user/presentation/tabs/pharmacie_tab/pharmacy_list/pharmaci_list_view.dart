@@ -3,7 +3,6 @@ import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab
 
 import 'data/models/pharmacies_model.dart';
 
-
 class PharmaciListView extends StatelessWidget {
   const PharmaciListView({super.key, required this.pharmacyy});
   final List<Pharmacy> pharmacyy;

@@ -15,8 +15,8 @@ class PharmacieCategori extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      PharmacyCubit(pharmacyRepo: PharmacyRepoImplementationFromApi())
-        ..fetchPharmacies(),
+          PharmacyCubit(pharmacyRepo: PharmacyRepoImplementationFromApi())
+            ..fetchPharmacies(),
       child: Padding(
         padding: const EdgeInsets.only(left: 6, right: 8, top: 25),
         child: ListView(
@@ -59,8 +59,6 @@ class PharmacieCategori extends StatelessWidget {
   }
 }
 
-
-
 class PharmaciesSection extends StatelessWidget {
   final int startIndex;
   final int numToShow;
@@ -77,7 +75,8 @@ class PharmaciesSection extends StatelessWidget {
           return Center(child: Text(state.message));
         } else if (state is PharmacyLoaded) {
           // تخطي أول 'startIndex' صيدلية و عرض 'numToShow' صيدليات بعدهم
-          final pharmaciesToShow = state.pharmacies.skip(startIndex).take(numToShow).toList();
+          final pharmaciesToShow =
+              state.pharmacies.skip(startIndex).take(numToShow).toList();
           return PharmaciListView(pharmacyy: pharmaciesToShow);
         } else {
           return const Center(child: Text("لا توجد بيانات"));

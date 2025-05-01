@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Drugs/drug_view_grid.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Drugs/drug_view_horizontal.dart';
-
 import 'package:graduation_project/shared_widgets/Image%20Carousel.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
@@ -57,7 +56,7 @@ class DrugView extends StatelessWidget {
                 ),
               ],
             ),
-            const DrugViewGrid(),
+            const DrugViewHorizontal(),
             Row(
               children: [
                 IconButton(
@@ -74,7 +73,7 @@ class DrugView extends StatelessWidget {
                 ),
               ],
             ),
-            const DrugViewHorizontal(),
+            const DrugViewGrid(),
           ],
         ),
       ),
