@@ -1,22 +1,25 @@
 // ignore_for_file: file_names
 
 import 'package:dio/dio.dart';
-import 'package:graduation_project/features/user/data/Models/medicine/medicine.dart';
+
 import 'package:graduation_project/features/user/data/models/article/article.dart';
-import '../../../features/user/data/models/care/care.dart';
+import 'package:graduation_project/features/user/data/models/care/care/datum.dart';
+import 'package:graduation_project/features/user/data/models/medicine/medicine/datum.dart';
 
 class ApiService {
   final Dio dio;
+  String API_URL = "http://20.19.80.46";
+  String API_PREFIX = "/api/v1";
 
   ApiService(this.dio);
-
-  Future<List<Medicine>> getMedicines() async {
+  Future<List<Datum>> getMedicines() async {
     try {
-      final response =
-          await dio.get('http://carecapsole.runasp.net/api/pharmacy/Medicine');
+      final response = await dio.get('$API_URL$API_PREFIX/medicines');
       if (response.statusCode == 200) {
-        List<dynamic> data = response.data;
-        return data.map((json) => Medicine.fromJson(json)).toList();
+        final json = response.data as Map<String, dynamic>;
+        final List<dynamic> data = json['data'];
+
+        return data.map((e) => Datum.fromJson(e)).toList();
       } else {
         throw Exception('Failed to load data');
       }
@@ -25,13 +28,14 @@ class ApiService {
     }
   }
 
-  Future<List<Care>> getCare() async {
+  Future<List<Catum>> getCare() async {
     try {
-      final response =
-          await dio.get('http://carecapsole.runasp.net/api/pharmacy/Care');
+      final response = await dio.get('$API_URL$API_PREFIX/medicines');
       if (response.statusCode == 200) {
-        List<dynamic> data = response.data;
-        return data.map((json) => Care.fromJson(json)).toList();
+        final json = response.data as Map<String, dynamic>;
+        final List<dynamic> data = json['data'];
+
+        return data.map((json) => Catum.fromJson(json)).toList();
       } else {
         throw Exception('Failed to loadaing data');
       }

@@ -3,22 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/models/pharmacies_model.dart';
 import '../data/repos/pharmacy_repo.dart';
 
-
 class PharmacyDetailsCubit extends Cubit<PharmacyDetailsState> {
   final PharmacyRepo pharmacyRepo;
 
-  PharmacyDetailsCubit({required this.pharmacyRepo}) : super(PharmacyDetailsInitial());
+  PharmacyDetailsCubit({required this.pharmacyRepo})
+      : super(PharmacyDetailsInitial());
 
   Future<void> getPharmacyDetails(int id) async {
     emit(PharmacyDetailsLoading());
-    final result = await pharmacyRepo.fetchPharmacyById(id); // تأكد من أن هذه الدالة تقوم بإرجاع بيانات صيدلية واحدة
+    final result = await pharmacyRepo.fetchPharmacyById(
+        id); // تأكد من أن هذه الدالة تقوم بإرجاع بيانات صيدلية واحدة
 
     result.fold(
-          (failure) {
+      (failure) {
         emit(PharmacyDetailsError(failure.message));
       },
-          (pharmacy) {
-        emit(PharmacyDetailsLoaded(pharmacy));  // التأكد من استخدام كائن Pharmacy وليس قائمة
+      (pharmacy) {
+        emit(PharmacyDetailsLoaded(
+            pharmacy)); // التأكد من استخدام كائن Pharmacy وليس قائمة
       },
     );
   }
@@ -41,4 +43,3 @@ class PharmacyDetailsError extends PharmacyDetailsState {
 
   PharmacyDetailsError(this.message);
 }
-

@@ -29,7 +29,8 @@ class RegistrationFormState extends State<RegistrationForm> {
 
     if (!_isChecked) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please accept the Terms and Privacy Policy")),
+        const SnackBar(
+            content: Text("Please accept the Terms and Privacy Policy")),
       );
       return;
     }
@@ -80,7 +81,8 @@ class RegistrationFormState extends State<RegistrationForm> {
               _buildInputField(
                 controller: _usernameController,
                 hintText: 'Full Name',
-                validator: (value) => value!.isEmpty ? "Full Name is required" : null,
+                validator: (value) =>
+                    value!.isEmpty ? "Full Name is required" : null,
               ),
               const SizedBox(height: 20),
               _buildLabel("Email Address"),
@@ -107,9 +109,12 @@ class RegistrationFormState extends State<RegistrationForm> {
                 obscureText: !_isPasswordVisible,
                 suffixIcon: _buildVisibilityIcon(
                   _isPasswordVisible,
-                      () => setState(() => _isPasswordVisible = !_isPasswordVisible),
+                  () =>
+                      setState(() => _isPasswordVisible = !_isPasswordVisible),
                 ),
-                validator: (value) => value!.length < 6 ? "Password must be at least 6 characters" : null,
+                validator: (value) => value!.length < 6
+                    ? "Password must be at least 6 characters"
+                    : null,
               ),
               const SizedBox(height: 20),
               _buildLabel("Confirm Password"),
@@ -120,24 +125,36 @@ class RegistrationFormState extends State<RegistrationForm> {
                 obscureText: !_isConfirmPasswordVisible,
                 suffixIcon: _buildVisibilityIcon(
                   _isConfirmPasswordVisible,
-                      () => setState(() => _isConfirmPasswordVisible = !_isConfirmPasswordVisible),
+                  () => setState(() =>
+                      _isConfirmPasswordVisible = !_isConfirmPasswordVisible),
                 ),
-                validator: (value) => value != _passwordController.text ? "Passwords do not match" : null,
+                validator: (value) => value != _passwordController.text
+                    ? "Passwords do not match"
+                    : null,
               ),
               const SizedBox(height: 20),
               CheckboxListTile(
                 title: RichText(
                   text: const TextSpan(
                     children: [
-                      TextSpan(text: "I agree to the ", style: TextStyle(fontSize: 16, color: Colors.black)),
-                      TextSpan(text: "Terms ", style: TextStyle(fontSize: 16, color: Colors.blue)),
-                      TextSpan(text: "and ", style: TextStyle(fontSize: 16, color: Colors.black)),
-                      TextSpan(text: "Privacy Policy", style: TextStyle(fontSize: 16, color: Colors.blue)),
+                      TextSpan(
+                          text: "I agree to the ",
+                          style: TextStyle(fontSize: 16, color: Colors.black)),
+                      TextSpan(
+                          text: "Terms ",
+                          style: TextStyle(fontSize: 16, color: Colors.blue)),
+                      TextSpan(
+                          text: "and ",
+                          style: TextStyle(fontSize: 16, color: Colors.black)),
+                      TextSpan(
+                          text: "Privacy Policy",
+                          style: TextStyle(fontSize: 16, color: Colors.blue)),
                     ],
                   ),
                 ),
                 value: _isChecked,
-                onChanged: (value) => setState(() => _isChecked = value ?? false),
+                onChanged: (value) =>
+                    setState(() => _isChecked = value ?? false),
               ),
               const SizedBox(height: 20),
               GestureDetector(
@@ -153,9 +170,9 @@ class RegistrationFormState extends State<RegistrationForm> {
                     child: _isLoading
                         ? const CircularProgressIndicator(color: Colors.white)
                         : const Text(
-                      "Sign UP",
-                      style: TextStyle(fontSize: 24, color: Colors.white),
-                    ),
+                            "Sign UP",
+                            style: TextStyle(fontSize: 24, color: Colors.white),
+                          ),
                   ),
                 ),
               ),
@@ -170,7 +187,8 @@ class RegistrationFormState extends State<RegistrationForm> {
     );
   }
 
-  Widget _buildLabel(String text) => Text(text, style: const TextStyle(fontSize: 16));
+  Widget _buildLabel(String text) =>
+      Text(text, style: const TextStyle(fontSize: 16));
 
   Widget _buildInputField({
     required TextEditingController controller,
@@ -188,7 +206,9 @@ class RegistrationFormState extends State<RegistrationForm> {
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: Colors.grey[200],
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20), borderSide: BorderSide.none),
+        border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20),
+            borderSide: BorderSide.none),
       ),
       validator: validator,
     );

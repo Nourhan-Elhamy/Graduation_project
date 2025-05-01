@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/services/Api_service.dart';
-import 'package:graduation_project/features/user/data/models/care/care.dart';
+import 'package:graduation_project/features/user/data/models/care/care/datum.dart';
+
 import 'package:graduation_project/shared_widgets/product_list.dart';
 
 import 'package:dio/dio.dart';
@@ -10,7 +11,7 @@ class CareViewGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Care>>(
+    return FutureBuilder<List<Catum>>(
       future: ApiService(Dio()).getCare(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -23,7 +24,7 @@ class CareViewGrid extends StatelessWidget {
           return const Center(child: Text('There are no medications  '));
         }
 
-        final List<Care> care = snapshot.data!;
+        final List<Catum> care = snapshot.data!;
 
         return GridView.builder(
           shrinkWrap: true,
@@ -38,7 +39,7 @@ class CareViewGrid extends StatelessWidget {
             final medicine = care[index];
             return ProductList(
               icon: Icons.favorite_border_outlined,
-              image: medicine.imageUrl ?? '',
+              image: medicine.image ?? '',
               name: medicine.name ?? '',
               egp: "EGP",
               price: medicine.price.toString(),

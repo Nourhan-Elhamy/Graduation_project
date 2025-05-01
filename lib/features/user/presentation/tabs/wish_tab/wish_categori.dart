@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 class WishCategori extends StatelessWidget {
-
-  const WishCategori({super.key, });
+  const WishCategori({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,6 @@ class WishCategori extends StatelessWidget {
             style: TextStyle(color: AppColors.blue, fontSize: 30),
           ),
         ),
-        body: Image.asset("assets/images/favorite_image.png")
-    );
+        body: Image.asset("assets/images/favorite_image.png"));
   }
 }

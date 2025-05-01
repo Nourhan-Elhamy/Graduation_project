@@ -9,7 +9,8 @@ class PharmacyRepoImplementationFromApi implements PharmacyRepo {
   @override
   Future<Either<Failure, List<Pharmacy>>> fetchPharmacies() async {
     try {
-      final response = await http.get(Uri.parse('http://carecapsole.runasp.net/api/Pharmacies'));
+      final response = await http
+          .get(Uri.parse('http://carecapsole.runasp.net/api/Pharmacies'));
 
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
@@ -26,8 +27,8 @@ class PharmacyRepoImplementationFromApi implements PharmacyRepo {
   @override
   Future<Either<Failure, Pharmacy>> fetchPharmacyById(int id) async {
     try {
-      final response = await http.get(
-          Uri.parse('http://carecapsole.runasp.net/api/Pharmacies/$id'));
+      final response = await http
+          .get(Uri.parse('http://carecapsole.runasp.net/api/Pharmacies/$id'));
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
@@ -39,4 +40,5 @@ class PharmacyRepoImplementationFromApi implements PharmacyRepo {
     } catch (e) {
       return left(ApiFailure(message: 'Oops, an error occurred!'));
     }
-  }}
+  }
+}
