@@ -72,14 +72,45 @@ class PharmaciesSection extends StatelessWidget {
         if (state is PharmacyLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is PharmacyError) {
-          return Center(child: Text(state.message));
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                const SizedBox(height: 16),
+                Text(
+                  state.message,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.red),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    context.read<PharmacyCubit>().fetchPharmacies();
+                  },
+                  child: const Text('Try Again'),
+                ),
+              ],
+            ),
+          );
         } else if (state is PharmacyLoaded) {
-          // تخطي أول 'startIndex' صيدلية و عرض 'numToShow' صيدليات بعدهم
-          final pharmaciesToShow =
-              state.pharmacies.skip(startIndex).take(numToShow).toList();
+          if (state.pharmacies.isEmpty) {
+            return const Center(
+              child: Text(
+                'No pharmacies available',
+                style: TextStyle(fontSize: 16),
+              ),
+            );
+          }
+          final pharmaciesToShow = state.pharmacies.skip(startIndex).take(numToShow).toList();
           return PharmaciListView(pharmacyy: pharmaciesToShow);
         } else {
-          return const Center(child: Text("لا توجد بيانات"));
+          return const Center(
+            child: Text(
+              'No data available',
+              style: TextStyle(fontSize: 16),
+            ),
+          );
         }
       },
     );

@@ -13,10 +13,10 @@ class PharmacyCubit extends Cubit<PharmacyState> {
     final result = await pharmacyRepo.fetchPharmacies();
 
     result.fold(
-      (failure) {
+          (failure) {
         emit(PharmacyError(failure.message));
       },
-      (pharmacies) {
+          (pharmacies) {
         emit(PharmacyLoaded(pharmacies));
       },
     );

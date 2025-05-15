@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../../../../core/utils/app_colors.dart';
 import 'controller/pharmacy_details_cubit.dart';
 import 'controller/productpharmacy-horizontal.dart';
 import 'data/repos/pharmacy_implementation_repo.dart';
-
 class PharmaciesDetails extends StatefulWidget {
-  final int pharmacyId;
+  final String pharmacyId;
 
   const PharmaciesDetails({super.key, required this.pharmacyId});
 
@@ -36,33 +36,37 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
             builder: (context, state) {
               if (state is PharmacyDetailsLoading) {
                 return const Center(child: CircularProgressIndicator());
+
               } else if (state is PharmacyDetailsError) {
+
                 return Center(child: Text(state.message));
+
               } else if (state is PharmacyDetailsLoaded) {
+
                 final pharmacy = state.pharmacy;
 
                 // تحديد المنتجات بناءً على الفئة المختارة
                 List<dynamic> filteredProducts;
                 if (selectedCategory == 'Drugs') {
-                  filteredProducts = pharmacy.medicines;
+
                 } else if (selectedCategory == 'Personal Care') {
-                  filteredProducts = pharmacy.care;
+
                 } else {
-                  filteredProducts = [...pharmacy.medicines, ...pharmacy.care];
+
                 }
 
                 return Column(
                   children: [
                     Stack(
                       children: [
-                        Image.network(pharmacy.imageURL,
+                        Image.network(pharmacy.image,
                             width: double.infinity, fit: BoxFit.cover),
                         IconButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
                           icon:
-                              Icon(Icons.arrow_back_ios, color: AppColors.blue),
+                          Icon(Icons.arrow_back_ios, color: AppColors.blue),
                         ),
                       ],
                     ),
@@ -71,11 +75,11 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                       children: [
                         Text(
                           pharmacy.name,
-                          style: Theme.of(context).textTheme.bodyMedium,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith( fontSize: 30),
                         ),
-                        SizedBox(height: screenHeight * 0.02),
+
                         Text(
-                          "Address: ${pharmacy.location}",
+                          pharmacy.description,
                           textAlign: TextAlign.center,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
@@ -83,27 +87,30 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               .textTheme
                               .bodyMedium!
                               .copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.w300),
+                              fontSize: 16, fontWeight: FontWeight.w400),
                         ),
+                        SizedBox(height: screenHeight * 0.02),
+                        Text(
+                          "Address:${pharmacy.address}",
+                          textAlign: TextAlign.center,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(
+                              fontSize: 16, fontWeight: FontWeight.w400),
+                        ),
+
                         SizedBox(height: screenHeight * 0.01),
                         Text(
-                          "Open Hours: ${pharmacy.workTime}",
+                          "Phone:+${pharmacy.phone}",
                           textAlign: TextAlign.center,
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
                               .copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
-                        Text(
-                          "Phone: ${pharmacy.phoneNumbers}",
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
+                              fontSize: 16, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: screenHeight * 0.02),
                         Row(
@@ -162,7 +169,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               onTap: () {
                                 setState(() {
                                   selectedCategory =
-                                      'All'; // تغيير الفئة المختارة
+                                  'All'; // تغيير الفئة المختارة
                                 });
                               },
                             ),
@@ -173,7 +180,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               onTap: () {
                                 setState(() {
                                   selectedCategory =
-                                      'Personal Care'; // تغيير الفئة المختارة
+                                  'Personal Care'; // تغيير الفئة المختارة
                                 });
                               },
                             ),
@@ -184,7 +191,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               onTap: () {
                                 setState(() {
                                   selectedCategory =
-                                      'Drugs'; // تغيير الفئة المختارة
+                                  'Drugs'; // تغيير الفئة المختارة
                                 });
                               },
                             ),
@@ -208,9 +215,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                           ],
                         ),
                         SizedBox(height: screenHeight * 0.01),
-                        ProductPharmacyViewHorizontal(
-                            products:
-                                filteredProducts), // عرض المنتجات المفلترة
+                        // عرض المنتجات المفلترة
                       ],
                     ),
                   ],
@@ -229,9 +234,9 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
 class FilterButton extends StatelessWidget {
   const FilterButton(
       {super.key,
-      required this.label,
-      required this.isSelected,
-      required this.onTap});
+        required this.label,
+        required this.isSelected,
+        required this.onTap});
   final String label;
   final bool isSelected;
   final VoidCallback onTap;
@@ -243,7 +248,7 @@ class FilterButton extends StatelessWidget {
       onTap: onTap, // عند الضغط يتم استدعاء الدالة onTap
       child: Container(
         padding:
-            EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: 8),
+        EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: 8),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.blue : AppColors.white,
           borderRadius: BorderRadius.circular(8.0),
