@@ -12,11 +12,14 @@ class AppImages {
   static String google = "assets/images/Google Content.png";
   static String divider = "assets/images/Divider Container.png";
   static String location = "assets/images/Forgot password-rafiki 1 (1).png";
-  // ignore: non_constant_identifier_names
-  static String get_start = "assets/images/registerd successfully.png";
+  static String getStart = "assets/images/registerd successfully.png";
   static String panadol = "assets/images/panadolimage.png";
   static String rawafrican = "assets/images/Rawafricanimage.png";
 
   static String patientIcon = "assets/images/Patient Icon.png";
   static String pharmacyIcon = "assets/images/Pharmacy Icon.png";
+  static String forgetPasswordImage= "assets/images/2x/Forget_password.png";
+  static String vertifyPassword= "assets/images/2x/vertify_password.png";
+  static String changedPassword= "assets/images/2x/changedpass.png";
+  static String resetPassword ="assets/images/2x/reset_password.png";
 }

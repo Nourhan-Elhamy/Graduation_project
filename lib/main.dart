@@ -3,7 +3,9 @@ import 'package:graduation_project/core/utils/app_colors.dart';
 import 'features/splash/presentation/views/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+
+      const MyApp());
 }
 
 class MyApp extends StatelessWidget {

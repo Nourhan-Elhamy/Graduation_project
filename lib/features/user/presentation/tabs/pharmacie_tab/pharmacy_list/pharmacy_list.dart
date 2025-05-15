@@ -34,12 +34,12 @@ class PharmacyList extends StatelessWidget {
               borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(15), topRight: Radius.circular(15)),
               child: CachedNetworkImage(
-                imageUrl: pharmacy.imageURL,
+                imageUrl: pharmacy.image,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 placeholder: (_, __) => const LoedingIndecator(),
                 errorWidget: (_, __, ___) =>
-                    const Icon(Icons.image_not_supported_outlined),
+                const Icon(Icons.image_not_supported_outlined),
               ),
             ),
             Divider(
@@ -60,11 +60,11 @@ class PharmacyList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),
               child: Text(
-                pharmacy.location,
+                pharmacy.address,
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(fontSize: 12, fontWeight: FontWeight.w300),
+                    .copyWith(fontSize: 15, fontWeight: FontWeight.w300),
               ),
             ),
             Padding(
@@ -75,17 +75,18 @@ class PharmacyList extends StatelessWidget {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "Open Hours: ", // الجزء الأول
+                        text: "Email: ", // الجزء الأول
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 16, color: Colors.black), // لون مخصص
                       ),
                       TextSpan(
-                        text: pharmacy.workTime, // الجزء الثاني
+                        text: pharmacy.email,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
                             color: Colors.black), // لون مخصص
                       ),
+
                     ],
                   ),
                 ),
@@ -104,7 +105,7 @@ class PharmacyList extends StatelessWidget {
                             fontSize: 16, color: Colors.black), // لون مخصص
                       ),
                       TextSpan(
-                        text: pharmacy.phoneNumbers,
+                        text: pharmacy.phone,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                             fontSize: 12,
                             fontWeight: FontWeight.w300,
@@ -121,3 +122,4 @@ class PharmacyList extends StatelessWidget {
     );
   }
 }
+
