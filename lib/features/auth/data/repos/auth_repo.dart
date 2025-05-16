@@ -278,4 +278,109 @@ class AuthRepository {
 
     return Left('Reset password failed: \n${response.body}');
   }
+
+  Future<Either<String, Map<String, dynamic>>> getProfile() async {
+    final url = Uri.parse('http://20.19.80.46/api/v1/me');
+    
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final accessToken = prefs.getString('access');
+      
+      if (accessToken == null) {
+        return Left('No access token found');
+      }
+
+      final response = await http.get(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+      );
+
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && responseBody['status'] == 'success') {
+        return Right(responseBody);
+      } else {
+        if (responseBody['exception']?['response']?['message'] is List) {
+          final List messages = responseBody['exception']['response']['message'];
+          final fullMessage = messages.join('\n');
+          return Left(fullMessage);
+        } else if (responseBody['message'] != null) {
+          return Left(responseBody['message']);
+        } else {
+          return Left('Failed to fetch profile: \n${response.body}');
+        }
+      }
+    } catch (e) {
+      return Left('An error occurred while fetching profile: $e');
+    }
+  }
+
+  Future<Either<String, Map<String, dynamic>>> updateProfile({
+    required String name,
+    required String gender,
+    required String phone,
+    required String address,
+  }) async {
+    final url = Uri.parse('http://20.19.80.46/api/v1/me');
+    
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final accessToken = prefs.getString('access');
+      
+      if (accessToken == null) {
+        return Left('No access token found');
+      }
+
+      final response = await http.patch(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $accessToken',
+        },
+        body: jsonEncode({
+          "name": name,
+          "gender": gender,
+          "phone": phone,
+          "address": address,
+        }),
+      );
+
+      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && responseBody['status'] == 'success') {
+        final userData = responseBody['data'];
+        
+        // Update local storage with the same keys used in login/register
+        await Future.wait([
+          prefs.setString('id', userData['id']),
+          prefs.setString('name', userData['name']),
+          prefs.setString('email', userData['email']),
+          prefs.setString('role', userData['role']),
+          prefs.setString('image', userData['image'] ?? ''),
+          prefs.setString('gender', userData['gender'] ?? ''),
+          prefs.setString('phone', userData['phone'] ?? ''),
+          prefs.setString('address', userData['address'] ?? ''),
+          prefs.setString('createdAt', userData['createdAt']),
+          prefs.setString('updatedAt', userData['updatedAt']),
+        ]);
+
+        return Right(responseBody);
+      } else {
+        if (responseBody['exception']?['response']?['message'] is List) {
+          final List messages = responseBody['exception']['response']['message'];
+          final fullMessage = messages.join('\n');
+          return Left(fullMessage);
+        } else if (responseBody['message'] != null) {
+          return Left(responseBody['message']);
+        } else {
+          return Left('Profile update failed: \n${response.body}');
+        }
+      }
+    } catch (e) {
+      return Left('An error occurred while updating profile: $e');
+    }
+  }
 }
