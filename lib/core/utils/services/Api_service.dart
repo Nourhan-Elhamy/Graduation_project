@@ -14,10 +14,11 @@ class ApiService {
   ApiService(this.dio);
   Future<List<Datum>> getMedicines() async {
     try {
-      final response = await dio.get('$API_URL$API_PREFIX/medicines');
+      final response = await dio.get(
+          '$API_URL$API_PREFIX/medicines?category=medicine&page=1&limit=20');
       if (response.statusCode == 200) {
         final json = response.data as Map<String, dynamic>;
-        final List<dynamic> data = json['data'];
+        final List<dynamic> data = json['data']['data'];
 
         return data.map((e) => Datum.fromJson(e)).toList();
       } else {
@@ -30,10 +31,11 @@ class ApiService {
 
   Future<List<Catum>> getCare() async {
     try {
-      final response = await dio.get('$API_URL$API_PREFIX/medicines');
+      final response = await dio.get(
+          '$API_URL$API_PREFIX/medicines?category=medicine&page=1&limit=20');
       if (response.statusCode == 200) {
         final json = response.data as Map<String, dynamic>;
-        final List<dynamic> data = json['data'];
+        final List<dynamic> data = json['data']['data'];
 
         return data.map((json) => Catum.fromJson(json)).toList();
       } else {
