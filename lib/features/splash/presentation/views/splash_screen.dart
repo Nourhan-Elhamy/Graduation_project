@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         final prefs = await SharedPreferences.getInstance();
         final token = prefs.getString('access');
-
+         print("${token}");
         if (token != null && token.isNotEmpty) {
           Navigator.pushReplacement(
             context,

@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
+import 'package:graduation_project/features/auth/login/forget_password.dart';
+import 'package:graduation_project/features/auth/login/user_login_screen.dart';
 import 'package:graduation_project/features/user/presentation/tabs/profile_tab/refill_reminder.dart';
-
+import 'package:graduation_project/features/auth/data/repos/auth_repo.dart';
+import 'package:graduation_project/features/user/presentation/tabs/profile_tab/report_issue_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'edit_profile.dart';
 
 class ProfileCategori extends StatefulWidget {
@@ -14,26 +18,96 @@ class ProfileCategori extends StatefulWidget {
 
 class _ProfileCategoriState extends State<ProfileCategori> {
   String? profileImagePath;
-  String userName = "UserName";
-  String email = "@email";
-  String location = "11204.5761 Tanta";
-  String phoneNumber = "01000010000";
+  String userName = "";
+  String email = "";
+  String location = "";
+  String phoneNumber = "";
+  String? gender;
+  final AuthRepository _authRepository = AuthRepository();
+  bool isLoading = true;
+  String currentLocation = '';
 
-  // Method to navigate to EditProfilePage
+  @override
+  void initState() {
+    super.initState();
+    _loadInitialData();
+  }
+
+  Future<void> _loadInitialData() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      userName = prefs.getString('name') ?? '';
+      email = prefs.getString('email') ?? '';
+      location = prefs.getString('location') ?? '';
+      phoneNumber = prefs.getString('phone') ?? '';
+      profileImagePath = prefs.getString('profileImage');
+      gender = prefs.getString('gender');
+    });
+    _loadProfileData();
+  }
+
+  Future<void> _loadProfileData() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final result = await _authRepository.getProfile();
+
+    result.fold(
+      (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error)),
+        );
+      },
+      (response) {
+        if (response['status'] == 'success' && response['data'] != null) {
+          final userData = response['data'];
+          setState(() {
+            userName = userData['name'] ?? userName;
+            email = userData['email'] ?? email;
+            location = userData['address'] ?? location;
+            phoneNumber = userData['phone'] ?? phoneNumber;
+            profileImagePath = userData['image'] ?? profileImagePath;
+            gender = userData['gender'] ?? gender;
+          });
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to load profile data')),
+          );
+        }
+      },
+    );
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   void navigateToPage(BuildContext context, Widget page) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => page),
-    ).then((updatedData) {
-      // Update the data after returning from EditProfilePage
+    ).then((updatedData) async {
       if (updatedData != null) {
+        final prefs = await SharedPreferences.getInstance();
+        
         setState(() {
-          profileImagePath = updatedData['profileImage'];
-          userName = updatedData['userName'];
-          email = updatedData['email'];
-          location = updatedData['location'];
-          phoneNumber = updatedData['phoneNumber'];
+          location = updatedData['location'] ?? location;
+          userName = updatedData['userName'] ?? userName;
+          email = updatedData['email'] ?? email;
+          phoneNumber = updatedData['phoneNumber'] ?? phoneNumber;
+          profileImagePath = updatedData['profileImage'] ?? profileImagePath;
+          gender = updatedData['gender'] ?? gender;
         });
+
+        // Save all updated data to SharedPreferences
+        await prefs.setString('location', location);
+        await prefs.setString('name', userName);
+        await prefs.setString('email', email);
+        await prefs.setString('phone', phoneNumber);
+        await prefs.setString('profileImage', profileImagePath ?? '');
+        await prefs.setString('gender', gender ?? '');
+        
       }
     });
   }
@@ -42,6 +116,10 @@ class _ProfileCategoriState extends State<ProfileCategori> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;
+
+    if (isLoading) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
     return Scaffold(
       body: ListView(
@@ -55,13 +133,19 @@ class _ProfileCategoriState extends State<ProfileCategori> {
               // Display Profile Image
               CircleAvatar(
                 radius: screenWidth * 0.2,
-                backgroundImage: profileImagePath != null
-                    ? FileImage(File(profileImagePath!))
-                    : null, // Check if the profile image is available
-                child: profileImagePath == null
+                backgroundImage: profileImagePath != null && profileImagePath!.isNotEmpty
+                    ? (profileImagePath!.startsWith('http')
+                    ? NetworkImage(profileImagePath!) as ImageProvider
+                    : FileImage(File(profileImagePath!)))
+                    : null,
+                backgroundColor: AppColors.continerColor,
+                child: profileImagePath == null || profileImagePath!.isEmpty
                     ? Icon(Icons.person, size: screenWidth * 0.1)
-                    : null, // Placeholder if no image
+                    : null,
               ),
+
+              // Add a debug text to show the image path
+
 
               SizedBox(height: screenHeight * 0.04),
               Row(
@@ -78,14 +162,16 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                   GestureDetector(
                     onTap: () {
                       navigateToPage(
-                          context,
-                          EditProfilePage(
-                            userName: userName,
-                            email: email,
-                            location: location,
-                            profileImagePath: profileImagePath,
-                            phoneNumber: phoneNumber,
-                          ));
+                        context,
+                        EditProfilePage(
+                          userName: userName,
+                          email: email,
+                          location: location,
+                          profileImagePath: profileImagePath,
+                          phoneNumber: phoneNumber,
+                          gender: gender,
+                        ),
+                      );
                     },
                     child: Icon(Icons.edit_outlined),
                   ),
@@ -138,13 +224,18 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                         location: location,
                         profileImagePath: profileImagePath,
                         phoneNumber: phoneNumber,
+                        gender: gender,
                       ));
                 },
               ),
               BuildListTile(
                 label: "Change Password",
                 image: Image.asset("assets/images/2x/union-1.png"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (c){
+                    return ForgetPasswordScreen();
+                  }));
+                },
               ),
               BuildListTile(
                 label: "My Orders",
@@ -166,14 +257,21 @@ class _ProfileCategoriState extends State<ProfileCategori> {
               BuildListTile(
                 label: "Report an Issue",
                 image: Image.asset("assets/images/2x/report.png"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (c){
+                    return ReportIssueScreen();
+                  }));
+                },
               ),
               BuildListTile(
-                label: "About us",
-                image: Image.asset("assets/images/2x/About Icon.png"),
-                onTap: () {},
+                label: "Log Out",
+                image: Image.asset("assets/images/logout.png",height: 38,),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (c){
+                    return LoginPage();
+                  }));
+                },
               ),
-              // Add other items here...
             ],
           ),
         ],
