@@ -1,6 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
-import '../../../../shared_widgets/custom_text_filde.dart';
+import 'package:graduation_project/core/utils/services/Api_service.dart';
+import 'package:graduation_project/features/user/presentation/search_class/news_search_delegate.dart';
 
 class HomeSearch extends StatelessWidget {
   const HomeSearch({super.key});
@@ -9,16 +10,17 @@ class HomeSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-      body: const CustomTextFilde(
-        hintText: "Search",
-        icon: Icons.search,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: NewsSearchDelegate(apiService: ApiService(Dio())),
+              );
+            },
+            icon: Icon(Icons.search),
+          )
+        ],
       ),
     );
   }
