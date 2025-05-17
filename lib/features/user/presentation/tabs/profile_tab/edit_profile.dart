@@ -5,12 +5,13 @@ import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 import 'package:graduation_project/shared_widgets/custom_text_filde.dart';
 import 'package:graduation_project/shared_widgets/LocationDisplayWidget.dart';
-import 'package:graduation_project/features/user/logic/profile_cubit.dart';
 import 'package:graduation_project/features/user/data/repos/profile_repo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 import '../../../../../shared_widgets/custom_icon_camera.dart';
+import 'controller/profile_cubit.dart';
+import 'controller/profile_states.dart';
 class EditProfilePage extends StatefulWidget {
   final String userName;
   final String email;
