@@ -150,35 +150,33 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                      Column(
+
+                      Wrap(
+                        alignment: WrapAlignment.center,
                         children: [
-                          const SizedBox(height: 25),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                "Don't have an account yet? ",
-                                style: TextStyle(color: Color(0xff455A64)),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (c) => const RegistrationForm(),
-                                    ),
-                                  );
-                                },
-                                child: Text(
-                                  "Register here",
-                                  style: TextStyle(color: AppColors.blue),
+                          const Text(
+                            "Don't have an account yet? ",
+                            style: TextStyle(color: Color(0xff455A64)),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (c) => const RegistrationForm(),
                                 ),
-                              ),
-                            ],
+                              );
+                            },
+                            child: Text(
+                              "Register here",
+                              style: TextStyle(color: AppColors.blue),
+                            ),
                           ),
                         ],
-                      ),
+                      )
+
                     ],
+
                   ),
                 ),
               );

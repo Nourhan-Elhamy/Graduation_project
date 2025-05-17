@@ -23,17 +23,20 @@ class ProductDetailsScreen extends StatelessWidget {
       ],
       child: Scaffold(
         body: SingleChildScrollView(
-          child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
-            builder: (context, state) {
-              if (state is ProductDetailsLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is ProductDetailsLoaded) {
-                return ProductPreviewCard(product: state.product);
-              } else if (state is ProductDetailsError) {
-                return Center(child: Text(state.message));
-              }
-              return const SizedBox.shrink();
-            },
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
+              builder: (context, state) {
+                if (state is ProductDetailsLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is ProductDetailsLoaded) {
+                  return ProductPreviewCard(product: state.product);
+                } else if (state is ProductDetailsError) {
+                  return Center(child: Text(state.message));
+                }
+                return const SizedBox.shrink();
+              },
+            ),
           ),
         ),
       ),
