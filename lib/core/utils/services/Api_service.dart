@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:graduation_project/features/user/data/models/article/article.dart';
 import 'package:graduation_project/features/user/data/models/care/care/datum.dart';
 import 'package:graduation_project/features/user/data/models/medicine/medicine/datum.dart';
+import 'package:graduation_project/features/user/presentation/search_class/search/pharmacy_search.dart';
+import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab/pharmacy_list/data/models/pharmacies_model.dart';
 
 class ApiService {
   final Dio dio;
@@ -31,8 +33,8 @@ class ApiService {
 
   Future<List<Catum>> getCare() async {
     try {
-      final response = await dio.get(
-          '$API_URL$API_PREFIX/medicines?category=medicine&page=1&limit=20');
+      final response = await dio
+          .get('$API_URL$API_PREFIX/medicines?category=care&page=1&limit=20');
       if (response.statusCode == 200) {
         final json = response.data as Map<String, dynamic>;
         final List<dynamic> data = json['data']['data'];
@@ -58,6 +60,35 @@ class ApiService {
       }
     } catch (e) {
       throw Exception('An error occurred while loading data: $e');
+    }
+  }
+
+  Future<Map<String, dynamic>> search(String query) async {
+    try {
+      final response = await dio.get(
+        '$API_URL$API_PREFIX/search?q=$query',
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data['data'];
+
+        List<PharmacySearch> pharmacies = (data['pharmacies'] as List)
+            .map((e) => PharmacySearch.fromJson(e))
+            .toList();
+
+        List<Medicine> medicines = (data['medicines'] as List)
+            .map((e) => Medicine.fromJson(e))
+            .toList();
+
+        return {
+          'pharmacies': pharmacies,
+          'medicines': medicines,
+        };
+      } else {
+        throw Exception('Failed to load search results');
+      }
+    } catch (e) {
+      throw Exception('Search error: $e');
     }
   }
 }
