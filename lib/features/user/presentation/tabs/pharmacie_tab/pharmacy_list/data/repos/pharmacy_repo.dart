@@ -4,7 +4,7 @@ import '../models/pharmacies_model.dart';
 
 abstract class PharmacyRepo {
   Future<Either<Failure, List<Pharmacy>>> fetchPharmacies();
-  Future<Either<Failure, Pharmacy>> fetchPharmacyById(int id);
+  Future<Either<Failure, Pharmacy>> fetchPharmacyById(String id);
 }
 
 class Failure {

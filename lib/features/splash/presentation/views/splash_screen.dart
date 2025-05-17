@@ -1,8 +1,10 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:graduation_project/features/user/presentation/home.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../onboarding/presentation/views/onboarding_Screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -39,12 +41,22 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(const Duration(seconds: 2), () {
       controller2.forward();
     });
-    controller2.addStatusListener((status) {
+    controller2.addStatusListener((status) async {
       if (status == AnimationStatus.completed) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const OnboardingScreen()),
-        );
+        final prefs = await SharedPreferences.getInstance();
+        final token = prefs.getString('access');
+         print("${token}");
+        if (token != null && token.isNotEmpty) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeGround()),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const OnboardingScreen()),
+          );
+        }
       }
     });
   }

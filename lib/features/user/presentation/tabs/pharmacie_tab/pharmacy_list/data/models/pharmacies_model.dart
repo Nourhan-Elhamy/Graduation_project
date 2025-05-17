@@ -1,101 +1,43 @@
 class Pharmacy {
-  final int id;
+  final String id;
   final String name;
-  final String imageURL;
-  final String phoneNumbers;
-  final String whatsUrl;
-  final String location;
-  final String mapsLocation;
-  final String workTime;
-  final List<Medicine> medicines;
-  final List<Care> care;
+  final String description;
+  final String address;
+  final String phone;
+  final String email;
+  final String image;
+  final bool isActive;
+  final String? ownerId;
+  final String createdAt;
+  final String updatedAt;
 
   Pharmacy({
     required this.id,
     required this.name,
-    required this.imageURL,
-    required this.phoneNumbers,
-    required this.whatsUrl,
-    required this.location,
-    required this.mapsLocation,
-    required this.workTime,
-    required this.medicines,
-    required this.care,
+    required this.description,
+    required this.address,
+    required this.phone,
+    required this.email,
+    required this.image,
+    required this.isActive,
+    this.ownerId,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
   factory Pharmacy.fromJson(Map<String, dynamic> json) {
-    var medicinesJson = json['medicines'] as List;
-    var careJson = json['care'] as List;
-
     return Pharmacy(
-      id: json['id'],
-      name: json['name'],
-      imageURL: json['imageURL'],
-      phoneNumbers: json['phoneNumbers'],
-      whatsUrl: json['whatsUrl'],
-      location: json['location'],
-      mapsLocation: json['mapsLocation'],
-      workTime: json['workTime'],
-      medicines: medicinesJson.map((i) => Medicine.fromJson(i)).toList(),
-      care: careJson.map((i) => Care.fromJson(i)).toList(),
-    );
-  }
-}
-
-class Medicine {
-  final int id;
-  final String name;
-  final String imageURL;
-  final double price;
-  final String effectiveSubstance;
-  final int count;
-
-  Medicine({
-    required this.id,
-    required this.name,
-    required this.imageURL,
-    required this.price,
-    required this.effectiveSubstance,
-    required this.count,
-  });
-
-  factory Medicine.fromJson(Map<String, dynamic> json) {
-    return Medicine(
-      id: json['id'],
-      name: json['name'],
-      imageURL: json['imageURL'],
-      price: json['price'].toDouble(),
-      effectiveSubstance: json['effectiveSubstance'],
-      count: json['count'],
-    );
-  }
-}
-
-class Care {
-  final int id;
-  final String name;
-  final String imageURL;
-  final double price;
-  final String brand;
-  final int count;
-
-  Care({
-    required this.id,
-    required this.name,
-    required this.imageURL,
-    required this.price,
-    required this.brand,
-    required this.count,
-  });
-
-  factory Care.fromJson(Map<String, dynamic> json) {
-    return Care(
-      id: json['id'],
-      name: json['name'],
-      imageURL: json['imageURL'],
-      price: json['price'].toDouble(),
-      brand: json['brand'],
-      count: json['count'],
+      id: json['id']?.toString() ?? '',
+      name: json['name']?.toString() ?? '',
+      description: json['description']?.toString() ?? '',
+      address: json['address']?.toString() ?? '',
+      phone: json['phone']?.toString() ?? '',
+      email: json['email']?.toString() ?? '',
+      image: json['image']?.toString() ?? '',
+      isActive: json['isActive'] ?? false,
+      ownerId: json['ownerId']?.toString(),
+      createdAt: json['createdAt']?.toString() ?? '',
+      updatedAt: json['updatedAt']?.toString() ?? '',
     );
   }
 }

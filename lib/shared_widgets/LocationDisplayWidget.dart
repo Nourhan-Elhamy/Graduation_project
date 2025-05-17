@@ -6,7 +6,12 @@ import 'package:geocoding/geocoding.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 class LocationDisplayWidget extends StatefulWidget {
-  const LocationDisplayWidget({super.key});
+  final Function(String)? onLocationChanged;
+
+  const LocationDisplayWidget({
+    super.key,
+    this.onLocationChanged,
+  });
 
   @override
   _LocationDisplayWidgetState createState() => _LocationDisplayWidgetState();
@@ -78,6 +83,9 @@ class _LocationDisplayWidgetState extends State<LocationDisplayWidget> {
         setState(() {
           _location = place.locality ?? "City not found";
         });
+        if (widget.onLocationChanged != null) {
+          widget.onLocationChanged!(_location);
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -92,8 +100,8 @@ class _LocationDisplayWidgetState extends State<LocationDisplayWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 30,
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      height: 50,
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
       margin: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         color: AppColors.blue.withOpacity(0.1),
