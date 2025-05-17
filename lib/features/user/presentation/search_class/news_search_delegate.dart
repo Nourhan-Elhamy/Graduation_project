@@ -48,7 +48,10 @@ class NewsSearchDelegate extends SearchDelegate {
                 child: Text('الصيدليات', style: TextStyle(fontSize: 18)),
               ),
             ...pharmacies.map((pharmacy) => ListTile(
-                  leading: Image.network(pharmacy.image ?? '', width: 50),
+                  leading: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Image.network(pharmacy.image ?? '', width: 50)),
                   title: Text(pharmacy.name ?? ''),
                 )),
             if (medicines.isNotEmpty)
@@ -57,7 +60,10 @@ class NewsSearchDelegate extends SearchDelegate {
                 child: Text('الأدوية', style: TextStyle(fontSize: 18)),
               ),
             ...medicines.map((medicine) => ListTile(
-                  leading: Image.network(medicine.image ?? '', width: 50),
+                  leading: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Image.network(medicine.image ?? '', width: 50)),
                   title: Text(medicine.name ?? ''),
                 )),
           ],
