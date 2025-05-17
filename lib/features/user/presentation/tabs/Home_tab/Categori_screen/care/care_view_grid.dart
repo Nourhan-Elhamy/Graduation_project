@@ -6,6 +6,8 @@ import 'package:graduation_project/shared_widgets/product_list.dart';
 
 import 'package:dio/dio.dart';
 
+import '../product_details/presentation/product_details_screen.dart';
+
 class CareViewGrid extends StatelessWidget {
   const CareViewGrid({super.key});
 
@@ -43,6 +45,14 @@ class CareViewGrid extends StatelessWidget {
               name: medicine.name ?? '',
               egp: "EGP",
               price: medicine.price.toString(),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ProductDetailsScreen(productId: medicine.id!),
+                  ),
+                );
+              },
             );
           },
         );
