@@ -10,7 +10,7 @@ class ProductList extends StatelessWidget {
   final String egp;
   final String price;
   final VoidCallback? onTap;
-
+  final VoidCallback? onIconPressed;
   const ProductList(
       {super.key,
       required this.icon,
@@ -19,14 +19,14 @@ class ProductList extends StatelessWidget {
       required this.egp,
       required this.price,
         this.onTap,
+        this.onIconPressed,
 
       });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
+    return
+       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -35,23 +35,29 @@ class ProductList extends StatelessWidget {
             children: [
               ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
-                child: CachedNetworkImage(
-                  imageUrl: image,
-                  width: 130,
-                  height: 130,
-                  fit: BoxFit.cover,
-                  placeholder: (_, __) => const LoedingIndecator(),
-                  errorWidget: (_, __, ___) =>
-                      const Icon(Icons.image_not_supported_outlined),
+                child: GestureDetector(
+                  onTap: onTap,
+                  child: CachedNetworkImage(
+                    imageUrl: image,
+                    width: 130,
+                    height: 130,
+                    fit: BoxFit.cover,
+                    placeholder: (_, __) => const LoedingIndecator(),
+                    errorWidget: (_, __, ___) =>
+                        const Icon(Icons.image_not_supported_outlined),
+                  ),
                 ),
               ),
               Positioned(
                 top: 8,
                 right: 8,
-                child: Icon(
-                  icon,
-                  size: 24,
-                  color: AppColors.blue,
+                child: GestureDetector(
+                  onTap: onIconPressed, // <-- هنا استدعاء الدالة
+                  child: Icon(
+                    icon,
+                    size: 24,
+                    color: AppColors.blue,
+                  ),
                 ),
               ),
             ],
@@ -93,7 +99,7 @@ class ProductList extends StatelessWidget {
             ),
           ),
         ],
-      ),
+
     );
   }
 }

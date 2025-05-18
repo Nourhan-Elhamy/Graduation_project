@@ -1,11 +1,14 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Drugs/Drug_view.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../../../core/utils/app_colors.dart';
+import '../../../../../../shared_widgets/LoadingIndecator.dart';
 import 'controller/pharmacy_details_cubit.dart';
 import 'controller/productpharmacy-horizontal.dart';
 import 'data/repos/pharmacy_implementation_repo.dart';
@@ -59,8 +62,15 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                   children: [
                     Stack(
                       children: [
-                        Image.network(pharmacy.image,
-                            width: double.infinity, fit: BoxFit.cover),
+                        CachedNetworkImage(
+                          imageUrl: pharmacy.image,
+                          width: double.infinity,
+
+                          fit: BoxFit.cover,
+                          placeholder: (_, __) => const LoedingIndecator(),
+                          errorWidget: (_, __, ___) =>
+                              Image.asset("assets/images/careCapsule.png",height: 200,),
+                        ),
                         IconButton(
                           onPressed: () {
                             Navigator.pop(context);
@@ -189,6 +199,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               label: "Drugs",
                               isSelected: selectedCategory == 'Drugs',
                               onTap: () {
+
                                 setState(() {
                                   selectedCategory =
                                   'Drugs'; // تغيير الفئة المختارة

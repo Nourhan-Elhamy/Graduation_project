@@ -10,6 +10,7 @@ import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
 import 'package:flutter/material.dart';
 import '../../../../../shared_widgets/container_search.dart';
 import '../../../../../shared_widgets/navegaitor_row.dart';
+import '../cart/presentation/views/cart_screen.dart';
 import '../pharmacie_tab/pharmacie_categori.dart';
 import '../pharmacie_tab/pharmacy_list/controller/pharmacy_cubit.dart';
 import '../pharmacie_tab/pharmacy_list/data/repos/pharmacy_implementation_repo.dart';
@@ -33,16 +34,11 @@ class _HomeCategoriState extends State<HomeCategori> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Row(
+              Row(
                 children: [
                   Expanded(child: LocationDisplayWidget()),
                   Spacer(),
-                  ImageIcon(
-                    AssetImage(
-                      'assets/images/Cart Icon.png',
-                    ),
-                    size: 30,
-                  ),
+
                 ],
               ),
               const SizedBox(
