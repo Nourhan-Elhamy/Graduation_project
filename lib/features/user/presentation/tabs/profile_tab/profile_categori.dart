@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/auth/login/forget_password.dart';
 import 'package:graduation_project/features/auth/login/user_login_screen.dart';
+import 'package:graduation_project/features/user/presentation/tabs/orders/presentation/views/user_orders.dart';
 import 'package:graduation_project/features/user/presentation/tabs/profile_tab/refill_reminder.dart';
 import 'package:graduation_project/features/auth/data/repos/auth_repo.dart';
 import 'package:graduation_project/features/user/presentation/tabs/profile_tab/report_issue_screen.dart';
@@ -240,7 +241,11 @@ class _ProfileCategoriState extends State<ProfileCategori> {
               BuildListTile(
                 label: "My Orders",
                 image: Image.asset("assets/images/2x/orders.png"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (c){
+                    return MyOrdersScreen();
+                  }));
+                },
               ),
               BuildListTile(
                 label: "Refill Reminder",

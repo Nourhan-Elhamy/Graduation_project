@@ -17,11 +17,11 @@ class CustomTextFilde extends StatelessWidget {
         fillColor: Colors.white54,
         focusColor: Colors.white,
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.iconColor, width: 2.0),
+          borderSide: BorderSide(color: AppColors.blue, width: 2.0),
           borderRadius: BorderRadius.circular(30),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: AppColors.iconColor, width: 2.0),
+          borderSide: BorderSide(color: AppColors.blue, width: 2.0),
           borderRadius: BorderRadius.circular(30),
         ),
         hintText: hintText,

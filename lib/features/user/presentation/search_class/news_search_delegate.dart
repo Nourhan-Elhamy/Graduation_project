@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/services/Api_service.dart';
 import 'package:graduation_project/features/user/presentation/search_class/search/medicine_search.dart';
 import 'package:graduation_project/features/user/presentation/search_class/search/pharmacy_search.dart';
+import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/product_details/presentation/product_details_screen.dart';
+import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab/pharmacy_list/pharmacies_details.dart';
 
 class NewsSearchDelegate extends SearchDelegate {
   final ApiService apiService;
@@ -45,7 +47,7 @@ class NewsSearchDelegate extends SearchDelegate {
             if (pharmacies.isNotEmpty)
               Padding(
                 padding: EdgeInsets.all(8),
-                child: Text('الصيدليات', style: TextStyle(fontSize: 18)),
+                child: Text('Pharmacies', style: TextStyle(fontSize: 18)),
               ),
             ...pharmacies.map((pharmacy) => ListTile(
                   leading: SizedBox(
@@ -53,11 +55,20 @@ class NewsSearchDelegate extends SearchDelegate {
                       height: 50,
                       child: Image.network(pharmacy.image ?? '', width: 50)),
                   title: Text(pharmacy.name ?? ''),
-                )),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PharmaciesDetails(  pharmacyId: pharmacy.id??'',),
+                  ),
+                );
+              },
+                )
+            ),
             if (medicines.isNotEmpty)
               Padding(
                 padding: EdgeInsets.all(8),
-                child: Text('الأدوية', style: TextStyle(fontSize: 18)),
+                child: Text('Products', style: TextStyle(fontSize: 18)),
               ),
             ...medicines.map((medicine) => ListTile(
                   leading: SizedBox(
@@ -65,6 +76,14 @@ class NewsSearchDelegate extends SearchDelegate {
                       height: 50,
                       child: Image.network(medicine.image ?? '', width: 50)),
                   title: Text(medicine.name ?? ''),
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ProductDetailsScreen(productId: medicine.id??""),
+                  ),
+                );
+              },
                 )),
           ],
         );

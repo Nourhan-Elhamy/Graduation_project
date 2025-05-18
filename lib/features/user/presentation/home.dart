@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/features/user/presentation/chat_bot/chat_bot.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Home_categori.dart';
+import 'package:graduation_project/features/user/presentation/tabs/cart/presentation/views/cart_screen.dart';
 import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab/pharmacie_categori.dart';
 import 'package:graduation_project/features/user/presentation/tabs/profile_tab/profile_categori.dart';
 import 'package:graduation_project/features/user/presentation/tabs/wish_tab/wish_categori.dart';
@@ -16,6 +17,7 @@ List<Widget> tabs = [
   const HomeCategori(),
   const PharmacieCategori(),
   const WishCategori(),
+  const CartScreen(),
   const ProfileCategori(),
 ];
 
@@ -60,6 +62,14 @@ class _HomeGroundState extends State<HomeGround> {
               AssetImage("assets/images/favorite_24px.png"),
             ),
             label: "Wish List",
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                'assets/images/Cart Icon.png',
+              ),
+            ),
+            label: "Cart",
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(

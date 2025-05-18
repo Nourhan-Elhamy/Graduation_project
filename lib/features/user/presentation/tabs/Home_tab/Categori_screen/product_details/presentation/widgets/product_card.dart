@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 import '../../../../../../../../../core/utils/app_colors.dart';
+import '../../../../../cart/presentation/controller/cart_cubit.dart';
+import '../../../../../cart/presentation/controller/cart_states.dart';
 import '../../../../../pharmacie_tab/pharmacy_list/controller/pharmacy_cubit.dart';
+import '../../../../../wish_tab/data/controller/wishlist_cubit.dart';
+import '../../../../../wish_tab/data/controller/wishlist_states.dart';
 import '../../data/repos/models.dart';
-
 class ProductPreviewCard extends StatefulWidget {
   final ProductDetails product;
 
@@ -177,32 +180,105 @@ class _ProductPreviewCardState extends State<ProductPreviewCard> {
                   children: [
 
                     Expanded(
-                      child: CustomButton(
-                        title: "Add To Cart",
-                        color: AppColors.blue,
-                        textcolor: AppColors.white,
-                        onPressed: () {},
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.blue),
-                        borderRadius: BorderRadius.circular(14)
-                      ),
-                      child: IconButton(
-                        icon: Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: isFavorite ? AppColors.blue : AppColors.blue,
-                          size: 40,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            isFavorite = !isFavorite;
-                          });
+                      child: BlocConsumer<CartCubit, CartState>(
+                        listener: (context, state) {
+                          if (state is CartItemAdded) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                state.cartItem.message?? "" ,
+                                  style: const TextStyle(color: Colors.white, fontSize: 16),
+                                ),
+                                backgroundColor: Colors.green.withOpacity(0.9),
+                                behavior: SnackBarBehavior.floating,
+                                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                duration: const Duration(seconds: 3),
+                              ),
+                            );
+                          } else if (state is CartFailure) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('${state.error}', style: const TextStyle(color: Colors.white, fontSize: 16),)
+                                ,  backgroundColor: Colors.green.withOpacity(0.9),
+                              behavior: SnackBarBehavior.floating,
+                              margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              duration: const Duration(seconds: 3),
+                            ),
+                            );
+                          }
+                        },
+                        builder: (context, state) {
+                          return CustomButton(
+                            title: state is CartLoading ? "Trying add item to cart.." : "Add To Cart",
+                            color: AppColors.blue,
+                            textcolor: AppColors.white,
+                            onPressed: state is CartLoading
+                                ? null
+                                : () {
+                              context.read<CartCubit>().addToCart(
+                                widget.product.id,
+                                1,
+                              );
+                            },
+                          );
                         },
                       ),
                     ),
+                    const SizedBox(width: 10),
+                    BlocConsumer<WishlistCubit, WishlistState>(
+                      listener: (context, state) {
+                        if (state is WishlistSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Wishlist updated!"),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
+                        } else if (state is WishlistFailure) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(state.error),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        final cubit = context.read<WishlistCubit>();
+                        final isFavorite = cubit.isFavorite(widget.product.id);
+
+                        return Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: AppColors.blue),
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: IconButton(
+                            icon: Icon(
+                              isFavorite ? Icons.favorite : Icons.favorite_border,
+                              color: AppColors.blue,
+                              size: 40,
+                            ),
+                            onPressed: state is WishlistLoading
+                                ? null
+                                : () {
+                              if (isFavorite) {
+                                cubit.removeFromWishlist(widget.product.id);
+                              } else {
+                                cubit.addToWishlist(widget.product.id);
+                              }
+                            },
+                          ),
+                        );
+                      },
+                    ),
+
+
+
                   ],
                 ),
               ],
