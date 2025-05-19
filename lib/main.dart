@@ -28,6 +28,10 @@ void main() {
 
 
             ),
+  BlocProvider(
+  create: (context) => CartCubit(CartRepo())..getCart(),
+
+  )
 
           ],
       child: const MyApp()));

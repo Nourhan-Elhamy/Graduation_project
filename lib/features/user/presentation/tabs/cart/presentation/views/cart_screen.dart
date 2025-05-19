@@ -18,9 +18,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CartCubit(CartRepo())..getCart(),
-      child: Scaffold(
+    return  Scaffold(
         appBar: AppBar(
           centerTitle: true,
           actions: [
@@ -156,7 +154,7 @@ class _CartScreenState extends State<CartScreen> {
             }
           },
         ),
-      ),
-    );
+      )
+    ;
   }
 }

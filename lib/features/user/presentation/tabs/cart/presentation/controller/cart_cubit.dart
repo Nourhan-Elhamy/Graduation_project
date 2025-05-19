@@ -48,13 +48,17 @@ class CartCubit extends Cubit<CartState> {
     }
   }
   Future<void> clearCart() async {
+    emit(CartLoading()); // ضروري علشان BlocBuilder يعيد البناء
     try {
       await cartRepo.clearCart();
-      await getCart();
+      final updatedCart = await cartRepo.getCart();
+      emit(CartSuccess(updatedCart));
     } catch (e) {
       emit(CartFailure(e.toString()));
     }
   }
+
+
 
 
 
