@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileRepository {
   final String baseUrl = 'http://20.19.80.46/api/v1';
@@ -44,4 +43,4 @@ class ProfileRepository {
     );
     return response.statusCode == 200;
   }
-} 
+}

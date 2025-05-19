@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:graduation_project/features/user/presentation/home.dart';
@@ -45,7 +45,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         final prefs = await SharedPreferences.getInstance();
         final token = prefs.getString('access');
-         print("${token}");
+
         if (token != null && token.isNotEmpty) {
           Navigator.pushReplacement(
             context,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/auth/login/user_login_screen.dart';
-import 'package:graduation_project/features/user/presentation/home.dart';
+
 import '../data/controller/auth_cubit.dart';
 import '../data/controller/auth_cubit_states.dart';
 import '../data/repos/auth_repo.dart';
@@ -72,7 +72,7 @@ class RegistrationFormState extends State<RegistrationForm> {
                       controller: _usernameController,
                       hintText: 'Full Name',
                       validator: (value) =>
-                      value!.isEmpty ? "Full Name is required" : null,
+                          value!.isEmpty ? "Full Name is required" : null,
                     ),
                     const SizedBox(height: 20),
                     _buildLabel("Email Address"),
@@ -90,7 +90,6 @@ class RegistrationFormState extends State<RegistrationForm> {
                         return null;
                       },
                     ),
-
                     const SizedBox(height: 20),
                     _buildLabel("Password"),
                     const SizedBox(height: 8),
@@ -100,8 +99,8 @@ class RegistrationFormState extends State<RegistrationForm> {
                       obscureText: !_isPasswordVisible,
                       suffixIcon: _buildVisibilityIcon(
                         _isPasswordVisible,
-                            () => setState(() =>
-                        _isPasswordVisible = !_isPasswordVisible),
+                        () => setState(
+                            () => _isPasswordVisible = !_isPasswordVisible),
                       ),
                       validator: (value) => value!.length < 6
                           ? "Password must be at least 6 characters"
@@ -116,9 +115,8 @@ class RegistrationFormState extends State<RegistrationForm> {
                       obscureText: !_isConfirmPasswordVisible,
                       suffixIcon: _buildVisibilityIcon(
                         _isConfirmPasswordVisible,
-                            () => setState(() =>
-                        _isConfirmPasswordVisible =
-                        !_isConfirmPasswordVisible),
+                        () => setState(() => _isConfirmPasswordVisible =
+                            !_isConfirmPasswordVisible),
                       ),
                       validator: (value) => value != _passwordController.text
                           ? "Passwords do not match"
@@ -126,7 +124,8 @@ class RegistrationFormState extends State<RegistrationForm> {
                     ),
                     const SizedBox(height: 20),
                     CheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading, // هذه السطر الجديد
+                      controlAffinity:
+                          ListTileControlAffinity.leading, // هذه السطر الجديد
 
                       title: RichText(
                         text: const TextSpan(
@@ -153,27 +152,29 @@ class RegistrationFormState extends State<RegistrationForm> {
                       value: _isChecked,
                       onChanged: (value) =>
                           setState(() => _isChecked = value ?? false),
-                      activeColor: AppColors.blue,  // لتغيير اللون عند التفعيل إلى الأزرق
-
+                      activeColor:
+                          AppColors.blue, // لتغيير اللون عند التفعيل إلى الأزرق
                     ),
                     const SizedBox(height: 20),
                     GestureDetector(
                       onTap: isLoading
                           ? null
                           : () {
-                        if (!_formKey.currentState!.validate()) return;
-                        if (!_isChecked) {
-                          _showStyledSnackBar(context,
-                              "Please accept the Terms and Privacy Policy", Colors.red);
-                          return;
-                        }
-                        context.read<AuthCubit>().register(
-                          email: _emailController.text.trim(),
-                          password: _passwordController.text.trim(),
-                          fullName: _usernameController.text.trim(),
-                          address: _addressController.text.trim(),
-                        );
-                      },
+                              if (!_formKey.currentState!.validate()) return;
+                              if (!_isChecked) {
+                                _showStyledSnackBar(
+                                    context,
+                                    "Please accept the Terms and Privacy Policy",
+                                    Colors.red);
+                                return;
+                              }
+                              context.read<AuthCubit>().register(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                    fullName: _usernameController.text.trim(),
+                                    address: _addressController.text.trim(),
+                                  );
+                            },
                       child: Container(
                         width: double.infinity,
                         height: 59,
@@ -184,17 +185,16 @@ class RegistrationFormState extends State<RegistrationForm> {
                         child: Center(
                           child: isLoading
                               ? const CircularProgressIndicator(
-                              color: Colors.white)
+                                  color: Colors.white)
                               : const Text(
-                            "Sign Up",
-                            style: TextStyle(
-                                fontSize: 24, color: Colors.white),
-                          ),
+                                  "Sign Up",
+                                  style: TextStyle(
+                                      fontSize: 24, color: Colors.white),
+                                ),
                         ),
                       ),
                     ),
                     const SizedBox(height: 20),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -218,7 +218,6 @@ class RegistrationFormState extends State<RegistrationForm> {
                         ),
                       ],
                     ),
-
                   ],
                 ),
               ),
@@ -229,7 +228,8 @@ class RegistrationFormState extends State<RegistrationForm> {
     );
   }
 
-  void _showStyledSnackBar(BuildContext context, String message, Color bgColor) {
+  void _showStyledSnackBar(
+      BuildContext context, String message, Color bgColor) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -255,7 +255,7 @@ class RegistrationFormState extends State<RegistrationForm> {
   String _formatBackendErrors(String rawError) {
     try {
       final errorData =
-      rawError.contains('{') ? rawError : '{"message":"$rawError"}';
+          rawError.contains('{') ? rawError : '{"message":"$rawError"}';
       final parsed = errorData.replaceAll(RegExp(r'[\{\}\[\]"]'), '');
       return parsed.split(':').last.trim();
     } catch (_) {

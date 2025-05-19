@@ -1,7 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../data/models/cart_model.dart';
-import '../../data/models/getcart_model.dart';
 import '../../data/repos/cart_repo.dart';
 import 'cart_states.dart';
 
@@ -47,6 +45,7 @@ class CartCubit extends Cubit<CartState> {
       emit(CartFailure(e.toString()));
     }
   }
+
   Future<void> clearCart() async {
     emit(CartLoading()); // ضروري علشان BlocBuilder يعيد البناء
     try {
@@ -57,9 +56,4 @@ class CartCubit extends Cubit<CartState> {
       emit(CartFailure(e.toString()));
     }
   }
-
-
-
-
-
 }

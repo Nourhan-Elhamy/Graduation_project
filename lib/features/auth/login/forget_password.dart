@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_images.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,7 +46,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             _showMessage(state.message, bgColor: Colors.green);
             String? code;
             if (state.message.contains('code:')) {
-              final codeMatch = RegExp(r'code: (\d+)').firstMatch(state.message);
+              final codeMatch =
+                  RegExp(r'code: (\d+)').firstMatch(state.message);
               if (codeMatch != null) {
                 code = codeMatch.group(1);
               }
@@ -102,7 +102,8 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           controller: emailController,
                           hintText: "Email Address",
                         ),
-                        SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.1),
                         GestureDetector(
                           onTap: isLoading
                               ? null

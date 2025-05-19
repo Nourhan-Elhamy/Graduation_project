@@ -1,7 +1,10 @@
+// ignore_for_file: use_super_parameters
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 import '../../data/models/orders_models.dart';
+
 class OrderDetailsPage extends StatelessWidget {
   final OrderDetail orderDetail;
 
@@ -55,15 +58,15 @@ class OrderDetailsPage extends StatelessWidget {
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: fontSizeLarge,
-                              color: AppColors.grey
-                          ),
+                              fontWeight: FontWeight.bold,
+                              fontSize: fontSizeLarge,
+                              color: AppColors.grey),
                         ),
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.circle, size: 20, color: Colors.amberAccent),
+                          const Icon(Icons.circle,
+                              size: 20, color: Colors.amberAccent),
                           const SizedBox(width: 4),
                           Text(
                             orderDetail.status,
@@ -79,27 +82,24 @@ class OrderDetailsPage extends StatelessWidget {
                   ),
                   SizedBox(height: width * 0.03),
 
-
-
                   SizedBox(height: width * 0.025),
 
-
                   Text("Delivery Address: ${orderDetail.shippingAddress}",
-                      style: TextStyle(fontSize: fontSizeMedium,color: AppColors.grey)),
+                      style: TextStyle(
+                          fontSize: fontSizeMedium, color: AppColors.grey)),
                   SizedBox(height: width * 0.05),
 
                   // Order Details Title
                   Row(
                     children: [
-                      Icon(Icons.receipt_long,color: AppColors.blue),
+                      Icon(Icons.receipt_long, color: AppColors.blue),
                       SizedBox(width: width * 0.02),
                       Text(
                         "Order Details",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: fontSizeMedium,
-                            color: AppColors.grey
-                        ),
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSizeMedium,
+                            color: AppColors.grey),
                       ),
                     ],
                   ),
@@ -111,10 +111,31 @@ class OrderDetailsPage extends StatelessWidget {
                     color: Colors.grey.shade100,
                     child: Row(
                       children: [
-                        Expanded(flex: 3, child: Text("Medicine Name", style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeSmall,color: AppColors.grey))),
-                        Expanded(child: Text("Quantity", style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeSmall,color: AppColors.grey))),
-                        Expanded(child: Text("Unit Price", style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeSmall,color: AppColors.grey))),
-                        Expanded(child: Text("Subtotal", style: TextStyle(fontWeight: FontWeight.bold, fontSize: fontSizeSmall,color: AppColors.grey))),
+                        Expanded(
+                            flex: 3,
+                            child: Text("Medicine Name",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: fontSizeSmall,
+                                    color: AppColors.grey))),
+                        Expanded(
+                            child: Text("Quantity",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: fontSizeSmall,
+                                    color: AppColors.grey))),
+                        Expanded(
+                            child: Text("Unit Price",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: fontSizeSmall,
+                                    color: AppColors.grey))),
+                        Expanded(
+                            child: Text("Subtotal",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: fontSizeSmall,
+                                    color: AppColors.grey))),
                       ],
                     ),
                   ),
@@ -138,7 +159,10 @@ class OrderDetailsPage extends StatelessWidget {
                                     width: width * 0.1,
                                     height: width * 0.1,
                                     fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) => Icon(Icons.image_not_supported, size: width * 0.08),
+                                    errorBuilder:
+                                        (context, error, stackTrace) => Icon(
+                                            Icons.image_not_supported,
+                                            size: width * 0.08),
                                   ),
                                 ),
                                 SizedBox(width: width * 0.02),
@@ -166,7 +190,7 @@ class OrderDetailsPage extends StatelessWidget {
                           // السعر
                           Expanded(
                             child: Text(
-                              "${item.price}",
+                              item.price,
                               style: TextStyle(fontSize: fontSizeSmall),
                             ),
                           ),
@@ -174,14 +198,14 @@ class OrderDetailsPage extends StatelessWidget {
                           // الإجمالي
                           Expanded(
                             child: Text(
-                              "${(item.price * item.quantity)}",
+                              (item.price * item.quantity),
                               style: TextStyle(fontSize: fontSizeSmall),
                             ),
                           ),
                         ],
                       ),
                     );
-                  }).toList(),
+                  }),
 
                   Divider(thickness: 1, height: width * 0.08),
 
@@ -191,10 +215,9 @@ class OrderDetailsPage extends StatelessWidget {
                     child: Text(
                       "Total Price: ${orderDetail.totalAmount} EGP",
                       style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: fontSizeMedium,
-                        color: AppColors.blue
-                      ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: fontSizeMedium,
+                          color: AppColors.blue),
                     ),
                   ),
                 ],

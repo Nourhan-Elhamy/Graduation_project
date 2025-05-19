@@ -41,7 +41,9 @@ class NewsSearchDelegate extends SearchDelegate {
         final pharmacies = snapshot.data!['pharmacies'] as List<PharmacySearch>;
 
         final medicines = snapshot.data!['medicines'] as List<MedicineSearch>;
-
+        if (pharmacies.isEmpty && medicines.isEmpty) {
+          return Center(child: Text('No results found.'));
+        }
         return ListView(
           children: [
             if (pharmacies.isNotEmpty)
@@ -55,16 +57,17 @@ class NewsSearchDelegate extends SearchDelegate {
                       height: 50,
                       child: Image.network(pharmacy.image ?? '', width: 50)),
                   title: Text(pharmacy.name ?? ''),
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => PharmaciesDetails(  pharmacyId: pharmacy.id??'',),
-                  ),
-                );
-              },
-                )
-            ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PharmaciesDetails(
+                          pharmacyId: pharmacy.id ?? '',
+                        ),
+                      ),
+                    );
+                  },
+                )),
             if (medicines.isNotEmpty)
               Padding(
                 padding: EdgeInsets.all(8),
@@ -76,14 +79,15 @@ class NewsSearchDelegate extends SearchDelegate {
                       height: 50,
                       child: Image.network(medicine.image ?? '', width: 50)),
                   title: Text(medicine.name ?? ''),
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ProductDetailsScreen(productId: medicine.id??""),
-                  ),
-                );
-              },
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            ProductDetailsScreen(productId: medicine.id ?? ""),
+                      ),
+                    );
+                  },
                 )),
           ],
         );

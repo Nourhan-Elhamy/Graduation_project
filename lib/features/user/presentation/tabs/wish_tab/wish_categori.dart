@@ -1,14 +1,12 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project/core/utils/app_images.dart';
 
 import 'data/controller/wishlist_cubit.dart';
 import 'data/controller/wishlist_states.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WishCategori extends StatefulWidget {
   const WishCategori({super.key});
@@ -33,7 +31,6 @@ class _WishCategoriState extends State<WishCategori> {
         backgroundColor: Colors.white,
         centerTitle: true,
         elevation: 0,
-       
         title: const Text(
           'Wish List',
           style: TextStyle(
@@ -52,7 +49,9 @@ class _WishCategoriState extends State<WishCategori> {
           } else {
             final items = context.read<WishlistCubit>().wishlistItems;
             if (items.isEmpty) {
-              return  Center(child: Image.asset("assets/images/favorite_image.png"),);
+              return Center(
+                child: Image.asset("assets/images/favorite_image.png"),
+              );
             }
 
             return ListView.separated(
@@ -104,7 +103,7 @@ class _WishCategoriState extends State<WishCategori> {
                             const SizedBox(height: 4),
                             Text(
                               '${item.price}',
-                              style:  TextStyle(
+                              style: TextStyle(
                                 color: AppColors.grey,
                                 fontSize: 14,
                               ),
@@ -115,7 +114,9 @@ class _WishCategoriState extends State<WishCategori> {
                       // Delete icon
                       IconButton(
                         onPressed: () {
-                          context.read<WishlistCubit>().removeFromWishlist(item.id);
+                          context
+                              .read<WishlistCubit>()
+                              .removeFromWishlist(item.id);
                         },
                         icon: const Icon(Icons.delete, color: Colors.red),
                       ),

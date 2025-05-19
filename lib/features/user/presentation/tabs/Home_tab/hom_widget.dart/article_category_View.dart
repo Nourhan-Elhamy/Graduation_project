@@ -26,7 +26,7 @@ class ArticleCategoryView extends StatelessWidget {
         ArticleCtegory(
           image: 'assets/images/article Image@3x.png',
           titel: 'Antibiotics',
-          head: 'Antibiotics include a range of powerful drugs....',
+          head: 'Antibiotics include a drugs....',
         ),
       ],
     );
