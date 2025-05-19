@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/user/presentation/home.dart';
@@ -23,12 +22,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset("assets/images/2x/checkoutimage.png"),
-                SizedBox(height: MediaQuery.of(context).size.height*0.2,),
-                CustomButton(title: "back to home", color: AppColors.blue, textcolor: AppColors.white,onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (C){
-                    return HomeGround();
-                  }));
-                },)
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                ),
+                CustomButton(
+                  title: "back to home",
+                  color: AppColors.blue,
+                  textcolor: AppColors.white,
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (C) {
+                      return HomeGround();
+                    }));
+                  },
+                )
               ],
             ),
           ),

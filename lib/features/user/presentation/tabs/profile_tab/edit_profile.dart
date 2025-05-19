@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,6 +14,7 @@ import 'package:path/path.dart' as path;
 import '../../../../../shared_widgets/custom_icon_camera.dart';
 import 'controller/profile_cubit.dart';
 import 'controller/profile_states.dart';
+
 class EditProfilePage extends StatefulWidget {
   final String userName;
   final String email;
@@ -64,7 +67,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       final directory = await getApplicationDocumentsDirectory();
       final fileName = 'profile_${DateTime.now().millisecondsSinceEpoch}.jpg';
       final savedPath = path.join(directory.path, fileName);
-      
+
       // Copy the image to app's local storage
       final File originalFile = File(imagePath);
       if (await originalFile.exists()) {
@@ -137,13 +140,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       children: [
                         CircleAvatar(
                           radius: screenWidth * 0.2,
-                          backgroundImage: profileImagePath != null && profileImagePath!.isNotEmpty
+                          backgroundImage: profileImagePath != null &&
+                                  profileImagePath!.isNotEmpty
                               ? (profileImagePath!.startsWith('http')
-                              ? NetworkImage(profileImagePath!) as ImageProvider
-                              : FileImage(File(profileImagePath!)))
+                                  ? NetworkImage(profileImagePath!)
+                                      as ImageProvider
+                                  : FileImage(File(profileImagePath!)))
                               : null,
                           backgroundColor: AppColors.continerColor,
-                          child: profileImagePath == null || profileImagePath!.isEmpty
+                          child: profileImagePath == null ||
+                                  profileImagePath!.isEmpty
                               ? Icon(Icons.person, size: screenWidth * 0.1)
                               : null,
                         ),
@@ -153,7 +159,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         CustomIconCamera(
                           onImageSelected: (path) async {
                             if (path != null) {
-
                               final savedPath = await _saveImageToLocal(path);
                               setState(() {
                                 profileImagePath = savedPath;
@@ -184,7 +189,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     style: TextStyle(color: Colors.blueGrey),
                   ),
                   CustomTextFilde(
-                      hintText: "Phone Number", controller: phoneNumberController),
+                      hintText: "Phone Number",
+                      controller: phoneNumberController),
                   SizedBox(height: screenHeight * 0.02),
                   const Text(
                     "Location",
@@ -204,12 +210,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       SizedBox(width: 8),
                       IconButton(
-                        icon: Icon(Icons.edit_location_alt, color: AppColors.blue),
+                        icon: Icon(Icons.edit_location_alt,
+                            color: AppColors.blue),
                         onPressed: () {
                           showDialog(
                             context: context,
                             builder: (context) {
-                              final controller = TextEditingController(text: currentLocation);
+                              final controller =
+                                  TextEditingController(text: currentLocation);
                               return AlertDialog(
                                 title: Text("Enter Address"),
                                 content: CustomTextFilde(
@@ -281,12 +289,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       onPressed: () async {
                         final accessToken = await _getAccessTokenAsync();
                         context.read<ProfileCubit>().updateProfile(
-                          accessToken: accessToken,
-                          name: nameController.text,
-                          gender: selectedGender,
-                          phone: phoneNumberController.text,
-                          address: currentLocation,
-                        );
+                              accessToken: accessToken,
+                              name: nameController.text,
+                              gender: selectedGender,
+                              phone: phoneNumberController.text,
+                              address: currentLocation,
+                            );
                       },
                     ),
                   ),

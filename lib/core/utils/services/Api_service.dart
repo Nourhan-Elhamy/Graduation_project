@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, non_constant_identifier_names
+
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -60,8 +62,7 @@ class ApiService {
 
   Future<List<Article>> getArticles() async {
     try {
-      final response =
-          await dio.get('http://carecapsole.runasp.net/api/Diseases');
+      final response = await dio.get('https://carecapsole.tryasp.net/article');
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         return data.map((json) => Article.fromJson(json)).toList();
@@ -77,7 +78,7 @@ class ApiService {
   Future<Map<String, dynamic>> search(String query) async {
     try {
       final token = await getToken();
-
+      print('Token: $token');
       final response = await dio.get(
         '$API_URL$API_PREFIX/search?q=$query',
         options: Options(

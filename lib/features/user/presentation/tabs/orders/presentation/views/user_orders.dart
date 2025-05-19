@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
@@ -5,6 +7,7 @@ import 'package:graduation_project/features/user/presentation/tabs/orders/presen
 
 import '../controller/orders_cubit.dart';
 import '../controller/orders_states.dart';
+
 class MyOrdersScreen extends StatefulWidget {
   const MyOrdersScreen({super.key});
 
@@ -28,7 +31,8 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
       // فتح صفحة التفاصيل وانتظار رجوع المستخدم
       await Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => OrderDetailsPage(orderDetail: currentState.orderDetail),
+          builder: (_) =>
+              OrderDetailsPage(orderDetail: currentState.orderDetail),
         ),
       );
 

@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:graduation_project/core/utils/token_helper.dart';
+
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/Category_view.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/article_category_View.dart';
 import 'package:graduation_project/shared_widgets/Image%20Carousel.dart';
@@ -10,7 +10,7 @@ import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
 import 'package:flutter/material.dart';
 import '../../../../../shared_widgets/container_search.dart';
 import '../../../../../shared_widgets/navegaitor_row.dart';
-import '../cart/presentation/views/cart_screen.dart';
+
 import '../pharmacie_tab/pharmacie_categori.dart';
 import '../pharmacie_tab/pharmacy_list/controller/pharmacy_cubit.dart';
 import '../pharmacie_tab/pharmacy_list/data/repos/pharmacy_implementation_repo.dart';
@@ -38,7 +38,6 @@ class _HomeCategoriState extends State<HomeCategori> {
                 children: [
                   Expanded(child: LocationDisplayWidget()),
                   Spacer(),
-
                 ],
               ),
               const SizedBox(

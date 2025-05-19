@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:graduation_project/core/utils/app_images.dart';
+
 import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab/pharmacy_list/pharmacies_details.dart';
 
 import '../../../../../../shared_widgets/LoadingIndecator.dart';
@@ -40,7 +40,7 @@ class PharmacyList extends StatelessWidget {
                 fit: BoxFit.cover,
                 placeholder: (_, __) => const LoedingIndecator(),
                 errorWidget: (_, __, ___) =>
-                Image.asset("assets/images/careCapsule.png"),
+                    Image.asset("assets/images/careCapsule.png"),
               ),
             ),
             Divider(
@@ -87,7 +87,6 @@ class PharmacyList extends StatelessWidget {
                             fontWeight: FontWeight.w300,
                             color: Colors.black), // لون مخصص
                       ),
-
                     ],
                   ),
                 ),
@@ -123,4 +122,3 @@ class PharmacyList extends StatelessWidget {
     );
   }
 }
-

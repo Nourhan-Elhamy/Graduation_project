@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
@@ -23,38 +25,35 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
     final description = _descriptionController.text;
 
     if (type == null || description.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              "Please Report an Issue",
-              style: const TextStyle(color: Colors.white, fontSize: 16),
-            ),
-            backgroundColor: Colors.red.withOpacity(0.9),
-            behavior: SnackBarBehavior.floating,
-            margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-            ),
-            duration: const Duration(seconds: 3),
-          ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          "Please Report an Issue",
+          style: const TextStyle(color: Colors.white, fontSize: 16),
+        ),
+        backgroundColor: Colors.red.withOpacity(0.9),
+        behavior: SnackBarBehavior.floating,
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        duration: const Duration(seconds: 3),
+      ));
       return;
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Issue Reported Successfully",
-            style: const TextStyle(color: Colors.white, fontSize: 16),
-          ),
-          backgroundColor: Colors.red.withOpacity(0.9),
-          behavior: SnackBarBehavior.floating,
-          margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          duration: const Duration(seconds: 3),
-        )
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(
+        "Issue Reported Successfully",
+        style: const TextStyle(color: Colors.white, fontSize: 16),
+      ),
+      backgroundColor: Colors.red.withOpacity(0.9),
+      behavior: SnackBarBehavior.floating,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15),
+      ),
+      duration: const Duration(seconds: 3),
+    ));
 
     _descriptionController.clear();
     setState(() {
@@ -63,20 +62,23 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
 
     // Navigate back to profile page after showing the success message
 
-      Navigator.pop(context);
-
+    Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-          title: Text('Report an Issue',style: TextStyle(color: AppColors.blue),),
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios_new)),
+        title: Text(
+          'Report an Issue',
+          style: TextStyle(color: AppColors.blue),
+        ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios_new)),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -86,7 +88,8 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
               DropdownButtonFormField<String>(
                 decoration: InputDecoration(labelText: 'Issue Type'),
                 items: issueTypes
-                    .map((type) => DropdownMenuItem(value: type, child: Text(type)))
+                    .map((type) =>
+                        DropdownMenuItem(value: type, child: Text(type)))
                     .toList(),
                 value: selectedIssueType,
                 onChanged: (val) => setState(() => selectedIssueType = val),
@@ -100,9 +103,13 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height*0.4),
-              CustomButton(title:'Send', color: AppColors.blue, textcolor: AppColors.white, onPressed: _submitIssue,)
-          
+              SizedBox(height: MediaQuery.of(context).size.height * 0.4),
+              CustomButton(
+                title: 'Send',
+                color: AppColors.blue,
+                textcolor: AppColors.white,
+                onPressed: _submitIssue,
+              )
             ],
           ),
         ),
