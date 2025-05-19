@@ -233,12 +233,7 @@ class _ProductPreviewCardState extends State<ProductPreviewCard> {
                     BlocConsumer<WishlistCubit, WishlistState>(
                       listener: (context, state) {
                         if (state is WishlistSuccess) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("Wishlist updated!"),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
+
                         } else if (state is WishlistFailure) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
