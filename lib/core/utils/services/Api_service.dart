@@ -74,11 +74,10 @@ class ApiService {
     }
   }
 
-  // دالة البحث مع إضافة التوكن في الهيدر فقط هنا
   Future<Map<String, dynamic>> search(String query) async {
     try {
       final token = await getToken();
-      print('Token: $token');
+
       final response = await dio.get(
         '$API_URL$API_PREFIX/search?q=$query',
         options: Options(
@@ -105,6 +104,36 @@ class ApiService {
       }
     } catch (e) {
       throw Exception('Search error: $e');
+    }
+  }
+
+  Future<String?> processImage(String imagePath) async {
+    try {
+      FormData formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(imagePath, filename: 'image.jpg'),
+      });
+
+      final token = await getToken();
+
+      final response = await dio.post(
+        '$API_URL$API_PREFIX/ai/process-image',
+        data: formData,
+        options: Options(
+          headers: {
+            if (token != null && token.isNotEmpty)
+              'Authorization': 'Bearer $token',
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        return response.data['result'] ?? 'No result found';
+      } else {
+        return 'Error: ${response.statusCode}';
+      }
+    } catch (e) {
+      return 'Error: $e';
     }
   }
 }

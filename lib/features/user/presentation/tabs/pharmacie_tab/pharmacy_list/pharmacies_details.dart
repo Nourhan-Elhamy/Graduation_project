@@ -166,7 +166,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                           child: Row(
                             children: [
                               const ContainerSearch(),
-                              SizedBox(width: screenWidth * 0.01),
+                              SizedBox(width: screenWidth * 0.03),
                               const CustomIconCamera(),
                             ],
                           ),
