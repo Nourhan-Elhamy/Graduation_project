@@ -2,7 +2,8 @@
 
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:mime/mime.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:graduation_project/features/user/data/models/article/article.dart';
 import 'package:graduation_project/features/user/data/models/care/care/datum.dart';
 import 'package:graduation_project/features/user/data/models/medicine/medicine/datum.dart';
@@ -109,8 +110,15 @@ class ApiService {
 
   Future<String?> processImage(String imagePath) async {
     try {
+      // الحصول على mime type من المسار
+      final mimeType = lookupMimeType(imagePath) ?? 'image/jpeg';
+
       FormData formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(imagePath, filename: 'image.jpg'),
+        'file': await MultipartFile.fromFile(
+          imagePath,
+          filename: 'image.jpg',
+          contentType: MediaType.parse(mimeType),
+        ),
       });
 
       final token = await getToken();
@@ -124,15 +132,29 @@ class ApiService {
               'Authorization': 'Bearer $token',
             'Content-Type': 'multipart/form-data',
           },
+          validateStatus: (status) => status != null && status < 500,
         ),
       );
 
-      if (response.statusCode == 200) {
-        return response.data['result'] ?? 'No result found';
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        final data = response.data;
+        // data ممكن تكون Map أو List حسب API - افترض Map هنا
+        if (data != null &&
+            data['code'] == 200 &&
+            data['status'] == 'success') {
+          // ترجع المحتوى الموجود في data['data'] أو data['result'] حسب شكل الرد
+          return data['data']?['medicine'] ??
+              data['result'] ??
+              'No result found';
+        } else {
+          // لو في رسالة خطأ أو حالة غير متوقعة داخل بيانات الرد
+          return 'API error message: ${data['message'] ?? 'Unknown error'}';
+        }
       } else {
-        return 'Error: ${response.statusCode}';
+        return 'HTTP Error: ${response.statusCode}, message: ${response.data}';
       }
     } catch (e) {
+      print('Exception caught: $e');
       return 'Error: $e';
     }
   }

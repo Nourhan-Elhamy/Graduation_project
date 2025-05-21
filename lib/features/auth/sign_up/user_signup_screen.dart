@@ -195,28 +195,31 @@ class RegistrationFormState extends State<RegistrationForm> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Already have an account? ",
-                          style: TextStyle(color: Color(0xff455A64)),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (c) => const LoginPage(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Sign in",
-                            style: TextStyle(color: AppColors.blue),
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Already have an account? ",
+                            style: TextStyle(color: Color(0xff455A64)),
                           ),
-                        ),
-                      ],
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (c) => const LoginPage(),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Sign in",
+                              style: TextStyle(color: AppColors.blue),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

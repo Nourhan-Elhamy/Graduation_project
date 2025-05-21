@@ -49,6 +49,7 @@ class _HomeCategoriState extends State<HomeCategori> {
                   CustomIconCamera(),
                 ],
               ),
+
               ImageCarouselWithCustomIndicator(),
               const SizedBox(
                 height: 15,
