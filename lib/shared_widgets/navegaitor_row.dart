@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class NavegaitorRow extends StatelessWidget {
   const NavegaitorRow({super.key});
@@ -6,11 +7,11 @@ class NavegaitorRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.all(8.0.r),
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 5),
+            padding:  EdgeInsets.only(right: 5.w),
             child: Image.asset(
               "assets/images/Pharmacy select.png",
             ),

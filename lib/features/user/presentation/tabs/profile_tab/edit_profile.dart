@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 import 'package:graduation_project/shared_widgets/custom_text_filde.dart';
@@ -139,15 +140,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         CircleAvatar(
                           radius: screenWidth * 0.2,
                           backgroundImage: profileImagePath != null &&
-                                  profileImagePath!.isNotEmpty
+                              profileImagePath!.isNotEmpty
                               ? (profileImagePath!.startsWith('http')
-                                  ? NetworkImage(profileImagePath!)
-                                      as ImageProvider
-                                  : FileImage(File(profileImagePath!)))
+                              ? NetworkImage(profileImagePath!)
+                          as ImageProvider
+                              : FileImage(File(profileImagePath!)))
                               : null,
                           backgroundColor: AppColors.continerColor,
                           child: profileImagePath == null ||
-                                  profileImagePath!.isEmpty
+                              profileImagePath!.isEmpty
                               ? Icon(Icons.person, size: screenWidth * 0.1)
                               : null,
                         ),
@@ -168,31 +169,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     ),
                   ),
                   SizedBox(height: screenHeight * 0.02),
-                  const Text(
+                  Text(
                     "Full Name",
-                    style: TextStyle(color: Colors.blueGrey),
+                    style: TextStyle(color: AppColors.grey),
                   ),
                   CustomTextFilde(
                       hintText: "Full Name", controller: nameController),
                   SizedBox(height: screenHeight * 0.02),
-                  const Text(
+                  Text(
                     "Email Address",
-                    style: TextStyle(color: Colors.blueGrey),
+                    style: TextStyle(color:  AppColors.grey),
                   ),
                   CustomTextFilde(
                       hintText: "Email Address", controller: emailController),
                   SizedBox(height: screenHeight * 0.02),
-                  const Text(
+                  Text(
                     "Phone Number",
-                    style: TextStyle(color: Colors.blueGrey),
+                    style: TextStyle(color: AppColors.grey),
                   ),
                   CustomTextFilde(
                       hintText: "Phone Number",
                       controller: phoneNumberController),
                   SizedBox(height: screenHeight * 0.02),
-                  const Text(
+                  Text(
                     "Location",
-                    style: TextStyle(color: Colors.blueGrey),
+                    style: TextStyle(color: AppColors.grey),
                   ),
                   SizedBox(height: screenHeight * 0.01),
                   Row(
@@ -206,7 +207,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           },
                         ),
                       ),
-                      SizedBox(width: 8),
+                      SizedBox(width: 8.w),
                       IconButton(
                         icon: Icon(Icons.edit_location_alt,
                             color: AppColors.blue),
@@ -215,9 +216,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             context: context,
                             builder: (context) {
                               final controller =
-                                  TextEditingController(text: currentLocation);
+                              TextEditingController(text: currentLocation);
                               return AlertDialog(
-                                title: Text("Enter Address"),
+                                title: Text(" Address"),
                                 content: CustomTextFilde(
                                   hintText: "Enter your address",
                                   controller: controller,
@@ -286,15 +287,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       textcolor: AppColors.white,
                       onPressed: () async {
                         final accessToken = await _getAccessTokenAsync();
+
+                        // حفظ البيانات محليًا
+                        final prefs = await SharedPreferences.getInstance();
+                        await prefs.setString('name', nameController.text);
+                        await prefs.setString('email', emailController.text);
+                        await prefs.setString('phone', phoneNumberController.text);
+                        await prefs.setString('gender', selectedGender);
+                        await prefs.setString('location', currentLocation);
+                        if (profileImagePath != null) {
+                          await prefs.setString('profileImage', profileImagePath!);
+                        }
+
+                        // إرسال البيانات للسيرفر
                         context.read<ProfileCubit>().updateProfile(
-                              accessToken: accessToken,
-                              name: nameController.text,
-                              gender: selectedGender,
-                              phone: phoneNumberController.text,
-                              address: currentLocation,
-                            );
+                          accessToken: accessToken,
+                          name: nameController.text,
+                          gender: selectedGender,
+                          phone: phoneNumberController.text,
+                          address: currentLocation,
+                        );
                       },
-                    ),
+
+                        )
                   ),
                 ],
               ),
@@ -303,5 +318,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
       ),
     );
-  }
-}
+
+}}
+

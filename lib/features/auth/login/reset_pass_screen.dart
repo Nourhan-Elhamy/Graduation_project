@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_images.dart';
 import 'package:graduation_project/features/auth/data/controller/auth_cubit.dart';
 import 'package:graduation_project/features/auth/data/controller/auth_cubit_states.dart';
@@ -40,11 +41,11 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style:  TextStyle(color: Colors.white, fontSize: 16.sp),
         ),
         backgroundColor: bgColor.withOpacity(0.9),
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -80,23 +81,23 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 'Reset Password',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 30,
+                  fontSize: 30.sp,
                   color: AppColors.blue,
                 ),
               ),
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding:  EdgeInsets.all(16.0.r),
                 child: Form(
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.asset(AppImages.resetPassword),
-                      const SizedBox(height: 20),
+                       SizedBox(height: 20.h),
                       _buildLabel("Email"),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8.h),
                       _buildInputField(
                         controller: _emailController,
                         hintText: 'Enter your email',
@@ -110,9 +111,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       _buildLabel("Verification Code"),
-                      const SizedBox(height: 8),
+                       SizedBox(height: 8.h),
                       _buildInputField(
                         controller: _codeController,
                         hintText: 'Enter verification code',
@@ -126,9 +127,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           return null;
                         },
                       ),
-                      const SizedBox(height: 20),
+                     SizedBox(height: 20.h),
                       _buildLabel("New Password"),
-                      const SizedBox(height: 8),
+                      SizedBox(height: 8.h),
                       _buildInputField(
                         controller: _passwordController,
                         hintText: 'Enter new password',
@@ -141,7 +142,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                             ? "Password must be at least 6 characters"
                             : null,
                       ),
-                      const SizedBox(height: 40),
+                       SizedBox(height: 40.h),
                       GestureDetector(
                         onTap: isLoading
                             ? null
@@ -156,7 +157,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                               },
                         child: Container(
                           width: double.infinity,
-                          height: 59,
+                          height: 59.h,
                           decoration: BoxDecoration(
                             color: AppColors.blue,
                             borderRadius: BorderRadius.circular(20),
@@ -164,9 +165,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           child: Center(
                             child: isLoading
                                 ? const CircularProgressIndicator(color: Colors.white)
-                                : const Text(
+                                :  Text(
                                     "Reset Password",
-                                    style: TextStyle(color: Colors.white, fontSize: 24),
+                                    style: TextStyle(color: Colors.white, fontSize: 24.sp),
                                   ),
                           ),
                         ),
@@ -183,7 +184,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   }
 
   Widget _buildLabel(String text) =>
-      Text(text, style: const TextStyle(fontSize: 16));
+      Text(text, style: TextStyle(fontSize: 16.sp));
 
   Widget _buildInputField({
     required TextEditingController controller,
@@ -197,7 +198,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       obscureText: obscureText,
       decoration: InputDecoration(
         hintText: hintText,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+        contentPadding:  EdgeInsets.symmetric(horizontal: 15.w),
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: AppColors.iconColor.withOpacity(0.2),

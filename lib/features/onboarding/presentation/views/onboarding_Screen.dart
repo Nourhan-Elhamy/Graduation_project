@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -26,7 +27,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             itemCount: onboardingmodel.length,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.all(30.0),
+                padding:  EdgeInsets.all(30.0.r),
                 child: ListView(
                   children: [
                     Column(
@@ -40,7 +41,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Text(
                           onboardingmodel[index].title,
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: AppColors.blue, fontSize: 36),
+                          style: TextStyle(color: AppColors.blue, fontSize: 36.sp),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.025,
@@ -48,7 +49,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         Text(
                           onboardingmodel[index].desc,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 15),
+                          style:  TextStyle(fontSize: 15.sp),
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.025,
@@ -56,11 +57,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         SmoothPageIndicator(
                           controller: pageController,
                           count: onboardingmodel.length,
-                          effect: const ExpandingDotsEffect(
+                          effect:  ExpandingDotsEffect(
                             activeDotColor: Color(0xff00A3E0),
                             dotColor: Colors.grey,
-                            dotHeight: 6,
-                            dotWidth: 6,
+                            dotHeight: 6.h,
+                            dotWidth: 6.w,
                           ),
                         ),
                         SizedBox(

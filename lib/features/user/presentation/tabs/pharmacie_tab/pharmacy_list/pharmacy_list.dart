@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -48,28 +49,28 @@ class PharmacyList extends StatelessWidget {
               thickness: 2,
               height: 0,
             ),
-            const SizedBox(
-              height: 10,
+             SizedBox(
+              height: 10.h,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
+              padding:  EdgeInsets.only(left: 8.w, right: 8.w),
               child: Text(
                 pharmacy.name,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
+              padding:  EdgeInsets.only(left: 8.w, right: 8.w),
               child: Text(
                 pharmacy.address,
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(fontSize: 15, fontWeight: FontWeight.w300),
+                    .copyWith(fontSize: 15.sp, fontWeight: FontWeight.w300),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
+              padding:  EdgeInsets.only(left: 8.w, right: 8.w),
               child: Center(
                 child: RichText(
                   textAlign: TextAlign.center,
@@ -78,12 +79,12 @@ class PharmacyList extends StatelessWidget {
                       TextSpan(
                         text: "Email: ", // الجزء الأول
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 16, color: Colors.black), // لون مخصص
+                            fontSize: 16.sp, color: Colors.black), // لون مخصص
                       ),
                       TextSpan(
                         text: pharmacy.email,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w300,
                             color: Colors.black), // لون مخصص
                       ),
@@ -93,7 +94,7 @@ class PharmacyList extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
+              padding: EdgeInsets.only(left: 8.w, right: 8.w),
               child: Center(
                 child: RichText(
                   textAlign: TextAlign.center,
@@ -102,12 +103,12 @@ class PharmacyList extends StatelessWidget {
                       TextSpan(
                         text: "Phone: ",
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 16, color: Colors.black), // لون مخصص
+                            fontSize: 16.sp, color: Colors.black), // لون مخصص
                       ),
                       TextSpan(
                         text: pharmacy.phone,
                         style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontSize: 12,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w300,
                             color: Colors.black), // لون مخصص
                       ),

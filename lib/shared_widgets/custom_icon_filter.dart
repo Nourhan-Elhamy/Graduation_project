@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 class CustomIconFilter extends StatelessWidget {
@@ -7,10 +8,10 @@ class CustomIconFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 5),
+      padding:  EdgeInsets.only(left: 5.w),
       child: Container(
-        width: 40,
-        height: 40,
+        width: 40.w,
+        height: 40.h,
         decoration: BoxDecoration(
           color: AppColors.blue,
           border: Border.all(

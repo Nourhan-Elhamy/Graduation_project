@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 
@@ -28,11 +29,11 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(
           "Please Report an Issue",
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: Colors.white, fontSize: 16.sp),
         ),
         backgroundColor: Colors.red.withOpacity(0.9),
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -44,11 +45,11 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
         "Issue Reported Successfully",
-        style: const TextStyle(color: Colors.white, fontSize: 16),
+        style:  TextStyle(color: Colors.white, fontSize: 16.sp),
       ),
       backgroundColor: Colors.red.withOpacity(0.9),
       behavior: SnackBarBehavior.floating,
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      margin:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
@@ -94,7 +95,7 @@ class _ReportIssueScreenState extends State<ReportIssueScreen> {
                 value: selectedIssueType,
                 onChanged: (val) => setState(() => selectedIssueType = val),
               ),
-              SizedBox(height: 16),
+              SizedBox(height: 16.h),
               TextField(
                 controller: _descriptionController,
                 maxLines: 5,

@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Article_category/articlecategory.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/care/care_view.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/hom_widget.dart/CategoryItem.dart';
@@ -16,10 +17,10 @@ class CategoryView extends StatelessWidget {
     return GridView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 4,
-        crossAxisSpacing: 13,
-        mainAxisSpacing: 13,
+        crossAxisSpacing: 13.w,
+        mainAxisSpacing: 13.h,
       ),
       children: [
         GestureDetector(
@@ -67,7 +68,7 @@ class CategoryView extends StatelessWidget {
             );
           },
           child: const Categoryitem(
-              image: 'assets/images/label-tag-01.png', label: 'Offares'),
+              image: 'assets/images/label-tag-01.png', label: 'Offers'),
         ),
       ],
     );

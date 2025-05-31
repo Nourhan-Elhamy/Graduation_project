@@ -8,33 +8,34 @@ import 'features/user/presentation/tabs/cart/presentation/controller/cart_cubit.
 import 'features/user/presentation/tabs/orders/presentation/controller/orders_cubit.dart';
 import 'features/user/presentation/tabs/wish_tab/data/controller/wishlist_cubit.dart';
 import 'features/user/presentation/tabs/wish_tab/data/repo/wishlist_repo.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 void main() {
   runApp(
-
-      MultiBlocProvider(
+    ScreenUtilInit(
+        designSize: const Size(412, 917),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MultiBlocProvider(
           providers: [
-        BlocProvider(
-          create: (_) => CartCubit(CartRepo()),
-
-        ),
+            BlocProvider(
+              create: (_) => CartCubit(CartRepo()),
+            ),
             BlocProvider(
               create: (context) => WishlistCubit(WishlistRepository()),
-
             ),
             BlocProvider(
-            create: (context) => OrderCubit(OrderRepo()),
-
-
-
+              create: (context) => OrderCubit(OrderRepo()),
             ),
-  BlocProvider(
-  create: (context) => CartCubit(CartRepo())..getCart(),
-
-  )
-
+            BlocProvider(
+              create: (context) => CartCubit(CartRepo())..getCart(),
+            ),
           ],
-      child: const MyApp()));
+          child: const MyApp(),
+        );
+      },
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -42,10 +43,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
-      theme: AppColors.lightTheme,
+    return SafeArea(
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const SplashScreen(),
+        theme: AppColors.lightTheme,
+      ),
     );
   }
 }

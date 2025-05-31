@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/features/user/presentation/tabs/pharmacie_tab/pharmacy_list/pharmacy_list.dart';
 
 import 'data/models/pharmacies_model.dart';
@@ -15,7 +16,7 @@ class PharmaciListView extends StatelessWidget {
       itemBuilder: (_, int index) {
         return PharmacyList(pharmacy: pharmacyy[index]);
       },
-      separatorBuilder: (_, __) => const SizedBox(height: 10),
+      separatorBuilder: (_, __) =>  SizedBox(height: 10.h),
     );
   }
 }

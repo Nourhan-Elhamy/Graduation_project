@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
@@ -100,9 +101,9 @@ class _LocationDisplayWidgetState extends State<LocationDisplayWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 50,
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-      margin: const EdgeInsets.only(left: 10),
+      height: 50.h,
+      padding:  EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
+      margin:  EdgeInsets.only(left: 10.w),
       decoration: BoxDecoration(
         color: AppColors.blue.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
@@ -113,7 +114,7 @@ class _LocationDisplayWidgetState extends State<LocationDisplayWidget> {
           Icon(
             Icons.location_on,
             color: AppColors.blue,
-            size: 20,
+            size: 20.sp,
           ),
           Expanded(
             child: Text(

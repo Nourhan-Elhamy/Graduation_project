@@ -2,11 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:graduation_project/features/user/presentation/tabs/orders/presentation/views/order_screen.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 import '../../../../../../../core/utils/app_colors.dart';
 
+import '../../../Home_tab/Categori_screen/product_details/presentation/product_details_screen.dart';
 import '../controller/cart_cubit.dart';
 import '../controller/cart_states.dart';
 
@@ -21,6 +23,7 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         actions: [
           TextButton(
@@ -48,17 +51,19 @@ class _CartScreenState extends State<CartScreen> {
                 }
               },
               child: Text("Clear All",
-                  style: TextStyle(color: Colors.red, fontSize: 20)))
+                  style: TextStyle(color: Colors.red, fontSize: 20.sp)))
         ],
-        title: const Text(
+        title:  Text(
           "Cart",
-          style: TextStyle(color: Colors.blue, fontSize: 30),
+          style: TextStyle(color: Colors.blue, fontSize: 30.sp),
         ),
       ),
       body: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
           if (state is CartLoading) {
-            return const Center(child: CircularProgressIndicator());
+            return  Center(child: CircularProgressIndicator(
+              color: AppColors.blue,
+            ));
           } else if (state is CartSuccess) {
             final cart = state.cart;
             if (cart.items.isEmpty) {
@@ -70,16 +75,16 @@ class _CartScreenState extends State<CartScreen> {
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.4,
                   ),
-                  const SizedBox(height: 16),
-                  const Text(
+                 SizedBox(height: 16.h),
+                   Text(
                     "No Items in Your Cart",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    style: TextStyle(fontSize: 16.sp, color: Colors.grey),
                   ),
                 ],
               );
             } else {
               return Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding:  EdgeInsets.all(16.0.r),
                 child: Column(
                   children: [
                     Expanded(
@@ -88,30 +93,37 @@ class _CartScreenState extends State<CartScreen> {
                         itemBuilder: (context, index) {
                           final item = cart.items[index];
                           return Card(
-                            child: ListTile(
-                              leading: Image.network(item.medicine.image),
-                              title: Text(item.medicine.name),
-                              subtitle: Text(
-                                'Quantity: ${item.quantity}',
-                                maxLines: 2,
-                              ),
-                              trailing: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    item.medicine.price,
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                  IconButton(
-                                    icon: Icon(Icons.delete_outline,
-                                        color: Colors.red),
-                                    onPressed: () {
-                                      context.read<CartCubit>().deleteFromCart(
-                                          item.medicine
-                                              .id); // هنا ID العنصر في السلة
-                                    },
-                                  ),
-                                ],
+                            child: GestureDetector(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (c){
+                                  return ProductDetailsScreen(productId: item.medicine.id);
+                                }));
+                              },
+                              child: ListTile(
+                                leading: Image.network(item.medicine.image),
+                                title: Text(item.medicine.name,style: TextStyle(color: AppColors.grey,fontWeight: FontWeight.w700),),
+                                subtitle: Text(
+                                  'Items: ${item.quantity}',
+                                  maxLines: 2,
+                                ),
+                                trailing: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      item.medicine.price,
+                                      style: TextStyle(fontSize: 20.sp),
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.delete_outline,
+                                          color: Colors.red),
+                                      onPressed: () {
+                                        context.read<CartCubit>().deleteFromCart(
+                                            item.medicine
+                                                .id); // هنا ID العنصر في السلة
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           );
@@ -122,32 +134,31 @@ class _CartScreenState extends State<CartScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Sub Total:',
-                            style: TextStyle(fontSize: 16)),
-                        Text('${cart.totalPrice} EGP'),
+                        Text('Sub Total:',
+                            style: TextStyle(fontSize: 18.sp,color: AppColors.grey,fontWeight: FontWeight.w400)),
+                        Text('${cart.totalPrice} EGP', style: TextStyle(fontSize: 20.sp,color: AppColors.grey,fontWeight: FontWeight.bold)),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text('Shipping:', style: TextStyle(fontSize: 16)),
-                        Text('20 EGP'),
+                      children:  [
+                        Text('Shipping:', style: TextStyle(fontSize: 18.sp,color: AppColors.grey,fontWeight: FontWeight.w400)),
+                        Text('20 EGP' ,style: TextStyle(fontSize: 20.sp,color: AppColors.grey,fontWeight: FontWeight.bold)),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('TOTAL:',
+                        Text('TOTAL:',
                             style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold)),
+                                fontSize: 18.sp,color: AppColors.grey,fontWeight: FontWeight.w400)),
                         Text('${cart.totalPrice + 20} EGP',
-                            style:
-                                const TextStyle(fontWeight: FontWeight.bold)),
+                            style: TextStyle(fontSize: 18.sp,color: AppColors.grey,fontWeight: FontWeight.bold)),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                     SizedBox(height: 16.h),
                     SizedBox(
                         width: double.infinity,
                         child: CustomButton(
@@ -157,8 +168,8 @@ class _CartScreenState extends State<CartScreen> {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (c) {
-                              return CreateOrderScreen();
-                            }));
+                                  return CreateOrderScreen();
+                                }));
                           },
                         )),
                   ],

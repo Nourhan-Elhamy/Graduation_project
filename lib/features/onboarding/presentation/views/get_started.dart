@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/auth/login/user_login_screen.dart';
-import 'package:graduation_project/features/onboarding/presentation/views/role_selection_page.dart';
+import 'package:graduation_project/features/auth/sign_up/user_signup_screen.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
 
 import '../../../../core/utils/app_images.dart';
@@ -15,7 +16,7 @@ class GetStartedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(30),
+        padding:  EdgeInsets.all(30.r),
         child: ListView(
           children: [
             Column(
@@ -25,13 +26,13 @@ class GetStartedScreen extends StatelessWidget {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.02,
                 ),
-                const Text(
+                Text(
                   "Get Started",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       color: Color(0xff00A3E0),
                       fontWeight: FontWeight.w400,
-                      fontSize: 36),
+                      fontSize: 36.sp),
                 ),
                 const Text(
                     "Join carecapsule today and enjoy convenient access to pharmacies across different locations. \nStart now!",
@@ -41,6 +42,7 @@ class GetStartedScreen extends StatelessWidget {
                 ),
                 CustomButton(
                   title: "Login to existing account",
+
                   color: AppColors.blue,
                   textcolor: AppColors.white,
                   onPressed: () {
@@ -50,8 +52,8 @@ class GetStartedScreen extends StatelessWidget {
                     }));
                   },
                 ),
-                const SizedBox(
-                  height: 24,
+                SizedBox(
+                  height: 24.h,
                 ),
                 CustomButton(
                     title: "Sign Up",
@@ -60,7 +62,7 @@ class GetStartedScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (c) {
-                        return const RoleSelectionScreen();
+                        return const RegistrationForm();
                       }));
                     })
               ],

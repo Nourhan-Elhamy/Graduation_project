@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
@@ -71,7 +72,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                           placeholder: (_, __) => const LoedingIndecator(),
                           errorWidget: (_, __, ___) => Image.asset(
                               "assets/images/careCapsule.png",
-                              height: 200),
+                              height: 200.h),
                         ),
                         IconButton(
                           onPressed: () {
@@ -90,7 +91,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyMedium!
-                              .copyWith(fontSize: 30),
+                              .copyWith(fontSize: 30.sp),
                         ),
                         Text(
                           pharmacy.description,
@@ -101,7 +102,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               .textTheme
                               .bodyMedium!
                               .copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(height: screenHeight * 0.02),
                         Text(
@@ -113,7 +114,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               .textTheme
                               .bodyMedium!
                               .copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.w400),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w400),
                         ),
                         SizedBox(height: screenHeight * 0.01),
                         Text(
@@ -123,7 +124,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               .textTheme
                               .bodyMedium!
                               .copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.w500),
+                                  fontSize: 16.sp, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(height: screenHeight * 0.02),
                         Row(
@@ -162,7 +163,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                         ),
                         SizedBox(height: screenHeight * 0.04),
                         Padding(
-                          padding: const EdgeInsets.all(5),
+                          padding:  EdgeInsets.all(5.r),
                           child: Row(
                             children: [
                               const ContainerSearch(),
@@ -210,7 +211,7 @@ class _PharmaciesDetailsState extends State<PharmaciesDetails> {
                               style: Theme.of(context)
                                   .textTheme
                                   .bodyMedium!
-                                  .copyWith(fontSize: 20),
+                                  .copyWith(fontSize: 20.sp),
                             ),
                           ],
                         ),
@@ -251,7 +252,7 @@ class FilterButton extends StatelessWidget {
       onTap: onTap, // عند الضغط يتم استدعاء الدالة onTap
       child: Container(
         padding:
-            EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: 8),
+            EdgeInsets.symmetric(horizontal: screenWidth * 0.03, vertical: 8.h),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.blue : AppColors.white,
           borderRadius: BorderRadius.circular(8.0),

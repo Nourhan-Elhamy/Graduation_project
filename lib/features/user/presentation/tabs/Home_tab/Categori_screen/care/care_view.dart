@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/care/care_view_grid.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/care/care_view_horizontal.dart';
 import 'package:graduation_project/shared_widgets/Image%20Carousel.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
+
+import '../../../../../../../core/utils/app_colors.dart';
 
 class CareView extends StatelessWidget {
   const CareView({super.key});
@@ -12,30 +15,40 @@ class CareView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: Icon(Icons.arrow_back_ios_new,color: AppColors.blue,)),
         centerTitle: true,
         title: Text(
           'Personal Care',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontSize: 30,
-              ),
+              fontSize: 30.sp,
+              color: AppColors.grey
+          ),
         ),
         iconTheme: Theme.of(context).iconTheme,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 15,
+             SizedBox(
+              height: 15.h,
             ),
-            const Row(
+             Row(
               children: [
                 Expanded(child: ContainerSearch()),
+                SizedBox(
+                 width:5.w,
+                ),
                 CustomIconCamera(),
               ],
             ),
+            SizedBox(
+              height: 15.h,
+            ),
             const ImageCarouselWithCustomIndicator(),
-            const SizedBox(
-              height: 15,
+             SizedBox(
+              height: 15.h,
             ),
             Row(
               children: [
@@ -49,10 +62,11 @@ class CareView extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontSize: 20),
+                      .copyWith(fontSize: 20.sp),
                 ),
               ],
             ),
+
             const CareViewHorizontal(),
             Row(
               children: [
@@ -66,11 +80,11 @@ class CareView extends StatelessWidget {
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
-                      .copyWith(fontSize: 20),
+                      .copyWith(fontSize: 20.sp),
                 ),
               ],
             ),
-            const CareViewGrid(),
+            CareViewGrid(),
           ],
         ),
       ),

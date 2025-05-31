@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/user/presentation/tabs/orders/presentation/views/user_order_details.dart';
 
@@ -69,15 +70,15 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
             return ListView.builder(
               padding: EdgeInsets.symmetric(
                 horizontal: width * 0.05,
-                vertical: 16,
+                vertical: 16.h,
               ),
               itemCount: state.orders.length,
               itemBuilder: (context, index) {
                 final order = state.orders[index];
 
                 return Container(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  padding: const EdgeInsets.all(16),
+                  margin:  EdgeInsets.only(bottom: 16.h),
+                  padding:  EdgeInsets.all(16.r),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(16),
@@ -111,9 +112,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           ),
                           Row(
                             children: [
-                              const Icon(Icons.circle,
-                                  size: 20, color: Colors.amberAccent),
-                              const SizedBox(width: 4),
+                               Icon(Icons.circle,
+                                  size: 20.sp, color: Colors.amberAccent),
+                               SizedBox(width: 4.w),
                               Text(
                                 order.status,
                                 style: TextStyle(
@@ -126,7 +127,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 8),
+                       SizedBox(height: 8.h),
 
                       // Total price
                       Text(
@@ -134,7 +135,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
                         style: TextStyle(
                             fontSize: width * 0.038, color: AppColors.grey),
                       ),
-                      const SizedBox(height: 4),
+                       SizedBox(height: 4.h),
 
                       // Action buttons
                       Row(

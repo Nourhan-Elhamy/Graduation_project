@@ -22,7 +22,27 @@ class OrderRepo {
     );
 
     if (response.statusCode != 201) {
-      throw Exception('Order creation failed: ${response.body}');
+      final Map<String, dynamic> errorResponse = jsonDecode(response.body);
+
+      String errorMessage = 'Order creation failed';
+      if (errorResponse.containsKey('exception') &&
+          errorResponse['exception'] is Map &&
+          errorResponse['exception']['response'] is Map &&
+          errorResponse['exception']['response'].containsKey('message')) {
+
+        final messages = errorResponse['exception']['response']['message'];
+        if (messages is List && messages.isNotEmpty) {
+          errorMessage = messages[0];
+        } else if (messages is String) {
+          errorMessage = messages;
+        }
+      } else if (errorResponse.containsKey('message')) {
+        if (errorResponse['message'] is String) {
+          errorMessage = errorResponse['message'];
+        }
+      }
+
+      throw Exception(errorMessage);
     }
   }
 

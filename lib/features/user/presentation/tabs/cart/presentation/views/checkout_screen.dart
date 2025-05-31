@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/user/presentation/home.dart';
 import 'package:graduation_project/shared_widgets/custom_button.dart';
@@ -16,7 +17,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     return Scaffold(
       body: Center(
         child: Padding(
-          padding: const EdgeInsets.all(30.0),
+          padding:  EdgeInsets.all(30.0.r),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
