@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/features/auth/login/forget_password.dart';
 import 'package:graduation_project/features/auth/login/user_login_screen.dart';
@@ -55,12 +56,12 @@ class _ProfileCategoriState extends State<ProfileCategori> {
     final result = await _authRepository.getProfile();
 
     result.fold(
-      (error) {
+          (error) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(error)),
         );
       },
-      (response) {
+          (response) {
         if (response['status'] == 'success' && response['data'] != null) {
           final userData = response['data'];
           setState(() {
@@ -91,7 +92,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
     ).then((updatedData) async {
       if (updatedData != null) {
         final prefs = await SharedPreferences.getInstance();
-        
+
         setState(() {
           location = updatedData['location'] ?? location;
           userName = updatedData['userName'] ?? userName;
@@ -108,7 +109,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
         await prefs.setString('phone', phoneNumber);
         await prefs.setString('profileImage', profileImagePath ?? '');
         await prefs.setString('gender', gender ?? '');
-        
+
       }
     });
   }
@@ -119,10 +120,11 @@ class _ProfileCategoriState extends State<ProfileCategori> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
+      return  Center(child: CircularProgressIndicator(color: AppColors.blue,));
     }
 
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
         children: [
@@ -155,8 +157,9 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                   Text(
                     userName,
                     style: TextStyle(
-                      fontSize: screenWidth * 0.06,
-                      fontWeight: FontWeight.bold,
+                        fontSize: screenWidth * 0.06,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.grey
                     ),
                   ),
                   SizedBox(width: screenWidth * 0.05),
@@ -174,14 +177,14 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                         ),
                       );
                     },
-                    child: Icon(Icons.edit_outlined),
+                    child: Icon(Icons.edit_outlined,color: AppColors.grey,),
                   ),
                 ],
               ),
               SizedBox(height: screenHeight * 0.01),
               Text(
                 email,
-                style: TextStyle(fontSize: screenWidth * 0.05),
+                style: TextStyle(fontSize: screenWidth * 0.05,color: AppColors.grey.withOpacity(0.5)),
               ),
               Text(
                 phoneNumber,
@@ -195,7 +198,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                         horizontal: screenWidth * 0.04,
                         vertical: screenWidth * 0.01),
                     decoration: BoxDecoration(
-                      color: Colors.white60,
+                      color: Colors.blue.withOpacity(0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
@@ -254,11 +257,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
                   navigateToPage(context, RefillReminder());
                 },
               ),
-              BuildListTile(
-                label: "Language Preferences",
-                image: Image.asset("assets/images/2x/globe.png"),
-                onTap: () {},
-              ),
+
               BuildListTile(
                 label: "Report an Issue",
                 image: Image.asset("assets/images/2x/report.png"),
@@ -270,7 +269,7 @@ class _ProfileCategoriState extends State<ProfileCategori> {
               ),
               BuildListTile(
                 label: "Log Out",
-                image: Image.asset("assets/images/logout.png",height: 38,),
+                image: Image.asset("assets/images/logout.png",height: 38.h,),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (c){
                     return LoginPage();
@@ -288,9 +287,9 @@ class _ProfileCategoriState extends State<ProfileCategori> {
 class BuildListTile extends StatelessWidget {
   const BuildListTile(
       {super.key,
-      required this.label,
-      required this.image,
-      required this.onTap});
+        required this.label,
+        required this.image,
+        required this.onTap});
   final String label;
   final Image image;
   final VoidCallback onTap;
@@ -300,13 +299,14 @@ class BuildListTile extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      padding:  EdgeInsets.symmetric(vertical: 8.0.h),
       child: ListTile(
         title: Text(
           label,
           style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: screenWidth * 0.05,
+              fontWeight: FontWeight.w500,
+              fontSize: screenWidth * 0.05,
+              color: AppColors.grey
           ),
         ),
         leading: image,

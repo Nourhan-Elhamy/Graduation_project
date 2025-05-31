@@ -1,5 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../core/utils/app_colors.dart';
 
 class ImageResultScreen extends StatelessWidget {
   final String imagePath;
@@ -15,22 +18,23 @@ class ImageResultScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('result'),
+        title:  Text('result',style: TextStyle(color: AppColors.blue),),
+        centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.0.r),
         child: Column(
           children: [
             Image.file(
               File(imagePath),
               width: double.infinity,
-              height: 300,
+              height: 300.h,
               fit: BoxFit.cover,
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Text(
               resultText,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style:  TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
           ],

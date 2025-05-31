@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/features/auth/login/forget_password.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../../core/utils/app_images.dart';
@@ -39,11 +40,11 @@ class _LoginPageState extends State<LoginPage> {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: Colors.white, fontSize: 16.sp),
         ),
         backgroundColor: bgColor.withOpacity(0.9),
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -78,24 +79,24 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const SizedBox(height: 40),
+                      SizedBox(height: 40.h),
                       Image.asset(AppImages.logo, fit: BoxFit.cover),
-                      const SizedBox(height: 20),
+                      SizedBox(height: 20.h),
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text("Email"),
                       ),
-                      const SizedBox(height: 5),
+                      SizedBox(height: 5.h),
                       _buildInputField(
                         controller: _usernameController,
                         hintText: 'Email',
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: 30.h),
                       const Align(
                         alignment: Alignment.centerLeft,
                         child: Text("Password"),
                       ),
-                      const SizedBox(height: 5),
+                       SizedBox(height: 5.h),
                       _buildInputField(
                         controller: _passwordController,
                         hintText: 'Password',
@@ -111,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 30),
+                      SizedBox(height: 30.h),
                       Align(
                         alignment: Alignment.centerRight,
                         child: GestureDetector(
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                       SizedBox(height: 20.h),
                       GestureDetector(
                         onTap: isLoading ? null : () => _attemptLogin(context),
                         child: Container(
@@ -142,14 +143,14 @@ class _LoginPageState extends State<LoginPage> {
                           child: Center(
                             child: isLoading
                                 ? const CircularProgressIndicator(color: Colors.white)
-                                : const Text(
+                                :  Text(
                               "Login",
-                              style: TextStyle(color: Colors.white, fontSize: 24),
+                              style: TextStyle(color: Colors.white, fontSize: 24.sp),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                       SizedBox(height: 10.h),
 
                       Wrap(
                         alignment: WrapAlignment.center,
@@ -195,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
   }) {
     return Container(
       width: double.infinity,
-      height: 59,
+      height: 59.h,
       decoration: BoxDecoration(
         color: AppColors.iconColor.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20),
@@ -207,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+          contentPadding: EdgeInsets.symmetric(horizontal: 15.w),
           suffixIcon: suffixIcon,
         ),
       ),

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/services/Api_service.dart';
 import 'package:graduation_project/features/user/data/models/article/article.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Article_category/ArticleDetailScreen.dart';
+
+import '../../../../../../../core/utils/app_colors.dart';
 
 class ArticleCategory extends StatefulWidget {
   const ArticleCategory({super.key});
@@ -25,8 +28,10 @@ class _ArticleCategoryState extends State<ArticleCategory> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: (){Navigator.pop(context);
+        }, icon: Icon(Icons.arrow_back_ios,color: AppColors.grey,)),
         centerTitle: true,
-        title: const Text('Cancer Guides'),
+        title: Text('Diseases & Conditions',style: TextStyle(color: AppColors.blue,fontSize: 30.sp),),
       ),
       body: FutureBuilder<List<Article>>(
         future: articles,
@@ -46,7 +51,7 @@ class _ArticleCategoryState extends State<ArticleCategory> {
           final List<Article> articlesList = snapshot.data!;
 
           return Padding(
-            padding: const EdgeInsets.only(top: 20, left: 30),
+            padding: EdgeInsets.only(top: 20.h, left: 30.w),
             child: ListView(
               children: articlesList.map((article) {
                 return GestureDetector(
@@ -60,13 +65,14 @@ class _ArticleCategoryState extends State<ArticleCategory> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: EdgeInsets.symmetric(vertical: 20.0.h),
                     child: Text(
                       article.name,
-                      style: Theme.of(context)
+                      style:
+                      Theme.of(context)
                           .textTheme
                           .bodyMedium!
-                          .copyWith(fontSize: 20),
+                          .copyWith(fontSize: 20,color: AppColors.grey),
                     ),
                   ),
                 );

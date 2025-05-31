@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Categoryitem extends StatelessWidget {
   const Categoryitem({super.key, required this.image, required this.label});
@@ -23,18 +24,19 @@ class Categoryitem extends StatelessWidget {
             ),
             borderRadius: const BorderRadius.all(Radius.circular(8.0)),
           ),
-          child: (Image.asset(
+          child: Image.asset(
             image,
             width: 60,
             height: 60,
-          )),
+          ),
         ),
-        const SizedBox(
-          height: 2,
+        SizedBox(
+          height: 2.h,
         ),
         Text(
           label,
           softWrap: true,
+          style: TextStyle(color: AppColors.grey),
         )
       ],
     );

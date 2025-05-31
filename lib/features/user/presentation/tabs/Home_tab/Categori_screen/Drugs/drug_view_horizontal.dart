@@ -1,6 +1,7 @@
 // drug_view_horizontal.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/services/Api_service.dart';
 
 import 'package:graduation_project/features/user/data/models/medicine/medicine/datum.dart';
@@ -39,13 +40,13 @@ class DrugViewHorizontal extends StatelessWidget {
                 SnackBar(
                   content: Text(
                     state.cartItem.message ?? "",
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.white, fontSize: 16.sp), // ريسبونسف
                   ),
                   backgroundColor: Colors.green.withOpacity(0.9),
                   behavior: SnackBarBehavior.floating,
-                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h), // ريسبونسف
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15.r), // ريسبونسف
                   ),
                   duration: const Duration(seconds: 2),
                 ),
@@ -55,13 +56,13 @@ class DrugViewHorizontal extends StatelessWidget {
                 SnackBar(
                   content: Text(
                     state.error,
-                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(color: Colors.white, fontSize: 16.sp), // ريسبونسف
                   ),
                   backgroundColor: Colors.red.withOpacity(0.9),
                   behavior: SnackBarBehavior.floating,
-                  margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h), // ريسبونسف
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(15.r), // ريسبونسف
                   ),
                   duration: const Duration(seconds: 2),
                 ),
@@ -69,7 +70,7 @@ class DrugViewHorizontal extends StatelessWidget {
             }
           },
           child: SizedBox(
-            height: 210,
+            height: 210.h, // ريسبونسف
             child: ListView.builder(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
@@ -77,7 +78,7 @@ class DrugViewHorizontal extends StatelessWidget {
               itemBuilder: (context, index) {
                 final medicine = medicines[index];
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0.w), // ريسبونسف
                   child: Builder(
                     builder: (context) {
                       return BlocBuilder<CartCubit, CartState>(

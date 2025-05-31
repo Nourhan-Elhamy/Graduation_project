@@ -2,6 +2,7 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 import 'package:graduation_project/shared_widgets/LoadingIndecator.dart';
 
@@ -24,8 +25,8 @@ class DrugList extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl:
                     'https://www.iisertvm.ac.in/assets/images/placeholder.jpg',
-                width: 130,
-                height: 130,
+                width: 130.w,
+                height: 130.h,
                 fit: BoxFit.cover,
                 placeholder: (_, __) => const LoedingIndecator(),
                 errorWidget: (_, __, ___) =>
@@ -33,29 +34,29 @@ class DrugList extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: 8,
-              right: 8,
+              top: 8.h,
+              right: 8.w,
               child: Icon(
                 icon,
-                size: 24,
+                size: 24.sp,
                 color: AppColors.blue,
               ),
             ),
           ],
         ),
-        const SizedBox(height: 1),
+       SizedBox(height: 1.h),
         SizedBox(
-          height: 20,
-          width: 100,
+          height: 20.h,
+          width: 100.w,
           child: Text(
             textAlign: TextAlign.start,
             overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+            maxLines: 2,
             'Antinal 200 mg - 24 Capsules',
             style: Theme.of(context)
                 .textTheme
                 .bodyMedium!
-                .copyWith(fontSize: 14, color: Colors.black),
+                .copyWith(fontSize: 14.sp, color: Colors.black),
           ),
         ),
         RichText(
@@ -67,12 +68,12 @@ class DrugList extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
-                    .copyWith(fontSize: 16, color: Colors.black),
+                    .copyWith(fontSize: 16.sp, color: Colors.black),
               ),
               TextSpan(
                 text: "60",
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontSize: 12,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w300,
                     color: Colors.black),
               ),

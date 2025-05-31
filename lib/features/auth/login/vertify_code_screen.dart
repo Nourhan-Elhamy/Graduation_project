@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_images.dart';
 import 'package:graduation_project/features/auth/login/reset_pass_screen.dart';
 import '../../../core/utils/app_colors.dart';
@@ -41,11 +42,11 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style:  TextStyle(color: Colors.white, fontSize: 16.sp),
         ),
         backgroundColor: bgColor.withOpacity(0.9),
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -65,24 +66,24 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          title: const Text(
+          title:  Text(
             'verify Code',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.bold,
-              fontSize: 24,
+              fontSize: 24.sp,
             ),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 'Code Requested Successfully',
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16.sp),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -92,14 +93,14 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                 ),
                 child: Text(
                   code,
-                  style: const TextStyle(
-                    fontSize: 32,
+                  style:  TextStyle(
+                    fontSize: 32.sp,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 3,
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -114,7 +115,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blue,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                      padding:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -219,28 +220,28 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                 style: TextStyle(
                   color: AppColors.blue,
                   fontWeight: FontWeight.bold,
-                  fontSize: 28,
+                  fontSize: 28.sp,
                 ),
               ),
             ),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              padding:  EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
               child: Form(
                 key: _formKey,
                 child: Column(
                   children: [
-                    const SizedBox(height: 20),
+                     SizedBox(height: 20.h),
                     SizedBox(
-                      height: 180,
+                      height: 180.h,
                       child: Image.asset(AppImages.vertifyPassword, fit: BoxFit.contain),
                     ),
-                    const SizedBox(height: 24),
-                    const Text(
+                    SizedBox(height: 24.h),
+                     Text(
                       "Please Verify Code ",
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                      style: TextStyle(fontSize: 16.sp, color: Colors.black87),
                     ),
-                    const SizedBox(height: 32),
+                     SizedBox(height: 32.h),
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -255,7 +256,7 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.h),
                     TextFormField(
                       controller: _codeController,
                       decoration: InputDecoration(
@@ -270,10 +271,10 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         return null;
                       },
                     ),
-                    const SizedBox(height: 32),
+                    SizedBox(height: 32.h),
                     SizedBox(
                       width: double.infinity,
-                      height: 50,
+                      height: 50.h,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.blue,
@@ -282,10 +283,10 @@ class _VerifyCodeScreenState extends State<VerifyCodeScreen> {
                         onPressed: isLoading ? null : () => _onVerify(context),
                         child: isLoading
                             ? const CircularProgressIndicator(color: Colors.white)
-                            : const Text("Verify", style: TextStyle(fontSize: 20, color: Colors.white)),
+                            :  Text("Verify", style: TextStyle(fontSize: 20.sp, color: Colors.white)),
                       ),
                     ),
-                    const SizedBox(height: 16),
+                     SizedBox(height: 16.h),
                     Center(
                       child: TextButton(
                         onPressed: () {

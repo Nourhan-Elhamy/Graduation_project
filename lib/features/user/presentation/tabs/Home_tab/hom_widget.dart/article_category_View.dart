@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'article_ctegory.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class ArticleCategoryView extends StatelessWidget {
   const ArticleCategoryView({super.key});
 
@@ -12,10 +14,10 @@ class ArticleCategoryView extends StatelessWidget {
     return GridView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        crossAxisSpacing: 13,
-        mainAxisSpacing: 13,
+        crossAxisSpacing: 13.w,  // ScreenUtil adjusts width
+        mainAxisSpacing: 13.h,   // ScreenUtil adjusts height
       ),
       children: const [
         ArticleCtegory(
@@ -32,3 +34,4 @@ class ArticleCategoryView extends StatelessWidget {
     );
   }
 }
+

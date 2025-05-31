@@ -1,45 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 // ignore: must_be_immutable
-class Messege extends StatefulWidget {
-  bool sender; // true=>me fales=>api
-  String text;
+class Messege extends StatelessWidget {
+  final bool sender; // true => user, false => bot
+  final String text;
 
-  Messege({super.key, required this.sender, required this.text});
+  const Messege({super.key, required this.sender, required this.text});
 
   @override
-  State<Messege> createState() => _MessegeState();
-}
-
-class _MessegeState extends State<Messege> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment:
-          widget.sender ? MainAxisAlignment.end : MainAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(bottom: 4),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    color: (widget.sender) ? AppColors.blue : Colors.grey,
-                    borderRadius: BorderRadius.circular(15)),
-                padding: EdgeInsets.all(8),
-                constraints: BoxConstraints(maxWidth: 300),
-                child: Text(
-                  widget.text,
-                  style: TextStyle(
-                      color: (widget.sender) ? AppColors.white : Colors.black),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.w),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end, // عشان الصورة تنزل تحت
+        mainAxisAlignment:
+        sender ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          if (!sender)
+            Padding(
+              padding: EdgeInsets.only(right: 6.w),
+              child: Image.asset(
+                'assets/images/3x/Mask group (1).png',
+                width: 30.w,
+                height: 30.h,
+              ),
+            ),
+          Flexible(
+            child: Container(
+              padding: EdgeInsets.all(12.r),
+              decoration: BoxDecoration(
+                color: sender ? AppColors.blue :  AppColors.grey.withOpacity(0.1),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                  bottomLeft:
+                  sender ? Radius.circular(20) : Radius.circular(0),
+                  bottomRight:
+                  sender ? Radius.circular(0) : Radius.circular(20),
                 ),
               ),
-            ],
+              child: Text(
+                text,
+                style: TextStyle(
+                  color: sender ? Colors.white : Colors.black87,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

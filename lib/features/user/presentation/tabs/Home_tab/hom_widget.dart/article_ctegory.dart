@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 class ArticleCtegory extends StatelessWidget {
@@ -36,25 +37,25 @@ class ArticleCtegory extends StatelessWidget {
             thickness: 2,
             height: 0,
           ),
-          const SizedBox(
-            height: 10,
+           SizedBox(
+            height: 10.h,
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
+            padding:  EdgeInsets.only(left: 8.w, right: 8.w),
             child: Text(
               titel,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 8, right: 8),
+            padding: EdgeInsets.only(left: 8.w, right: 8.w),
             child: Text(
               head,
               maxLines: 4,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
-                  .copyWith(fontSize: 12, fontWeight: FontWeight.w300),
+                  .copyWith(fontSize: 12.sp, fontWeight: FontWeight.w300),
             ),
           ),
         ],

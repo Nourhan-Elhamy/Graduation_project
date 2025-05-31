@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
 
 import 'package:graduation_project/features/user/presentation/home.dart';
@@ -33,10 +34,10 @@ class _LoadingPageState extends State<LoadingPage> {
             CircularProgressIndicator(
               color: Colors.lightBlue,
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Text(
               'Getting Your Home...',
-              style: TextStyle(fontSize: 16, color: Colors.black87),
+              style: TextStyle(fontSize: 16.sp, color: Colors.black87),
             ),
           ],
         ),

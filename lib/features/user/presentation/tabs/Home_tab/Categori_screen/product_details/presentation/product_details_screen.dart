@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/product_details/presentation/widgets/product_card.dart';
 import '../../../../pharmacie_tab/pharmacy_list/controller/pharmacy_cubit.dart';
 import '../../../../pharmacie_tab/pharmacy_list/data/repos/pharmacy_implementation_repo.dart';
@@ -24,7 +25,7 @@ class ProductDetailsScreen extends StatelessWidget {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(10.0.r),
             child: BlocBuilder<ProductDetailsCubit, ProductDetailsState>(
               builder: (context, state) {
                 if (state is ProductDetailsLoading) {
@@ -36,9 +37,11 @@ class ProductDetailsScreen extends StatelessWidget {
                 }
                 return const SizedBox.shrink();
               },
+
             ),
           ),
         ),
+
       ),
     );
   }

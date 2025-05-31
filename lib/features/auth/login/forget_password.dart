@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_images.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graduation_project/features/auth/login/vertify_code_screen.dart';
@@ -23,11 +24,11 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
       SnackBar(
         content: Text(
           message,
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: Colors.white, fontSize: 16.sp),
         ),
         backgroundColor: bgColor.withOpacity(0.9),
         behavior: SnackBarBehavior.floating,
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin:  EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -73,7 +74,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 'Forget Password',
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 30,
+                  fontSize: 30.sp,
                   color: AppColors.blue,
                 ),
               ),
@@ -81,7 +82,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
             body: SingleChildScrollView(
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0.r),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -92,12 +93,12 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                           "Please Enter Your Email Address To\nRecieve a Code.",
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 55),
+                         SizedBox(height: 55.h),
                         const Align(
                           alignment: Alignment.centerLeft,
                           child: Text("Email Address"),
                         ),
-                        const SizedBox(height: 10),
+                         SizedBox(height: 10.h),
                         _buildInputField(
                           controller: emailController,
                           hintText: "Email Address",
@@ -116,7 +117,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                 },
                           child: Container(
                             width: double.infinity,
-                            height: 59,
+                            height: 59.h,
                             decoration: BoxDecoration(
                               color: AppColors.blue,
                               borderRadius: BorderRadius.circular(20),
@@ -125,10 +126,10 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                               child: isLoading
                                   ? const CircularProgressIndicator(
                                       color: Colors.white)
-                                  : const Text(
+                                  : Text(
                                       "Send",
                                       style: TextStyle(
-                                          color: Colors.white, fontSize: 24),
+                                          color: Colors.white, fontSize: 24.sp),
                                     ),
                             ),
                           ),
@@ -153,7 +154,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   }) {
     return Container(
       width: double.infinity,
-      height: 59,
+      height: 59.h,
       decoration: BoxDecoration(
         color: AppColors.iconColor.withOpacity(0.2),
         borderRadius: BorderRadius.circular(20),
@@ -165,7 +166,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: hintText,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+          contentPadding:  EdgeInsets.symmetric(horizontal: 15.w),
           suffixIcon: suffixIcon,
         ),
       ),

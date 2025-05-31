@@ -1,6 +1,7 @@
 // ignore_for_file: use_super_parameters
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/core/utils/app_colors.dart';
 
 import '../../data/models/orders_models.dart';
@@ -65,9 +66,9 @@ class OrderDetailsPage extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.circle,
-                              size: 20, color: Colors.amberAccent),
-                          const SizedBox(width: 4),
+                           Icon(Icons.circle,
+                              size: 20.sp, color: Colors.amberAccent),
+                           SizedBox(width: 4.w),
                           Text(
                             orderDetail.status,
                             style: TextStyle(
