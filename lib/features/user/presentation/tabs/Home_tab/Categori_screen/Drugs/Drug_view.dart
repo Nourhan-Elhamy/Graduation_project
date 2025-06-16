@@ -1,5 +1,3 @@
-// ignore_for_file: file_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Categori_screen/Drugs/drug_view_grid.dart';
@@ -18,38 +16,45 @@ class DrugView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios_new,color: AppColors.blue,)),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new, color: AppColors.blue),
+        ),
         centerTitle: true,
         title: Text(
           'Drugs',
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontSize: 30.sp,
-              color: AppColors.grey
-          ),
+                fontSize: 30.sp,
+                color: AppColors.grey,
+              ),
         ),
-        iconTheme: Theme.of(context).iconTheme,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-             SizedBox(
-              height: 15.h,
-            ),
-            const Row(
-              children: [
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(child: SizedBox(height: 15.h)),
+
+          // Search Row
+          SliverToBoxAdapter(
+            child: Row(
+              children: const [
                 Expanded(child: ContainerSearch()),
                 CustomIconCamera(),
               ],
-            ), SizedBox(
-              height: 15.h,
             ),
-            const ImageCarouselWithCustomIndicator(),
-             SizedBox(
-              height: 15.h,
-            ),
-            Row(
+          ),
+
+          SliverToBoxAdapter(child: SizedBox(height: 15.h)),
+
+          // Image Carousel
+          SliverToBoxAdapter(child: ImageCarouselWithCustomIndicator()),
+
+          SliverToBoxAdapter(child: SizedBox(height: 15.h)),
+
+          // Frequently Purchased Title
+          SliverToBoxAdapter(
+            child: Row(
               children: [
                 IconButton(
                   color: const Color(0xFF455A64),
@@ -65,8 +70,14 @@ class DrugView extends StatelessWidget {
                 ),
               ],
             ),
-            const DrugViewHorizontal(),
-            Row(
+          ),
+
+          // Horizontal list
+          SliverToBoxAdapter(child: DrugViewHorizontal()),
+
+          // All Medicines Title
+          SliverToBoxAdapter(
+            child: Row(
               children: [
                 IconButton(
                   color: const Color(0xFF455A64),
@@ -82,9 +93,17 @@ class DrugView extends StatelessWidget {
                 ),
               ],
             ),
-            const DrugViewGrid(),
-          ],
-        ),
+          ),
+
+          // DrugViewGrid داخل SizedBox بارتفاع كافي
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height:
+                  MediaQuery.of(context).size.height * 1.2, // زود لو بتحمل كثير
+              child: const DrugViewGrid(),
+            ),
+          ),
+        ],
       ),
     );
   }
