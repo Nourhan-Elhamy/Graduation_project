@@ -29,7 +29,7 @@ class ApiService {
     return prefs.getString('access');
   }
 
-  Future<List<Datum>> getMedicines() async {
+  Future<List<Datum>> getMedicines({int page = 1}) async {
     try {
       final response = await dio.get(
           '$API_URL$API_PREFIX/medicines?category=medicine&page=1&limit=20');
@@ -45,7 +45,7 @@ class ApiService {
     }
   }
 
-  Future<List<Catum>> getCare() async {
+  Future<List<Catum>> getCare({int page = 1}) async {
     try {
       final response = await dio
           .get('$API_URL$API_PREFIX/medicines?category=care&page=1&limit=20');
@@ -138,16 +138,14 @@ class ApiService {
 
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         final data = response.data;
-        // data ممكن تكون Map أو List حسب API - افترض Map هنا
+
         if (data != null &&
             data['code'] == 200 &&
             data['status'] == 'success') {
-          // ترجع المحتوى الموجود في data['data'] أو data['result'] حسب شكل الرد
           return data['data']?['medicine'] ??
               data['result'] ??
               'No result found';
         } else {
-          // لو في رسالة خطأ أو حالة غير متوقعة داخل بيانات الرد
           return 'API error message: ${data['message'] ?? 'Unknown error'}';
         }
       } else {
