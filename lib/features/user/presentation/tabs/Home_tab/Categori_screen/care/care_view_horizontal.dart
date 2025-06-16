@@ -9,6 +9,7 @@ import 'package:graduation_project/shared_widgets/product_list.dart';
 
 import 'package:dio/dio.dart';
 
+import '../../../../../data/models/medicine/medicine/datum.dart';
 import '../../../cart/presentation/controller/cart_cubit.dart';
 import '../../../cart/presentation/controller/cart_states.dart';
 import '../product_details/presentation/product_details_screen.dart';
@@ -18,7 +19,7 @@ class CareViewHorizontal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Catum>>(
+    return FutureBuilder<List<Datum>>(
       future: ApiService(Dio()).getCare(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -31,7 +32,7 @@ class CareViewHorizontal extends StatelessWidget {
           return const Center(child: Text('  There are no medications'));
         }
 
-        final List<Catum> care = snapshot.data!;
+        final List<Datum> care = snapshot.data!;
 
         return BlocListener<CartCubit, CartState>(
           listener: (context, state) {

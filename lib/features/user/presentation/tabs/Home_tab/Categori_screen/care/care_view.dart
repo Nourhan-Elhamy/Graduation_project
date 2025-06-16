@@ -5,6 +5,7 @@ import 'package:graduation_project/features/user/presentation/tabs/Home_tab/Cate
 import 'package:graduation_project/shared_widgets/Image%20Carousel.dart';
 import 'package:graduation_project/shared_widgets/container_search.dart';
 import 'package:graduation_project/shared_widgets/custom_icon_camera.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import '../../../../../../../core/utils/app_colors.dart';
 
@@ -14,83 +15,94 @@ class CareView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back_ios_new, color: AppColors.blue),
+        ),
+        centerTitle: true,
+        title: Text(
+          'Personal Care',
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: 30.sp,
+            color: AppColors.grey,
+          ),
+        ),
+      ),
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            pinned: true,
-            floating: false,
-            snap: false,
-            backgroundColor: Colors.white,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back_ios_new, color: AppColors.blue),
-            ),
-            centerTitle: true,
-            title: Text(
-              'Personal Care',
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                    fontSize: 30.sp,
-                    color: AppColors.grey,
-                  ),
-            ),
-          ),
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),
+
+          // Search Row
           SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Row(
-                children: [
-                  Expanded(child: ContainerSearch()),
-                  SizedBox(width: 5.w),
-                  CustomIconCamera(),
-                ],
-              ),
+            child: Row(
+              children: const [
+                Expanded(child: ContainerSearch()),
+                CustomIconCamera(),
+              ],
             ),
           ),
+
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),
-          const SliverToBoxAdapter(child: ImageCarouselWithCustomIndicator()),
+
+          // Image Carousel
+          SliverToBoxAdapter(child: ImageCarouselWithCustomIndicator()),
+
           SliverToBoxAdapter(child: SizedBox(height: 15.h)),
+
+          // Frequently Purchased Title
           SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Row(
-                children: [
-                  Icon(Icons.volunteer_activism, color: AppColors.blue),
-                  SizedBox(width: 5.w),
-                  Text(
-                    "Best Seller",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(fontSize: 20.sp),
-                  ),
-                ],
-              ),
+            child: Row(
+              children: [
+                IconButton(
+                  color: const Color(0xFF455A64),
+                  icon: Icon(MdiIcons.pill),
+                  onPressed: () {},
+                ),
+                Text(
+                  "Frequently Purchased",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 20.sp),
+                ),
+              ],
             ),
           ),
-          const SliverToBoxAdapter(child: CareViewHorizontal()),
+
+          // Horizontal list
+          SliverToBoxAdapter(child: CareViewHorizontal()),
+
+          // All Medicines Title
           SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.w),
-              child: Row(
-                children: [
-                  Icon(Icons.favorite_border, color: AppColors.blue),
-                  SizedBox(width: 5.w),
-                  Text(
-                    "All Products",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(fontSize: 20.sp),
-                  ),
-                ],
-              ),
+            child: Row(
+              children: [
+                IconButton(
+                  color: const Color(0xFF455A64),
+                  icon: Icon(MdiIcons.pill),
+                  onPressed: () {},
+                ),
+                Text(
+                  "All Medicines",
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 20.sp),
+                ),
+              ],
             ),
           ),
-          CareViewGrid(),
-          SliverToBoxAdapter(child: SizedBox(height: 30.h)),
+
+          // DrugViewGrid داخل SizedBox بارتفاع كافي
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height:
+              MediaQuery.of(context).size.height * 1.2, // زود لو بتحمل كثير
+              child: const CareViewGrid(),
+            ),
+          ),
         ],
       ),
     );
