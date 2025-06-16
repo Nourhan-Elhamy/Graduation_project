@@ -32,7 +32,8 @@ class ApiService {
   Future<List<Datum>> getMedicines({int page = 1}) async {
     try {
       final response = await dio.get(
-          '$API_URL$API_PREFIX/medicines?category=medicine&page=1&limit=20');
+        '$API_URL$API_PREFIX/medicines?category=medicine&page=$page&limit=20',
+      );
       if (response.statusCode == 200) {
         final json = response.data as Map<String, dynamic>;
         final List<dynamic> data = json['data']['data'];
@@ -45,14 +46,16 @@ class ApiService {
     }
   }
 
-  Future<List<Catum>> getCare({int page = 1}) async {
+
+  Future<List<Datum>> getCare({int page = 1}) async {
     try {
-      final response = await dio
-          .get('$API_URL$API_PREFIX/medicines?category=care&page=1&limit=20');
+      final response = await dio.get(
+        '$API_URL$API_PREFIX/medicines?category=care&page=$page&limit=20',
+      );
       if (response.statusCode == 200) {
         final json = response.data as Map<String, dynamic>;
         final List<dynamic> data = json['data']['data'];
-        return data.map((json) => Catum.fromJson(json)).toList();
+        return data.map((json) => Datum.fromJson(json)).toList();
       } else {
         throw Exception('Failed to load data');
       }
@@ -60,6 +63,7 @@ class ApiService {
       throw Exception('An error occurred while loading data: $e');
     }
   }
+
 
   Future<List<Article>> getArticles() async {
     try {
